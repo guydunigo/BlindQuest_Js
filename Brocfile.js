@@ -10,6 +10,7 @@ const LiveReload = require("broccoli-livereload");
 const env = require("broccoli-env").getEnv();
 // Options
 const root = "src";
+const imgsFold = "misc/imgs";
 const createSourceMap = (env === "development") ? true : false;
 
 /* --------------------------- html --------------------------- */
@@ -65,8 +66,14 @@ js = babel(js, {
 // })
 // /* --------------------------------------------------------- */
 
+/* --------------------------- imgs --------------------------- */
+const imgs = funnel(imgsFold, {
+    files: ["logo.png"],
+    destDir: "imgs"
+});
+
 /* --------------------------- end --------------------------- */
-let tree = merge([html,/*css,*/js]);
+let tree = merge([html,/*css,*/js, imgs]);
 
 if (env === "development") {
     tree = new LiveReload(tree, {
