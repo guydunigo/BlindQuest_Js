@@ -1,20 +1,38 @@
 Misc
 ====
+* Order TODO
 * Play sound
 * Test playing 1 sound file twice at the same time
 * Get user input
 * Reference every sounds
-* Open file (map) with nodeJs
-* download file (map) in js
+* Bq theme
 * Reference every extern sound and content with license
 * Deal with licenses (GPLv3 ?) and sublicenses compatibility
     https://www.gnu.org/licenses/gpl-faq.fr.html
 
 Features to add
 ===============
+* Files
+    * Maps
+        * Open file (map) with nodeJs
+        * download file (map) in js
+        * import local ? (drag and drop ?)
+    * Save/Load
+        * local
+            * load (drag and drop ?)
+        * Online ?
+    * Config
+        * Square types, sounds, voices...
 * Interface
+    * Easily translatable
+    * Non disturbing visual interface 
+        * keep Bq theme *but*
+            don't hurt eyes displaying smtg (you can play with closed eyes)
     * Help
-        * Voice ?
+        * Ingame :
+            * Voice ?
+            * displayable
+        * Wiki (github)
     * Save / Load locally
         * Online
     * Simple onomatopoeia appearing on the blank page
@@ -24,25 +42,28 @@ Features to add
     * Character describing what's happening ?
         ex : "Damn it ! The effects of *potion* are nearly off."
         * Or sidekick
-* Load map
+* Environment
+    * Load map
     * Map editor
-    * Dungeons
-        * Open/Unlock/Close doors
-            * Key
-            * Pick ?
-            * Break ?
-            * Jam ? (prevent enemies from coming in)
-        * Timed events *tic tac*
-        * Buttons / Levers / ...
-    * Towns
-        * NPCs
-            * Voices
-            * Interactions (selection mode ?)
-                * Exange/Sell/Buy
-                    * Money ?
-        * Inns
-            * Sleep
-                * Mana ? Stamina ? bonus ?
+    * Day/Night ?
+    * Places
+        * Dungeons
+            * Open/Unlock/Close doors
+                * Key
+                * Pick ?
+                * Break ?
+                * Jam ? (prevent enemies from coming in)
+            * Timed events *tic tac*
+            * Buttons / Levers / ...
+        * Towns
+            * NPCs
+                * Voices
+                * Interactions (selection mode ?)
+                    * Exange/Sell/Buy
+                        * Money ?
+            * Inns
+                * Sleep
+                    * Mana ? Stamina ? bonus ?
 * Move around with arrows
     * Touch (mobile) support
     * Change orientation
