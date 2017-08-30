@@ -1,4 +1,4 @@
-![BlindQuest](./misc/imgs/logo.png)
+![BlindQuest](./misc/imgs/logo_small.png)
 
 Blindquest
 ==========

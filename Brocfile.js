@@ -68,7 +68,7 @@ js = babel(js, {
 
 /* --------------------------- imgs --------------------------- */
 const imgs = funnel(imgsFold, {
-    files: ["logo.png"],
+    files: ["logo_small.png"],
     destDir: "imgs"
 });
 
