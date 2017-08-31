@@ -6,6 +6,7 @@ Misc
 * Get user input
 * Reference every sounds
 * Bq theme
+* Env files to js script ? security ? sandbox ?
 * Reference every extern sound and content with license
 * Deal with licenses (GPLv3 ?) and sublicenses compatibility
     https://www.gnu.org/licenses/gpl-faq.fr.html
@@ -14,6 +15,7 @@ Features to add
 ===============
 * Files
     * Maps
+        * **maps to JSON directly ?**
         * Open file (map) with nodeJs
         * download file (map) in js
         * import local ? (drag and drop ?)
@@ -46,6 +48,7 @@ Features to add
     * Load map
     * Map editor
     * Day/Night ?
+    * Slow death squares : Quicksand (sable mouvant)/...
     * Places
         * Dungeons
             * Open/Unlock/Close doors
@@ -55,6 +58,7 @@ Features to add
                 * Jam ? (prevent enemies from coming in)
             * Timed events *tic tac*
             * Buttons / Levers / ...
+            * Pressplates : *click* when stepping on it
         * Towns
             * NPCs
                 * Voices
@@ -66,6 +70,8 @@ Features to add
                     * Mana ? Stamina ? bonus ?
 * Move around with arrows
     * Touch (mobile) support
+    * 3d ? (df style)
+        * command to get position (=> number of *bip*s)
     * Change orientation
         * *Ding* when facing North (or West)
     * Map
@@ -98,6 +104,7 @@ Features to add
     * Mana and stamina
         * Weariness (yawning ?)
             * Time before changing square and doing stuff
+    * Cold / warmth / Wet / thristy (*aglagla*,...)
     * Bag
         * Weapons
         * Bonuses

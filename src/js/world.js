@@ -2,6 +2,7 @@
 export default World;
 
 import TEST_MAP from "./tests/test_world.js";
+import env from "./tests/test_env.js";
 
 /* Try to open the given filename and extract the world */
 // returns : {name:String,data:Array(Array(Number))}
@@ -69,5 +70,8 @@ const checkWorldPostExtract = function (world) {
 }
 
 const World = function (filename) {
-    return loadWorld(filename);
+    const world = loadWorld(filename);
+    world.env = env;
+
+    return world;
 }

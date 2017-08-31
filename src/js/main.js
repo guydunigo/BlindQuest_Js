@@ -5,7 +5,7 @@ const main = function () {
     document.getElementById("msg")
         .textContent = "Game loaded, have fun!"
 
-    console.log(World("test.txt").data);
+    console.log(World("test.txt").env);
 }
 
 document.addEventListener("DOMContentLoaded", main);
