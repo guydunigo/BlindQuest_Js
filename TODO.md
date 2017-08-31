@@ -1,6 +1,6 @@
 Misc
 ====
-* Order TODO
+* FIRST : **Order TODO !**
 * Play sound
 * Test playing 1 sound file twice at the same time
 * Get user input
