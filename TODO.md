@@ -1,15 +1,16 @@
 Misc
 ====
-* FIRST : **Order TODO !**
+* ~~FIRST~~ Later : **Order TODO !**
 * Play sound
 * Test playing 1 sound file twice at the same time
 * Get user input
 * Reference every sounds
 * Bq theme
 * Env files to js script ? security ? sandbox ?
+* External repo for the sound/music
 * Reference every extern sound and content with license
 * Deal with licenses (GPLv3 ?) and sublicenses compatibility
-    https://www.gnu.org/licenses/gpl-faq.fr.html
+    * https://www.gnu.org/licenses/gpl-faq.fr.html
 
 Features to add
 ===============
@@ -75,15 +76,19 @@ Features to add
     * Change orientation
         * *Ding* when facing North (or West)
     * Map
+        * Draw it on the screen as the player discovers ne squares ? (would break the audio-exclusive rule :/)
+            * Or snake-like line showing only the n last cases used
+                * Can be done with a voice telling *left left right ...*
         * Letal squares
         * Nogo squares
             * *Bumping* sound when trying to go
         * Looping map : (west is east, north is south, violets are blue, roses are blue...)
-* Sounds :
+* Sounds
     * Hear current square sound
         * Volumetric audio (stereo) with orientation
     * Hear close squares sounds
         * Hear second close squares sounds but softened
+    * Theme/Style or instrument rather than whole music ?
 * Fights
     * Life
         * Heartbeat louder as life dims

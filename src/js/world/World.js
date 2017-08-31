@@ -1,8 +1,8 @@
 // Defines the World class
 export default World;
 
-import TEST_MAP from "./tests/test_world.js";
-import env from "./tests/test_env.js";
+import TEST_MAP from "../tests/test_world.js";
+import Env from "./env/Env.js";
 
 /* Try to open the given filename and extract the world */
 // returns : {name:String,data:Array(Array(Number))}
@@ -69,9 +69,9 @@ const checkWorldPostExtract = function (world) {
     )
 }
 
-const World = function (filename) {
-    const world = loadWorld(filename);
-    world.env = env;
+const World = function (bq,filename) {
+    bq.world = loadWorld(filename);
+    bq.world.env = Env(bq);
 
-    return world;
+    return bq;
 }
