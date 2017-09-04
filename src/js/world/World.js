@@ -69,7 +69,7 @@ const checkWorldPostExtract = function (world) {
     )
 };
 
-const loadWorld = function (bq,filename) {
+const loadWorld = function (bq, filename) {
     bq.world = loadWorldFile(filename);
     loadEnv(bq);
 

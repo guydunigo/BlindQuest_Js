@@ -1,6 +1,6 @@
 // Square "class"
 export default Square;
 
-const Square = function() {
+const Square = function () {
     return {};
 };

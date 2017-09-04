@@ -44,19 +44,18 @@ const loadMoves = function (bq) {
 
     /* playSquareSounds */
     moves.post.playSquareSound = {
-        method: function(bq, mvt_obj) {
+        method: function (bq, mvt_obj) {
             // throw ni;
-            bq.audio.stopSquareSound(mvt_obj.src.type);
-            bq.audio.playSquareSound(mvt_obj.dest.type);
+            bq.audio.cur_square.play(mvt_obj.dest.type);
         }
     }
 
     /* playProxSounds */
     moves.post.playProxSounds = {
-        method: function(bq, mvt_obj) {
+        method: function (bq, mvt_obj) {
             // throw ni;
-            bq.audio.stopProxSounds();
-            bq.audio.playProxSounds(mvt_obj.dest.prox_squares);
+            bq.audio.prox.stop();
+            bq.audio.prox.play(mvt_obj.dest.prox_squares);
         }
     }
 

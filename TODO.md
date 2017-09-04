@@ -84,6 +84,7 @@ Features to add
             * *Bumping* sound when trying to go
         * Looping map : (west is east, north is south, violets are blue, roses are blue...)
 * Sounds
+    * Create basic audio interface logging before linking to any lib
     * Hear current square sound
         * Volumetric audio (stereo) with orientation
     * Hear close squares sounds

@@ -1,19 +1,18 @@
 // Main game loop
 export default Bq;
 
+import Interface from "./interface/Interface.js";
 import loadWorld from "./world/World.js";
 
-const Bq = function(filename) {
+const Bq = function (filename) {
     const bq = {
         world: {},
-        audio: {},
         interface: {}
     };
 
-    bq.audio;
-    bq.interface;
+    bq.interface = Interface();
 
-    bq.world = loadWorld(bq,filename);
+    loadWorld(bq, filename);
 
     return bq;
 };

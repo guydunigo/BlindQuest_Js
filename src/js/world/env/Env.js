@@ -63,6 +63,8 @@ const loadEnv = function (bq) {
         end: "end"
     };
 
+    env.audio.loadSounds(env.sounds);
+
     loadRules(bq);
 
     return env;
