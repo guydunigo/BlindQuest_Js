@@ -27,6 +27,8 @@ Features to add
     * Config
         * Square types, sounds, voices...
 * Interface
+    * Input
+        * Voice commanded ? (chat with player...)
     * Easily translatable
     * Non disturbing visual interface 
         * keep Bq theme *but*
