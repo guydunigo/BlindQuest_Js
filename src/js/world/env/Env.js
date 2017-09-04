@@ -1,9 +1,9 @@
-export default Env;
+export default loadEnv;
 
-import Rules from "./rules/Rules.js"
+import loadRules from "./rules/Rules.js"
 
-const Env = function (bq) {
-    const env = {
+const loadEnv = function (bq) {
+    const env = bq.world.env = {
         // square codes
         codes: {},
         // Effect sounds and music names
@@ -11,7 +11,7 @@ const Env = function (bq) {
             squares: {},
             effects: {}
         },
-        rules: Rules(bq)
+        rules: {}
     };
 
     /* ------ codes ------ */
@@ -62,4 +62,8 @@ const Env = function (bq) {
         start: "start",
         end: "end"
     };
+
+    loadRules(bq);
+
+    return env;
 }

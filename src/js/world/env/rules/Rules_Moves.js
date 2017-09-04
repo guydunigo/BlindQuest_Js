@@ -1,7 +1,7 @@
-export default moves;
+export default loadMoves;
 
-const moves = function (bq) {
-    const moves = {
+const loadMoves = function (bq) {
+    const moves = bq.world.rules.moves = {
         // determine wether you can moves or not or what happens when you try to leave, ...
         pre: {},
         // when you try to leave, the square may hurt you, ...
@@ -10,11 +10,12 @@ const moves = function (bq) {
         static: {}
     }
 
-    /* --- moves.pre --- */
-    // args : world and mvt obj
-    // returns : true if moves accepted and false if not
-
     // throw ni; think about priority and what is returned (possibility to be thrown away, events,...)
+    // >> update mvt_obj ?
+
+    /* --- moves.pre --- */
+    // args : bq and mvt obj
+    // returns : true if moves accepted and false if not
 
     /* nogo */
     moves.pre.nogo = {
@@ -36,4 +37,28 @@ const moves = function (bq) {
         ]),
         sounds: ["bump_wall"],
     }
+
+    /* --- moves.post --- */
+    // args : new bq obj and mvt obj
+    // returns : throw ni;
+
+    /* playSquareSounds */
+    moves.post.playSquareSound = {
+        method: function(bq, mvt_obj) {
+            // throw ni;
+            bq.audio.stopSquareSound(mvt_obj.src.type);
+            bq.audio.playSquareSound(mvt_obj.dest.type);
+        }
+    }
+
+    /* playProxSounds */
+    moves.post.playProxSounds = {
+        method: function(bq, mvt_obj) {
+            // throw ni;
+            bq.audio.stopProxSounds();
+            bq.audio.playProxSounds(mvt_obj.dest.prox_squares);
+        }
+    }
+
+    return moves;
 }

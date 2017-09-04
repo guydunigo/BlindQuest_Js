@@ -1,12 +1,12 @@
 // Defines the World class
-export default World;
+export default loadWorld;
 
 import TEST_MAP from "../tests/test_world.js";
-import Env from "./env/Env.js";
+import loadEnv from "./env/Env.js";
 
 /* Try to open the given filename and extract the world */
 // returns : {name:String,data:Array(Array(Number))}
-const loadWorld = function (filename) {
+const loadWorldFile = function (filename) {
     const fileContent = fetchWorld(filename);
 
     checkWorldPreExtract(fileContent.raw_data);
@@ -16,7 +16,7 @@ const loadWorld = function (filename) {
     checkWorldPostExtract(world);
 
     return world;
-}
+};
 
 /* Open world (download json, from fs, local drag,...) */
 // returns : {filename:String,raw_data:String}
@@ -24,7 +24,7 @@ const fetchWorld = function (name) {
     // throw ni
     name;
     return TEST_MAP;
-}
+};
 
 /* Extract the world and the worlds name from the raw_world string */
 // Raw data follows : 
@@ -45,13 +45,13 @@ const extractWorld = function (raw_data) {
         name,
         data
     };
-}
+};
 
 /* Check world file content conformity (stability/security ?) */
 const checkWorldPreExtract = function (raw_data) {
     // throw ni + ?tryRepair?
     return raw_data;
-}
+};
 const checkWorldPostExtract = function (world) {
     // throw ni + ?tryRepair?
 
@@ -67,11 +67,11 @@ const checkWorldPostExtract = function (world) {
                 throw new Error(`Line ${indexY} isn't the same length as the previous ones.`);
         }
     )
-}
+};
 
-const World = function (bq,filename) {
-    bq.world = loadWorld(filename);
-    bq.world.env = Env(bq);
+const loadWorld = function (bq,filename) {
+    bq.world = loadWorldFile(filename);
+    loadEnv(bq);
 
-    return bq;
-}
+    return bq.world;
+};
