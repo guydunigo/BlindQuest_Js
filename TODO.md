@@ -50,7 +50,10 @@ Features to add
     * Player to more generic class *character* for monsters
     * Load map
     * Map editor
-    * Day/Night ?
+    * Day/Night ? (+ sounds)
+    * Weather (wind, rain, storm, ... + different strength)
+        * Covering the other sounds
+        * Acting on the player : harder to walk/random moves, weariness, damages...
     * Slow death squares : Quicksand (sable mouvant)/...
     * Places
         * Dungeons

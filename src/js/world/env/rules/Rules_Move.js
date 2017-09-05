@@ -1,19 +1,26 @@
 export default loadMove;
 
 const loadMove = function (bq) {
-    const move = bq.world.rules.move = {
+    const move = bq.world.env.rules.move = {
+        // debug purpose only
+        name: "move",
         // Actual moving method :
         main: undefined,
-        // Triggered by event(s) :
+        // Triggered by event(s) : must be an Array
         events: [
             "world.player.move"
         ],
+        // throw ni; use these in the main or in Events.js ?
+
+        // played before the main
         // determine wether you can move or not or what happens when you try to leave, ...
         pre: {},
-        // when you try to leave, the square may hurt you, ...
+        // played after the main is executed
+        // ie : when you try to leave, the square may hurt you, ...
         post: {},
-        // static effects when staying on the case
-        static: {}
+        // applied when there is no events for this rule
+        // ie : static effects when staying on the case
+        idle: {}
     }
 
     // throw ni; think about priority and what is returned (possibility to be thrown away, events,...)
@@ -66,6 +73,9 @@ const loadMove = function (bq) {
             bq.audio.prox.play(mvt_obj.dest.prox_squares);
         }
     }
+
+    // Don't forget to register your rule to the events defined in move.events
+    bq.events.register(move);
 
     return move;
 }

@@ -27,20 +27,22 @@ const getParents = function (tree, event) {
 
 const Events = function () {
     const events = {
-        world: {},
-        interface: {},
+        model: {},
+        rules: {},
         add: undefined,
         getNext: undefined,
         isIdle: undefined,
         getPendings: undefined,
+        isEvendGood: undefined,
         filterEventsFrom: undefined,
-        eventIsA/*belle a les yeux bleus*/: undefined
+        eventIsA/*belle a les yeux bleus*/: undefined,
+        register: undefined
     };
 
     // hierarchy of events, use it between quotes with js notation
     // ie : ev = "world.player.move.up"
-    // btw : numbers are irrelevant
-    const tree = {
+    // btw : numbers are irrelevant actually
+    events.model = {
         world: {
             player: { // 1 -> 100
                 move: {
@@ -54,15 +56,16 @@ const Events = function () {
         interface: { // 1001 to 2000
             fullscreen: 1001
         }
-    }; tree;
+    };
 
     // Private
     const fifo = [];
 
     events.add = function (elmt) {
-        //checkEvent(elmt);
-        fifo.push(elmt);
-        console.log("EVENT #" + fifo.length + " ADDED " + elmt);
+        if (events.isEventGood(elmt)) {
+            fifo.push(elmt);
+            console.log("EVENT #" + fifo.length + " ADDED " + elmt);
+        }
         return elmt;
     }
 
@@ -80,6 +83,20 @@ const Events = function () {
             res.push(events.getNext());
         }
         return res;
+    };
+
+    // Check is event exists in events.model
+    events.isEventGood = function (event) {
+        let tree = event.split("."), tmp = events.model;
+        while (tmp !== undefined && tree.length > 0) {
+            tmp = tmp[tree[0]];
+            tree = tree.splice(1);
+        }
+
+        if (tmp === undefined)
+            console.log("EVENTS DIRTY " + event);
+
+        return (tmp !== undefined);
     };
 
     events.filterEventsFrom = function (category, events) {
@@ -108,6 +125,27 @@ const Events = function () {
         }
 
         return res;
+    };
+
+    // Possible memory loss ? rule duplicating ?
+    //   throw ni; test modifying the one in events and see if it changes in env too.
+    events.register = function (rule) {
+        const goodTargets = [];
+        rule.events.forEach(function (targ) {
+            if (events.isEventGood(targ)) {
+                goodTargets.push(targ);
+            }
+        })
+
+        goodTargets.forEach(function (targ) {
+            if (events.rules[targ] instanceof Array) {
+                events.rules.push(targ);
+            }
+            else {
+                events.rules[targ] = [rule];
+            }
+            console.log("EVENTS REGISTER " + rule.name + " FOR " + targ);
+        })
     };
 
     return events;
