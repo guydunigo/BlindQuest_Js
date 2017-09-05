@@ -41,7 +41,7 @@ js = new Rollup(js, {
 js = babel(js, {
     browserPolyfill: true, // doesn"t work
     sourceMap: createSourceMap,
-    compact: true,
+    compact: !createSourceMap,
     comments: createSourceMap,
     presets: [["env", {
         target: {

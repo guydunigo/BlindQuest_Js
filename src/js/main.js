@@ -5,7 +5,11 @@ const main = function () {
     document.getElementById("msg")
         .textContent = "Game loaded, have fun!"
 
-    console.log(Bq("test.txt"));
+    const b = Bq("test.txt");
+
+    console.log(b);
+
+    b.play();
 }
 
 document.addEventListener("DOMContentLoaded", main);
