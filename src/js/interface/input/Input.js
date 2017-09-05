@@ -3,21 +3,23 @@ export default Input;
 
 import Keyboard from "./Input_Keyboard.js"
 
+
+const conf = {
+    moves: {
+        up: undefined,
+        down: undefined,
+        left: undefined,
+        right: undefined
+    }
+}; conf;
+
 // throw ni; param : kind of input
 const Input = function (events) {
     const input = {
-        conf: {
-            moves: {
-                up: undefined,
-                down: undefined,
-                left: undefined,
-                right: undefined
-            }
-        },
-        devs: {}
+        kb: undefined
     }
 
-    Keyboard(events);
+    input.devs.kb = Keyboard(events);
 
     return input;
 };

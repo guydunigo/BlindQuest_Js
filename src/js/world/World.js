@@ -61,7 +61,7 @@ const checkWorldPostExtract = function (world) {
 
     // Every world line must be the same length (rectangles only, sorry)
     const refLineSize = world.data[0].length;
-    world.data.map(
+    world.data.forEach(
         (line, indexY) => {
             if (line.length != refLineSize)
                 throw new Error(`Line ${indexY} isn't the same length as the previous ones.`);

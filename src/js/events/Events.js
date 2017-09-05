@@ -26,15 +26,15 @@ const Events = function () {
     // Private
     const fifo = [];
 
-    events.add = function(elmt) {
+    events.add = function (elmt) {
         fifo.push(elmt);
-        console.log("EVENT ADDED " + elmt);
+        console.log("EVENT #" + fifo.length + " ADDED " + elmt);
         return elmt;
     }
 
-    events.getNext = function() {
+    events.getNext = function () {
         const tmp = fifo.shift();
-        console.log("EVENT REMOVED " + tmp);
+        console.log("EVENT #" + (fifo.length+1) + " REMOVED " + tmp);
         return tmp;
     }
 
