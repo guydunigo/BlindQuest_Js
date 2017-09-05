@@ -1,14 +1,14 @@
 // Trying to make a modular (easily extensible) rules system
 export default loadRules;
 
-import loadMoves from "./Rules_Moves.js";
+import loadMove from "./Rules_Move.js";
 
 const loadRules = function (bq) {
     const rules = bq.world.rules = {
-        moves: {}
+        move: {}
     };
 
-    loadMoves(bq)
+    loadMove(bq)
 
     return rules;
 }

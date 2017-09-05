@@ -7,10 +7,12 @@ const Keyboard = function (events) {
         conf: {
             world: {
                 player: {
-                    up: "ArrowUp",
-                    down: "ArrowDown",
-                    left: "ArrowLeft",
-                    right: "ArrowRight"
+                    move: {
+                        up: "ArrowUp",
+                        down: "ArrowDown",
+                        left: "ArrowLeft",
+                        right: "ArrowRight"
+                    }
                 }
             },
             interface: {
@@ -22,20 +24,20 @@ const Keyboard = function (events) {
     document.addEventListener("keydown", function (event) {
         let msg = "";
         switch (event.key) {
-            case kb.conf.world.player.up:
-                events.add(events.world.player.up);
+            case kb.conf.world.player.move.up:
+                events.add("world.player.move.up");
                 break;
-            case kb.conf.world.player.down:
-                events.add(events.world.player.down);
+            case kb.conf.world.player.move.down:
+                events.add("world.player.move.down");
                 break;
-            case kb.conf.world.player.left:
-                events.add(events.world.player.left);
+            case kb.conf.world.player.move.left:
+                events.add("world.player.move.left");
                 break;
-            case kb.conf.world.player.right:
-                events.add(events.world.player.right);
+            case kb.conf.world.player.move.right:
+                events.add("world.player.move.right");
                 break;
             case kb.conf.interface.fullscreen:
-                events.add(events.interface.fullscreen)
+                events.add("interface.fullscreen")
                 break;
             default:
                 msg = "NOEVENT ";

@@ -3,6 +3,7 @@
 
 export default Events;
 
+/* throw ni;
 const getParents = function (tree, event) {
     const res = [];
     let tmp = [];
@@ -22,7 +23,7 @@ const getParents = function (tree, event) {
         }
     }
     return res;
-}
+}*/
 
 const Events = function () {
     const events = {
@@ -32,35 +33,41 @@ const Events = function () {
         getNext: undefined,
         isIdle: undefined,
         getPendings: undefined,
-        filterEventsFrom: undefined
+        filterEventsFrom: undefined,
+        eventIsA/*belle a les yeux bleus*/: undefined
     };
 
-    // those codes' only purpose is to difference them,
-    //  they are not meant to be used directly
-    //  (ie : bq.events.world.player.up instead of 1)
-    events.world = { // 1 -> 1000
-        player: { // 1 -> 100
-            up: 1,
-            down: 2,
-            left: 3,
-            right: 4
+    // hierarchy of events, use it between quotes with js notation
+    // ie : ev = "world.player.move.up"
+    // btw : numbers are irrelevant
+    const tree = {
+        world: {
+            player: { // 1 -> 100
+                move: {
+                    up: 1,
+                    down: 2,
+                    left: 3,
+                    right: 4
+                }
+            }
+        },
+        interface: { // 1001 to 2000
+            fullscreen: 1001
         }
-    }
-    events.interface = { // 1001 to 2000
-        fullscreen: 1001
-    }
+    }; tree;
 
     // Private
     const fifo = [];
 
     events.add = function (elmt) {
+        //checkEvent(elmt);
         fifo.push(elmt);
         console.log("EVENT #" + fifo.length + " ADDED " + elmt);
         return elmt;
     }
 
     events.getNext = function () {
-        const res = getParents(events, fifo.shift());
+        const res = fifo.shift();
         // console.log("EVENT #" + (fifo.length + 1) + " REMOVED " + res);
         return res;
     }
@@ -73,19 +80,35 @@ const Events = function () {
             res.push(events.getNext());
         }
         return res;
-    }
+    };
 
     events.filterEventsFrom = function (category, events) {
-        const res = [];
-        let tmp;
-        for (const ev of events) {
-            if (ev[0] === category) {
-                [, ...tmp] = ev;
-                res.push(tmp);
-            }
-        }
+        const cats = category.split(".");
+        let res = events, tmpRes, evParents;
+
+        cats.forEach(function (cat) {
+            tmpRes = [];
+            res.forEach(function (ev) {
+                evParents = ev.split(".");
+                if (evParents[0] === cat) {
+                    tmpRes.push(evParents.splice(1));
+                }
+            });
+            res = tmpRes;
+        });
         return res;
-    }
+    };
+
+    events.eventIsA = function (evType, event) {
+        const evPar = event.split(".");
+        let res = false;
+        for (const ev of evPar) {
+            if (ev === evType)
+                res = true;
+        }
+
+        return res;
+    };
 
     return events;
 };

@@ -1,10 +1,14 @@
-export default loadMoves;
+export default loadMove;
 
-const loadMoves = function (bq) {
-    const moves = bq.world.rules.moves = {
+const loadMove = function (bq) {
+    const move = bq.world.rules.move = {
         // Actual moving method :
         main: undefined,
-        // determine wether you can moves or not or what happens when you try to leave, ...
+        // Triggered by event(s) :
+        events: [
+            "world.player.move"
+        ],
+        // determine wether you can move or not or what happens when you try to leave, ...
         pre: {},
         // when you try to leave, the square may hurt you, ...
         post: {},
@@ -15,17 +19,17 @@ const loadMoves = function (bq) {
     // throw ni; think about priority and what is returned (possibility to be thrown away, events,...)
     // >> update mvt_obj ?
 
-    /* --- moves.pre --- */
+    /* --- move.pre --- */
     // args : bq and mvt obj
-    // returns : true if moves accepted and false if not
+    // returns : true if move accepted and false if not
 
     /* nogo */
     // The nogo data can be modified during the game
     // ie : player gaining ability to go through doors...
-    moves.pre.nogo = {
+    move.pre.nogo = {
         method: function (bq, mvt_obj) {
             // throw ni;
-            let nogo = bq.world.env.rules.moves.nogo;
+            let nogo = bq.world.env.rules.move.nogo;
             if (nogo.data && nogo.data.has(mvt_obj.dest.type)) {
                 if (nogo.sounds) {
                     bq.audio.action.play(nogo.sounds);
@@ -42,12 +46,12 @@ const loadMoves = function (bq) {
         sounds: ["bump_wall"],
     }
 
-    /* --- moves.post --- */
+    /* --- move.post --- */
     // args : new bq obj and mvt obj
     // returns : throw ni;
 
     /* playSquareSounds */
-    moves.post.playSquareSound = {
+    move.post.playSquareSound = {
         method: function (bq, mvt_obj) {
             // throw ni;
             bq.audio.cur_square.play(mvt_obj.dest.type);
@@ -55,7 +59,7 @@ const loadMoves = function (bq) {
     }
 
     /* playProxSounds */
-    moves.post.playProxSounds = {
+    move.post.playProxSounds = {
         method: function (bq, mvt_obj) {
             // throw ni;
             bq.audio.prox.stop();
@@ -63,5 +67,5 @@ const loadMoves = function (bq) {
         }
     }
 
-    return moves;
+    return move;
 }

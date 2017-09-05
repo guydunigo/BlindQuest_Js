@@ -82,7 +82,7 @@ const findStartSquare = function (world) {
         })
     })
     if (pos === undefined) {
-        throw new Error("No start square was found.")
+        throw new Error("No start square was found.");
     }
     return Square(world, ...pos);
 }

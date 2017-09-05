@@ -3,9 +3,8 @@ Misc
 * ~~FIRST~~ Later : **Order TODO !**
 * Play sound
 * Test playing 1 sound file twice at the same time
-* Get user input
-* Reference every sounds
-* Bq theme
+* Reference every sounds and their provenance
+* Bq theme visual
 * Env files to js script ? security ? sandbox ?
 * External repo for the sound/music
 * Reference every extern sound and content with license
@@ -48,6 +47,7 @@ Features to add
         ex : "Damn it ! The effects of *potion* are nearly off."
         * Or sidekick
 * Environment
+    * Player to more generic class *character* for monsters
     * Load map
     * Map editor
     * Day/Night ?
@@ -71,7 +71,7 @@ Features to add
             * Inns
                 * Sleep
                     * Mana ? Stamina ? bonus ?
-* Move around with arrows
+* Move around
     * Touch (mobile) support
     * ability to go through walls, doors, ... (remove elmnts from nogo.data)
     * 3d ? (df style)

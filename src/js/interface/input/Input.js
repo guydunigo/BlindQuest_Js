@@ -7,10 +7,12 @@ import Keyboard from "./Input_Keyboard.js"
 const conf = {
     world: {
         player: {
-            up: undefined,
-            down: undefined,
-            left: undefined,
-            right: undefined
+            move: {
+                up: undefined,
+                down: undefined,
+                left: undefined,
+                right: undefined
+            }
         },
         interface: {
             fullscreen: undefined
