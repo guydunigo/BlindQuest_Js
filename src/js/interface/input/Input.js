@@ -19,7 +19,7 @@ const Input = function (events) {
         kb: undefined
     }
 
-    input.devs.kb = Keyboard(events);
+    input.kb = Keyboard(events);
 
     return input;
 };

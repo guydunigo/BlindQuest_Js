@@ -34,7 +34,6 @@ const Bq = function (filename) {
 
         return bq;
     }
-    console.log(bq.play);
 
     return bq;
 };

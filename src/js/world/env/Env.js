@@ -2,10 +2,22 @@ export default loadEnv;
 
 import loadRules from "./rules/Rules.js"
 
+// returns an object with switched keys/values 
+const reverseObj = function (inObj) {
+    const res = {};
+
+    Object.keys(inObj).forEach(function (elmt) {
+        res[inObj[elmt]] = elmt;
+    });
+
+    return res;
+}
+
 const loadEnv = function (bq) {
     const env = bq.world.env = {
         // square codes
         codes: {},
+        codeToType: undefined,
         // Effect sounds and music names
         sounds: {
             squares: {},
@@ -37,6 +49,9 @@ const loadEnv = function (bq) {
         start: 98,
         end: 99
     };
+
+    const conv_codes = reverseObj(env.codes);
+    env.codeToType = (code) => conv_codes[code];
 
     // throw ni; complete with actual values
     // int or string keys ?

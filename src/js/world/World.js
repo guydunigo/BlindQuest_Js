@@ -3,6 +3,8 @@ export default loadWorld;
 
 import TEST_MAP from "../tests/test_world.js";
 import loadEnv from "./env/Env.js";
+import Player from "./player/Player.js";
+import Square from "./Square.js";
 
 /* Try to open the given filename and extract the world */
 // returns : {name:String,data:Array(Array(Number))}
@@ -59,7 +61,7 @@ const checkWorldPostExtract = function (world) {
     if (world.name.length == 0)
         throw new Error("Empty world name.");
 
-    // Every world line must be the same length (rectangles only, sorry)
+    // Every world line must be the same length (rectangles only, sorry circles and co.)
     const refLineSize = world.data[0].length;
     world.data.forEach(
         (line, indexY) => {
@@ -69,9 +71,48 @@ const checkWorldPostExtract = function (world) {
     )
 };
 
+const findStartSquare = function (world) {
+    let pos = undefined;
+
+    world.data.map(function (y, indexY) {
+        y.map(function (x, indexX) {
+            if (x === world.env.codes.start) {
+                pos = [indexX, indexY];
+            }
+        })
+    })
+    if (pos === undefined) {
+        throw new Error("No start square was found.")
+    }
+    return Square(world, ...pos);
+}
+
 const loadWorld = function (bq, filename) {
-    bq.world = loadWorldFile(filename);
+    bq.world = {
+        name: "",
+        data: [[]],
+        env: {},
+        player: {},
+        get height() { bq.world.data.length },
+        get width() { bq.world.data[0].length },
+        getSquare(x, y) {
+            return Square(bq.world, x, y);
+        },
+        getSquareCode(x, y) {
+            return bq.world.data[y][x];
+        },
+        getSquareType(x, y) {
+            return bq.world.env.codeToType(bq.world.getSquareCode(x, y));
+        }
+    }
+
+    const tmp = loadWorldFile(filename);
+    bq.world.name = tmp.name;
+    bq.world.data = tmp.data;
+
     loadEnv(bq);
+
+    bq.world.player = Player(findStartSquare(bq.world));
 
     return bq.world;
 };
