@@ -29,10 +29,14 @@ const Bq = function (filename) {
     bq.play = function () {
         console.log("\nPLAY\n\n");
 
-        while (!bq.events.isIdle()) {
-            const event = bq.events.getNext();
-            console.log("PLAY EXEC " + event);
-        }
+        const events = bq.events.getPendings();
+
+        bq.world.step(
+            bq.events.filterEventsFrom("world", events)
+        );
+        bq.interface.step(
+            bq.events.filterEventsFrom("interface", events)
+        );
 
         // I find this way of doing the loop quite funny ^^
         // It can't provide a reliable time tracking though

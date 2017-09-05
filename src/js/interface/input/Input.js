@@ -12,7 +12,9 @@ const conf = {
             left: undefined,
             right: undefined
         },
-        interface: {}
+        interface: {
+            fullscreen: undefined
+        }
     }
 }; conf;
 

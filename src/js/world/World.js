@@ -87,8 +87,11 @@ const findStartSquare = function (world) {
     return Square(world, ...pos);
 }
 
-const step = function (bq, worldEvents) {
+const step = function (worldEvents) {
     // move player, ...
+    for (const ev of worldEvents) {
+        console.log("WORLD EXEC " + ev);
+    }
 }
 
 const loadWorld = function (bq, filename) {

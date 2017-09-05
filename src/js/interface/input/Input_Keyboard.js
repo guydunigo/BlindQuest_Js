@@ -13,7 +13,9 @@ const Keyboard = function (events) {
                     right: "ArrowRight"
                 }
             },
-            interface: {}
+            interface: {
+                fullscreen: "f"
+            }
         }
     }
 
@@ -31,6 +33,9 @@ const Keyboard = function (events) {
                 break;
             case kb.conf.world.player.right:
                 events.add(events.world.player.right);
+                break;
+            case kb.conf.interface.fullscreen:
+                events.add(events.interface.fullscreen)
                 break;
             default:
                 msg = "NOEVENT ";

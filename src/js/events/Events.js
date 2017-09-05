@@ -3,13 +3,36 @@
 
 export default Events;
 
+const getParents = function (tree, event) {
+    const res = [];
+    let tmp = [];
+    for (const key of Object.keys(tree)) {
+        // If it is a direct child :
+        if (tree[key] === event) {
+            res.push(key);
+            break;
+        }
+        // Or look in the sub trees
+        else if (Object.values(tree[key]).length !== 0) {
+            tmp = getParents(tree[key], event);
+            if (tmp.length > 0) {
+                res.push(key, ...tmp);
+                break;
+            }
+        }
+    }
+    return res;
+}
+
 const Events = function () {
     const events = {
         world: {},
         interface: {},
         add: undefined,
         getNext: undefined,
-        isIdle: undefined
+        isIdle: undefined,
+        getPendings: undefined,
+        filterEventsFrom: undefined
     };
 
     // those codes' only purpose is to difference them,
@@ -23,8 +46,8 @@ const Events = function () {
             right: 4
         }
     }
-    events.interface = {
-
+    events.interface = { // 1001 to 2000
+        fullscreen: 1001
     }
 
     // Private
@@ -37,12 +60,32 @@ const Events = function () {
     }
 
     events.getNext = function () {
-        const tmp = fifo.shift();
-        console.log("EVENT #" + (fifo.length + 1) + " REMOVED " + tmp);
-        return tmp;
+        const res = getParents(events, fifo.shift());
+        // console.log("EVENT #" + (fifo.length + 1) + " REMOVED " + res);
+        return res;
     }
 
     events.isIdle = () => fifo.length === 0;
+
+    events.getPendings = function () {
+        const res = [];
+        while (!events.isIdle()) {
+            res.push(events.getNext());
+        }
+        return res;
+    }
+
+    events.filterEventsFrom = function (category, events) {
+        const res = [];
+        let tmp;
+        for (const ev of events) {
+            if (ev[0] === category) {
+                [, ...tmp] = ev;
+                res.push(tmp);
+            }
+        }
+        return res;
+    }
 
     return events;
 };

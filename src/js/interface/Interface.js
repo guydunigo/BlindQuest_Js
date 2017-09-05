@@ -8,7 +8,12 @@ const Interface = function (events) {
     const inter = {
         input: Input(events),
         audio: Audio(),
-        disp: {}
+        disp: {},
+        step(interEvents) {
+            for (const ev of interEvents) {
+                console.log("INTERFACE EXEC " + ev);
+            }
+        }
     };
 
     return inter;
