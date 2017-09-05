@@ -5,11 +5,14 @@ import Keyboard from "./Input_Keyboard.js"
 
 
 const conf = {
-    moves: {
-        up: undefined,
-        down: undefined,
-        left: undefined,
-        right: undefined
+    world: {
+        player: {
+            up: undefined,
+            down: undefined,
+            left: undefined,
+            right: undefined
+        },
+        interface: {}
     }
 }; conf;
 

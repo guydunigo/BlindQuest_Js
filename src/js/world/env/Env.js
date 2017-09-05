@@ -78,8 +78,6 @@ const loadEnv = function (bq) {
         end: "end"
     };
 
-    bq.interface.audio.loadSounds(env.sounds);
-
     loadRules(bq);
 
     return env;

@@ -2,6 +2,8 @@ export default loadMoves;
 
 const loadMoves = function (bq) {
     const moves = bq.world.rules.moves = {
+        // Actual moving method :
+        main: undefined,
         // determine wether you can moves or not or what happens when you try to leave, ...
         pre: {},
         // when you try to leave, the square may hurt you, ...
@@ -18,13 +20,15 @@ const loadMoves = function (bq) {
     // returns : true if moves accepted and false if not
 
     /* nogo */
+    // The nogo data can be modified during the game
+    // ie : player gaining ability to go through doors...
     moves.pre.nogo = {
         method: function (bq, mvt_obj) {
             // throw ni;
             let nogo = bq.world.env.rules.moves.nogo;
             if (nogo.data && nogo.data.has(mvt_obj.dest.type)) {
                 if (nogo.sounds) {
-                    bq.audio.play(nogo.sounds);
+                    bq.audio.action.play(nogo.sounds);
                 }
                 return false;
             }

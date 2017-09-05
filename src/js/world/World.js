@@ -87,12 +87,18 @@ const findStartSquare = function (world) {
     return Square(world, ...pos);
 }
 
+const step = function (bq, worldEvents) {
+    // move player, ...
+}
+
 const loadWorld = function (bq, filename) {
     bq.world = {
         name: "",
         data: [[]],
         env: {},
         player: {},
+        birthms: 0,
+
         get height() { bq.world.data.length },
         get width() { bq.world.data[0].length },
         getSquare(x, y) {
@@ -103,7 +109,13 @@ const loadWorld = function (bq, filename) {
         },
         getSquareType(x, y) {
             return bq.world.env.codeToType(bq.world.getSquareCode(x, y));
-        }
+        },
+        // Launch music, etc...
+        launch() {
+            bq.world.birthms = Date.now()
+            bq.interface.audio.cur_square.play(bq.world.player.square);
+        },
+        step
     }
 
     const tmp = loadWorldFile(filename);

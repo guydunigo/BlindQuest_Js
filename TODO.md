@@ -73,6 +73,7 @@ Features to add
                     * Mana ? Stamina ? bonus ?
 * Move around with arrows
     * Touch (mobile) support
+    * ability to go through walls, doors, ... (remove elmnts from nogo.data)
     * 3d ? (df style)
         * command to get position (=> number of *bip*s)
     * Change orientation

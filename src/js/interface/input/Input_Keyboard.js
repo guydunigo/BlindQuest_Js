@@ -5,29 +5,32 @@ const Keyboard = function (events) {
     // through : bq.interface.input.kb.conf.xxx = "z"
     const kb = {
         conf: {
-            moves: {
-                up: "ArrowUp",
-                down: "ArrowDown",
-                left: "ArrowLeft",
-                right: "ArrowRight"
+            world: {
+                player: {
+                    up: "ArrowUp",
+                    down: "ArrowDown",
+                    left: "ArrowLeft",
+                    right: "ArrowRight"
+                }
             },
+            interface: {}
         }
     }
 
     document.addEventListener("keydown", function (event) {
         let msg = "";
         switch (event.key) {
-            case kb.conf.moves.up:
-                events.add(events.types.moves.up);
+            case kb.conf.world.player.up:
+                events.add(events.world.player.up);
                 break;
-            case kb.conf.moves.down:
-                events.add(events.types.moves.down);
+            case kb.conf.world.player.down:
+                events.add(events.world.player.down);
                 break;
-            case kb.conf.moves.left:
-                events.add(events.types.moves.left);
+            case kb.conf.world.player.left:
+                events.add(events.world.player.left);
                 break;
-            case kb.conf.moves.right:
-                events.add(events.types.moves.right);
+            case kb.conf.world.player.right:
+                events.add(events.world.player.right);
                 break;
             default:
                 msg = "NOEVENT ";

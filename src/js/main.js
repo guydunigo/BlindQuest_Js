@@ -9,7 +9,7 @@ const main = function () {
 
     console.log(b);
 
-    b.play();
+    b.launch();
 }
 
 document.addEventListener("DOMContentLoaded", main);

@@ -5,7 +5,8 @@ export default Events;
 
 const Events = function () {
     const events = {
-        types: {},
+        world: {},
+        interface: {},
         add: undefined,
         getNext: undefined,
         isIdle: undefined
@@ -13,14 +14,17 @@ const Events = function () {
 
     // those codes' only purpose is to difference them,
     //  they are not meant to be used directly
-    //  (ie : bq.events.types.moves.up instead of 1)
-    events.types = {
-        moves: { // from 1 to 10
+    //  (ie : bq.events.world.player.up instead of 1)
+    events.world = { // 1 -> 1000
+        player: { // 1 -> 100
             up: 1,
             down: 2,
             left: 3,
             right: 4
         }
+    }
+    events.interface = {
+
     }
 
     // Private
@@ -34,7 +38,7 @@ const Events = function () {
 
     events.getNext = function () {
         const tmp = fifo.shift();
-        console.log("EVENT #" + (fifo.length+1) + " REMOVED " + tmp);
+        console.log("EVENT #" + (fifo.length + 1) + " REMOVED " + tmp);
         return tmp;
     }
 

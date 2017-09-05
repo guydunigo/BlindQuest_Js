@@ -12,6 +12,7 @@ const Bq = function (filename) {
     const bq = {
         world: {},
         interface: {},
+        launch: undefined,
         play: undefined
     };
 
@@ -19,6 +20,11 @@ const Bq = function (filename) {
     bq.interface = Interface(bq.events);
 
     loadWorld(bq, filename);
+
+    bq.launch = function () {
+        bq.world.launch();
+        return bq.play();
+    }
 
     bq.play = function () {
         console.log("\nPLAY\n\n");

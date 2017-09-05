@@ -6,14 +6,15 @@ const Cur_square = function () {
     let name = "";
 
     const stop = function () {
-        console.log(`AUDIO SQUARE PLAY ${name}`);
+        if (name !== "")
+            console.log(`AUDIO SQUARE STOP ${name}`);
         name = "";
     }
-    const play = function (square_type) {
+    const play = function (square) {
         stop();
 
-        name = square_type;
-        console.log(`AUDIO SQUARE PLAY ${square_type}`);
+        name = square.type;
+        console.log(`AUDIO SQUARE PLAY ${name}`);
     }
 
     return {
@@ -44,11 +45,32 @@ const Prox = function () {
     }
 }
 
+const Action = function () {
+    let name = "";
+
+    const stop = function () {
+        console.log(`AUDIO ACTION PLAY ${name}`);
+        name = "";
+    }
+    const play = function (action_type) {
+        stop();
+
+        name = action_type;
+        console.log(`AUDIO ACTION PLAY ${action_type}`);
+    }
+
+    return {
+        name,
+        play,
+        stop
+    }
+}
+
 const Audio = function () {
     const audio = {
         cur_square: Cur_square(),
         prox: Prox(),
-        loadSounds: function (sounds) { console.log("AUDIO LOADED"); return sounds; }
+        action: Action(),
     }
 
     return audio;
