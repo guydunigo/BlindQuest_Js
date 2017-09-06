@@ -99,21 +99,26 @@ const Events = function () {
         return (tmp !== undefined);
     };
 
+    // Returns a list containing only the events in the given category
+    // the category must be an "absolute" path : world.player
     events.filterEventsFrom = function (category, events) {
         const cats = category.split(".");
-        let res = events, tmpRes, evParents;
+        let tmp1 = events, tmp2, evParents;
+        let res1 = events, res2;
 
         cats.forEach(function (cat) {
-            tmpRes = [];
-            res.forEach(function (ev) {
+            res2 = []; tmp2 = [];
+            tmp1.forEach(function (ev, index) {
                 evParents = ev.split(".");
                 if (evParents[0] === cat) {
-                    tmpRes.push(evParents.splice(1));
+                    tmp2.push(evParents.splice(1));
+                    res2.push(res1[index]);
                 }
             });
-            res = tmpRes;
+            tmp1 = tmp2;
+            res1 = res2;
         });
-        return res;
+        return res1;
     };
 
     events.eventIsA = function (evType, event) {
@@ -135,7 +140,7 @@ const Events = function () {
             if (events.isEventGood(targ)) {
                 goodTargets.push(targ);
             }
-        })
+        });
 
         goodTargets.forEach(function (targ) {
             if (events.rules[targ] instanceof Array) {
@@ -144,7 +149,7 @@ const Events = function () {
             else {
                 events.rules[targ] = [rule];
             }
-            console.log("EVENTS REGISTER " + rule.name + " FOR " + targ);
+            console.log("EVENTS REGISTER " + rule.name + " TO " + targ);
         })
     };
 
