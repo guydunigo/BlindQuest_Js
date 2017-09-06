@@ -5,7 +5,7 @@ import Mvt from "./Movement.js";
 const loadMove = function (bq) {
     const move = bq.world.env.rules.move = {
         // debug purpose only
-        name: "move",
+        name: "world.player.move",
         // Actual moving method :
         main: undefined,
         // Triggered by event(s) : must be an Array
@@ -14,6 +14,8 @@ const loadMove = function (bq) {
         ],
         // Any data for the rule
         //   here, you have the mvt vectors applyed :
+        // throw ni; use functions to calculate the vector
+        //      ie : depending on stamina, ...
         data: {
             "world.player.move.up": [0, -1],
             "world.player.move.down": [0, 1],
@@ -34,46 +36,29 @@ const loadMove = function (bq) {
         idle: {}
     }
 
-    move.main = function (bq, events) {
-        let nomove = true;
-        if (events.length > 0) {
-            // Calculating Mvt obj
-            const dirs = [];
-            let mvt;
+    move.main = function (bq, event) {
+        // Calculating Mvt obj
+        const dir = move.data[event];
 
-            events.forEach(function (x) {
-                if (move.data[x] !== undefined) {
-                    dirs.push(x);
-                }
+        if (dir !== undefined) {
+            let mvt = Mvt(bq.world, bq.world.player.square, dir);
+
+            // pre
+            Object.values(move.pre).forEach(function (func) {
+                mvt = func.main(bq, mvt);
             });
+            //throw ni; find a way to calculate new mvt with priority (use an array ?)
 
-            // throw ni; more than one deplacements
-            // mvt = Mvt(bq.world, bq.world.player.square);
-            // mvt.add(...dirs);
 
-            dirs.forEach(function (dir) {
-                mvt = Mvt(bq.world, bq.world.player.square, dir);
-
-                // pre
-                Object.values(move.pre).forEach(function (func) {
-                    mvt = pre.main(bq, mvt);
-                });
-                //throw ni; find a way to calculate new mvt with priority (use an array ?)
-
-                // actual move
-                if (!mvt.doesNothing()) {
-                    bq.world.player.square = Mvt.dest;
-                    nomove = false;
-                }
+            // actual move
+            if (!mvt.doesNothing()) {
+                bq.world.player.moveTo(mvt);
 
                 // post
-            });
-        }
-        // Apply static effect when staying on the square
-        if (nomove) {
-            Object.values(move.idle).forEach(function (func) {
-                func.main(bq);
-            });
+                Object.values(move.post).forEach(function (func) {
+                    func.main(bq, mvt);
+                });
+            }
         }
     };
 
@@ -90,13 +75,14 @@ const loadMove = function (bq) {
     move.pre.nogo = {
         main: function (bq, mvt_obj) {
             // throw ni; for bigger moves, check path...
-            let nogo = bq.world.env.rules.move.nogo;
-            if (nogo.data && nogo.data.has(mvt_obj.dest.type)) {
-                bq.audio.action.play(nogo.sounds);
+            let nogo = bq.world.env.rules.move.pre.nogo;
+            if (nogo.data && nogo.data.has(mvt_obj.dest.code)) {
+                console.log("RULES NOGO " + mvt_obj.dest.type);
+                bq.interface.audio.action.play(nogo.sounds);
                 return Mvt(bq.world, mvt_obj.src, [0, 0]);
             }
             else
-                return mvt;
+                return mvt_obj;
         },
         data: new Set([
             bq.world.env.codes.mountains,
@@ -111,18 +97,18 @@ const loadMove = function (bq) {
 
     /* playSquareSounds */
     move.post.playSquareSound = {
-        method: function (bq, mvt_obj) {
+        main: function (bq, mvt_obj) {
             // throw ni;
-            bq.audio.cur_square.play(mvt_obj.dest.type);
+            bq.interface.audio.cur_square.play(mvt_obj.dest);
         }
     }
 
     /* playProxSounds */
     move.post.playProxSounds = {
-        method: function (bq, mvt_obj) {
+        main: function (bq, mvt_obj) {
             // throw ni;
-            bq.audio.prox.stop();
-            bq.audio.prox.play(mvt_obj.dest.prox_squares);
+            bq.interface.audio.prox.stop();
+            bq.interface.audio.prox.play(mvt_obj.dest.prox_squares);
         }
     }
 

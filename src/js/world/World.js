@@ -102,16 +102,38 @@ const loadWorld = function (bq, filename) {
         player: {},
         birthms: 0,
 
-        get height() { bq.world.data.length },
-        get width() { bq.world.data[0].length },
+        get height() { return bq.world.data.length },
+        get width() { return bq.world.data[0].length },
+        correctX(x) {
+            let i = x;
+            if (i < 0) {
+                i = bq.world.width - 1 + (i % bq.world.width);
+            }
+            else if (i > bq.world.width - 1) {
+                i %= bq.world.width;
+            }
+            return i;
+        },
+        correctY(y) {
+            let i = y;
+            if (i < 0) {
+                i = bq.world.height - 1 + (i % bq.world.height);
+            }
+            else if (i > bq.world.height - 1) {
+                i %= bq.world.height;
+            }
+            return i;
+        },
         getSquare(x, y) {
             return Square(bq.world, x, y);
         },
         getSquareCode(x, y) {
-            return bq.world.data[y][x];
+            let i = bq.world.correctX(x), j = bq.world.correctY(y);
+            return bq.world.data[j][i];
         },
         getSquareType(x, y) {
-            return bq.world.env.codeToType(bq.world.getSquareCode(x, y));
+            let i = bq.world.correctX(x), j = bq.world.correctY(y);
+            return bq.world.env.codeToType(bq.world.getSquareCode(i, j));
         },
         // Launch music, etc...
         launch() {

@@ -3,6 +3,8 @@
 
 export default Events;
 
+import loadRulesHandlers from "./Events_rules.js";
+
 /* throw ni;
 const getParents = function (tree, event) {
     const res = [];
@@ -25,7 +27,7 @@ const getParents = function (tree, event) {
     return res;
 }*/
 
-const Events = function () {
+const Events = function (bq) {
     const events = {
         model: {},
         rules: {},
@@ -34,9 +36,11 @@ const Events = function () {
         isIdle: undefined,
         getPendings: undefined,
         isEvendGood: undefined,
+        getParentsTree: undefined,
         filterEventsFrom: undefined,
         eventIsA/*belle a les yeux bleus*/: undefined,
-        register: undefined
+        register: undefined,
+        handle: undefined
     };
 
     // hierarchy of events, use it between quotes with js notation
@@ -99,10 +103,27 @@ const Events = function () {
         return (tmp !== undefined);
     };
 
+    // Returns a list with the events hierarchy :
+    // ie : "world.player.move.up"
+    //   >> [ "world", "world.player", "world.player.move", "world.player.move.up" ]
+    events.getParentsTree = function (event) {
+        const parents = event.split("."), res = [];
+        let tmp;
+        parents.forEach(function (par) {
+            tmp = "";
+            if (res.length > 0) {
+                tmp = res[res.length - 1] + ".";
+            }
+            res.push(tmp + par);
+        });
+
+        return res;
+    }
+
     // Returns a list containing only the events in the given category
     // the category must be an "absolute" path : world.player
-    events.filterEventsFrom = function (category, events) {
-        const cats = category.split(".");
+    events.filterEventsFrom = function (category, evts) {
+        /*const cats = category.split(".");
         let tmp1 = events, tmp2, evParents;
         let res1 = events, res2;
 
@@ -118,7 +139,20 @@ const Events = function () {
             tmp1 = tmp2;
             res1 = res2;
         });
-        return res1;
+        return res1;*/
+
+        const res = [];
+        let tree;
+        evts.forEach(function (ev) {
+            tree = events.getParentsTree(ev);
+            for (const e of tree) {
+                if (category === e) {
+                    res.push(ev);
+                    break;
+                }
+            }
+        })
+        return res;
     };
 
     events.eventIsA = function (evType, event) {
@@ -132,26 +166,7 @@ const Events = function () {
         return res;
     };
 
-    // Possible memory loss ? rule duplicating ?
-    //   throw ni; test modifying the one in events and see if it changes in env too.
-    events.register = function (rule) {
-        const goodTargets = [];
-        rule.events.forEach(function (targ) {
-            if (events.isEventGood(targ)) {
-                goodTargets.push(targ);
-            }
-        });
-
-        goodTargets.forEach(function (targ) {
-            if (events.rules[targ] instanceof Array) {
-                events.rules.push(targ);
-            }
-            else {
-                events.rules[targ] = [rule];
-            }
-            console.log("EVENTS REGISTER " + rule.name + " TO " + targ);
-        })
-    };
+    loadRulesHandlers(bq, events);
 
     return events;
 };
