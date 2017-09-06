@@ -6,11 +6,13 @@ function loadRulesHandlers(bq, events) {
     events.register = function (rule) {
         const goodTargets = [];
         // Keep only good events
-        rule.events.forEach(function (targ) {
-            if (events.isEventGood(targ)) {
-                goodTargets.push(targ);
-            }
-        });
+        if (rule.events !== undefined) {
+            rule.events.forEach(function (targ) {
+                if (events.isEventGood(targ)) {
+                    goodTargets.push(targ);
+                }
+            });
+        }
 
         // Add them to the list :
         goodTargets.forEach(function (targ) {

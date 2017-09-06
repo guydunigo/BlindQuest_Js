@@ -22,7 +22,7 @@ It will also be time to upload this first version on the [website](https://blind
 
 ### Third goal : Planning
 
-The project will then require a little organizing and prioritizing (ie. sort TODO and clean it).
+The project will then require a little organizing and prioritizing (ie. sort TODO and clean it). Cleaning, reordering, commenting...
 
 During that time, I will think about licensing my work, which also means going through the libraries and all the content I have been using and if they are compatible with the license, etc.
 

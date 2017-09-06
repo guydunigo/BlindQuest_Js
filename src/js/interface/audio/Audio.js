@@ -6,15 +6,16 @@ const Cur_square = function () {
     let square = undefined;
 
     const stop = function () {
-        if (square !== undefined)
-            console.log(`\tAUDIO SQUARE STOP ${square.type}`);
+        if (square !== undefined) {
+            // console.log(`\tAUDIO SQUARE STOP ${square.type}`);
+        }
         square = undefined;
     }
     const play = function (square) {
         stop();
 
         square = square;
-        console.log(`\tAUDIO SQUARE PLAY ${square.type}`);
+        // console.log(`\tAUDIO SQUARE PLAY ${square.type}`);
     }
 
     return {
@@ -28,15 +29,16 @@ const Prox = function () {
     let list = [];
 
     const stop = function () {
-        if (list.length > 0)
-            console.log(`\tAUDIO PROX STOP ${list.map((x) => x.type)}`);
+        if (list.length > 0) {
+            // console.log(`\tAUDIO PROX STOP ${list.map((x) => x.type)}`);
+        }
         list = []
     }
     const play = function (prox_squares) {
         stop();
 
         list = prox_squares;
-        console.log(`\tAUDIO PROX PLAY ${list.map((x) => x.type)}`);
+        // console.log(`\tAUDIO PROX PLAY ${list.map((x) => x.type)}`);
     }
 
     return {
@@ -50,15 +52,16 @@ const Action = function () {
     let square = "";
 
     const stop = function () {
-        if (square !== "")
-            console.log(`\tAUDIO ACTION STOP ${square}`);
+        if (square !== "") {
+            // console.log(`\tAUDIO ACTION STOP ${square}`);
+        }
         square = "";
     }
     const play = function (action_type) {
         stop();
 
         square = action_type;
-        console.log(`\tAUDIO ACTION PLAY ${action_type}`);
+        // console.log(`\tAUDIO ACTION PLAY ${action_type}`);
     }
 
     return {

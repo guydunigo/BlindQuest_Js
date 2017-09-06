@@ -1,10 +1,12 @@
 Misc
 ====
 * ~~FIRST~~ Later : **Order TODO !**
+* Optimize website and display for screen readers
+* conf for debug messages
 * Play sound
 * Test playing 1 sound file twice at the same time
 * Reference every sounds and their provenance
-* Bq theme visual
+* Bq visual theme
 * Env files to js script ? security ? sandbox ?
 * External repo for the sound/music
 * Reference every extern sound and content with license
@@ -30,8 +32,8 @@ Features to add
         * Voice commanded ? (chat with player...)
     * Easily translatable
     * Non disturbing visual interface 
-        * keep Bq theme *but*
-            don't hurt eyes displaying smtg (you can play with closed eyes)
+        * keep Bq visual theme *but*
+            don't hurt eyes displaying smtg (you must be able to play with closed eyes)
     * Help
         * Ingame :
             * Voice ?
@@ -55,6 +57,7 @@ Features to add
         * Covering the other sounds
         * Acting on the player : harder to walk/random moves, weariness, damages...
     * Slow death squares : Quicksand (sable mouvant)/...
+    * Probability to be saved from water (return to coast by waves? NPCs ?)
     * Places
         * Dungeons
             * Open/Unlock/Close doors

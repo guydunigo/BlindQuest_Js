@@ -42,7 +42,7 @@ const Keyboard = function (events) {
             default:
                 msg = "NOEVENT ";
         };
-        console.log("INPUT KB " + msg + event.key);
+        console.log("\tINPUT KB " + msg + event.key);
     });
 
     return kb;

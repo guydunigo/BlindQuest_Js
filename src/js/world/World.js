@@ -87,11 +87,8 @@ const findStartSquare = function (world) {
     return Square(world, ...pos);
 }
 
-const step = function (worldEvents) {
-    // move player, ...
-    for (const ev of worldEvents) {
-        console.log("WORLD EXEC " + ev);
-    }
+const step = function (bq) {
+    bq.world.steps++;
 }
 
 const loadWorld = function (bq, filename) {
@@ -100,7 +97,7 @@ const loadWorld = function (bq, filename) {
         data: [[]],
         env: {},
         player: {},
-        birthms: 0,
+        steps: 0,
 
         get height() { return bq.world.data.length },
         get width() { return bq.world.data[0].length },
@@ -137,7 +134,6 @@ const loadWorld = function (bq, filename) {
         },
         // Launch music, etc...
         launch() {
-            bq.world.birthms = Date.now()
             bq.interface.audio.cur_square.play(bq.world.player.square);
         },
         step

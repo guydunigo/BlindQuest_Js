@@ -59,6 +59,9 @@ const Events = function (bq) {
         },
         interface: { // 1001 to 2000
             fullscreen: 1001
+        },
+        game: { // 2001 -> 3001
+            stop: 2001
         }
     };
 
@@ -68,7 +71,7 @@ const Events = function (bq) {
     events.add = function (elmt) {
         if (events.isEventGood(elmt)) {
             fifo.push(elmt);
-            console.log("EVENT #" + fifo.length + " ADDED " + elmt);
+            console.log("EVENTS ADDED #" + fifo.length + " " + elmt);
         }
         return elmt;
     }
@@ -159,8 +162,9 @@ const Events = function (bq) {
         const evPar = event.split(".");
         let res = false;
         for (const ev of evPar) {
-            if (ev === evType)
+            if (ev === evType) {
                 res = true;
+            }
         }
 
         return res;

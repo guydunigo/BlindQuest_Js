@@ -77,8 +77,9 @@ const loadMove = function (bq) {
             // throw ni; for bigger moves, check path...
             let nogo = bq.world.env.rules.move.pre.nogo;
             if (nogo.data && nogo.data.has(mvt_obj.dest.code)) {
-                console.log("RULES NOGO " + mvt_obj.dest.type);
-                bq.interface.audio.action.play(nogo.sounds);
+                console.log("RULES MOVE NOGO " + mvt_obj.dest.type);
+                // throw ni; pick random sound ?
+                bq.interface.audio.action.play(nogo.sounds[0]);
                 return Mvt(bq.world, mvt_obj.src, [0, 0]);
             }
             else
@@ -110,6 +111,20 @@ const loadMove = function (bq) {
             bq.interface.audio.prox.stop();
             bq.interface.audio.prox.play(mvt_obj.dest.prox_squares);
         }
+    }
+
+    /* lethal squares */
+    move.post.letalSquares = {
+        main: function (bq, mvt_obj) {
+            const letalTypes = move.post.letalSquares.data.map((x) => x[0]);
+            if (letalTypes.includes(mvt_obj.dest.code)) {
+                console.log("RULES MOVE LETHAL " + mvt_obj.dest.type);
+                bq.world.player.kill(bq);
+            }
+        },
+        data: [
+            [bq.world.env.codes.water, "drown"]
+        ]
     }
 
     // Don't forget to register your rule to the events defined in move.events
