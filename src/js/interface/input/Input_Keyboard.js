@@ -37,7 +37,7 @@ const Keyboard = function (events) {
                 events.add("world.player.move.right");
                 break;
             case kb.conf.interface.fullscreen:
-                events.add("interface.fullscreen")
+                events.add("interface.fullscreen");
                 break;
             default:
                 msg = "NOEVENT ";
