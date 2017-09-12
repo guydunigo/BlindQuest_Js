@@ -1,8 +1,8 @@
 // Defines the World class
-export default loadWorld;
+export default World;
 
 import TEST_MAP from "../tests/test_world.js";
-import loadEnv from "./env/Env.js";
+import Env from "./env/Env.js";
 import Player from "./player/Player.js";
 import Square from "./Square.js";
 
@@ -87,65 +87,65 @@ const findStartSquare = function (world) {
     return Square(world, ...pos);
 }
 
-const step = function (bq) {
-    bq.world.steps++;
+const step = function (world) {
+    world.steps++;
 }
 
-const loadWorld = function (bq, filename) {
-    bq.world = {
+const World = function (bq, filename) {
+    const world = {
         name: "",
         data: [[]],
         env: {},
         player: {},
         steps: 0,
 
-        get height() { return bq.world.data.length },
-        get width() { return bq.world.data[0].length },
+        get height() { return world.data.length },
+        get width() { return world.data[0].length },
         correctX(x) {
             let i = x;
             if (i < 0) {
-                i = bq.world.width - 1 + (i % bq.world.width);
+                i = world.width - 1 + (i % world.width);
             }
-            else if (i > bq.world.width - 1) {
-                i %= bq.world.width;
+            else if (i > world.width - 1) {
+                i %= world.width;
             }
             return i;
         },
         correctY(y) {
             let i = y;
             if (i < 0) {
-                i = bq.world.height - 1 + (i % bq.world.height);
+                i = world.height - 1 + (i % world.height);
             }
-            else if (i > bq.world.height - 1) {
-                i %= bq.world.height;
+            else if (i > world.height - 1) {
+                i %= world.height;
             }
             return i;
         },
         getSquare(x, y) {
-            return Square(bq.world, x, y);
+            return Square(world, x, y);
         },
         getSquareCode(x, y) {
-            let i = bq.world.correctX(x), j = bq.world.correctY(y);
-            return bq.world.data[j][i];
+            let i = world.correctX(x), j = world.correctY(y);
+            return world.data[j][i];
         },
         getSquareType(x, y) {
-            let i = bq.world.correctX(x), j = bq.world.correctY(y);
-            return bq.world.env.codeToType(bq.world.getSquareCode(i, j));
+            let i = world.correctX(x), j = world.correctY(y);
+            return world.env.codeToType(world.getSquareCode(i, j));
         },
         // Launch music, etc...
         launch() {
-            bq.interface.audio.cur_square.play(bq.world.player.square);
+            bq.interface.audio.cur_square.play(world.player.square);
         },
         step
     }
 
     const tmp = loadWorldFile(filename);
-    bq.world.name = tmp.name;
-    bq.world.data = tmp.data;
+    world.name = tmp.name;
+    world.data = tmp.data;
 
-    loadEnv(bq);
+    world.env = Env();
 
-    bq.world.player = Player(findStartSquare(bq.world));
+    world.player = Player(findStartSquare(world));
 
-    return bq.world;
+    return world;
 };

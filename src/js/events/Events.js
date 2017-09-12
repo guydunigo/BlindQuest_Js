@@ -47,21 +47,23 @@ const Events = function (bq) {
     // ie : ev = "world.player.move.up"
     // btw : numbers are irrelevant actually
     events.model = {
-        world: {
-            player: { // 1 -> 100
-                move: {
-                    up: 1,
-                    down: 2,
-                    left: 3,
-                    right: 4
+        bq: {
+            world: {
+                player: { // 1 -> 100
+                    move: {
+                        up: 1,
+                        down: 2,
+                        left: 3,
+                        right: 4
+                    }
                 }
+            },
+            interface: { // 1001 to 2000
+                fullscreen: 1001
+            },
+            game: { // 2001 -> 3001
+                stop: 2001
             }
-        },
-        interface: { // 1001 to 2000
-            fullscreen: 1001
-        },
-        game: { // 2001 -> 3001
-            stop: 2001
         }
     };
 
@@ -126,24 +128,6 @@ const Events = function (bq) {
     // Returns a list containing only the events in the given category
     // the category must be an "absolute" path : world.player
     events.filterEventsFrom = function (category, evts) {
-        /*const cats = category.split(".");
-        let tmp1 = events, tmp2, evParents;
-        let res1 = events, res2;
-
-        cats.forEach(function (cat) {
-            res2 = []; tmp2 = [];
-            tmp1.forEach(function (ev, index) {
-                evParents = ev.split(".");
-                if (evParents[0] === cat) {
-                    tmp2.push(evParents.splice(1));
-                    res2.push(res1[index]);
-                }
-            });
-            tmp1 = tmp2;
-            res1 = res2;
-        });
-        return res1;*/
-
         const res = [];
         let tree;
         evts.forEach(function (ev) {

@@ -1,9 +1,10 @@
 // Main game loop
 export default Bq;
 
-import Events from "./events/Events.js"
+import Events from "./events/Events.js";
+import Rules from "./rules/Rules.js";
 import Interface from "./interface/Interface.js";
-import loadWorld from "./world/World.js";
+import World from "./world/World.js";
 
 // miliseconds beetween each game loop
 const TIMEBASE = 1000;
@@ -13,6 +14,8 @@ const Bq = function (filename) {
         state: "",
         world: {},
         interface: {},
+        rules: {},
+        events: {},
         launch: undefined,
         play: undefined,
         states: {
@@ -25,8 +28,8 @@ const Bq = function (filename) {
 
     bq.events = Events(bq);
     bq.interface = Interface(bq.events);
-
-    loadWorld(bq, filename);
+    bq.world = World(bq, filename);
+    bq.rules = Rules(bq);
 
     bq.launch = function () {
         bq.world.launch();
@@ -39,10 +42,8 @@ const Bq = function (filename) {
 
         const events = bq.events.getPendings();
 
-        bq.world.step(bq);
-        /*bq.interface.step(
-            bq.events.filterEventsFrom("interface", events)
-        );*/
+        bq.world.step(bq.world);
+
         bq.events.handle(events);
 
         if (bq.state !== bq.states.stopped) {
@@ -56,8 +57,8 @@ const Bq = function (filename) {
 
     // throw ni; temporary :
     bq.events.register({
-        name: "game.stop",
-        events: ["game.stop"],
+        name: "bq.game.stop",
+        events: ["bq.game.stop"],
         main: function (bq) {
             bq.state = bq.states.stopped;
         }

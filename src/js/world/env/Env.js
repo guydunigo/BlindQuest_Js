@@ -1,6 +1,4 @@
-export default loadEnv;
-
-import loadRules from "./rules/Rules.js"
+export default Env;
 
 // returns an object with switched keys/values 
 const reverseObj = function (inObj) {
@@ -13,8 +11,8 @@ const reverseObj = function (inObj) {
     return res;
 }
 
-const loadEnv = function (bq) {
-    const env = bq.world.env = {
+const Env = function () {
+    const env = {
         // square codes
         codes: {},
         codeToType: undefined,
@@ -22,8 +20,7 @@ const loadEnv = function (bq) {
         sounds: {
             squares: {},
             effects: {}
-        },
-        rules: {}
+        }
     };
 
     /* ------ codes ------ */
@@ -77,8 +74,6 @@ const loadEnv = function (bq) {
         start: "start",
         end: "end"
     };
-
-    loadRules(bq);
 
     return env;
 }

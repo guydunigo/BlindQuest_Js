@@ -1,26 +1,26 @@
-export default loadMove;
+export default Move;
 
 import Mvt from "./Movement.js";
 
-const loadMove = function (bq) {
-    const move = bq.world.env.rules.move = {
+const Move = function (bq) {
+    const move = {
         // debug purpose only
-        name: "world.player.move",
+        name: "bq.world.player.move",
         // Actual moving method :
         main: undefined,
         // Triggered by event(s) : must be an Array
         events: [
-            "world.player.move"
+            "bq.world.player.move"
         ],
         // Any data for the rule
         //   here, you have the mvt vectors applyed :
         // throw ni; use functions to calculate the vector
         //      ie : depending on stamina, ...
         data: {
-            "world.player.move.up": [0, -1],
-            "world.player.move.down": [0, 1],
-            "world.player.move.left": [-1, 0],
-            "world.player.move.right": [1, 0]
+            "bq.world.player.move.up": [0, -1],
+            "bq.world.player.move.down": [0, 1],
+            "bq.world.player.move.left": [-1, 0],
+            "bq.world.player.move.right": [1, 0]
         },
 
         // throw ni; use these in the main or in Events.js ?
@@ -75,7 +75,7 @@ const loadMove = function (bq) {
     move.pre.nogo = {
         main: function (bq, mvt_obj) {
             // throw ni; for bigger moves, check path...
-            let nogo = bq.world.env.rules.move.pre.nogo;
+            let nogo = move.pre.nogo;
             if (nogo.data && nogo.data.has(mvt_obj.dest.code)) {
                 console.log("RULES MOVE NOGO " + mvt_obj.dest.type);
                 // throw ni; pick random sound ?
