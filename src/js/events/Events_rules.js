@@ -14,13 +14,20 @@ function loadRulesHandlers(bq, events) {
             });
         }
 
+        let dest = {};
+        if (rule.instant) {
+            dest = events.instants;
+        }
+        else {
+            dest = events.rules;
+        }
         // Add them to the list :
         goodTargets.forEach(function (targ) {
-            if (events.rules[targ] instanceof Array) {
-                events.rules.push(targ);
+            if (dest[targ] instanceof Array) {
+                dest.push(targ);
             }
             else {
-                events.rules[targ] = [rule];
+                dest[targ] = [rule];
             }
             console.log("EVENTS REGISTER " + rule.name + " TO " + targ);
         })
@@ -31,13 +38,16 @@ function loadRulesHandlers(bq, events) {
     // throw ni; Good idea ?
     // throw ni; send all events for this rule of one at a time ?
     //     >> track the uncalled rules and call the idle method ?
-    events.handle = function (evts) {
-        let tree, rules;
+    // returns true if a rule was called, false if nothing was done
+    events.handle = function (evts, rulesList = events.rules) {
+        let tree, rules, res = false;
         evts.forEach(function (ev) {
             tree = events.getParentsTree(ev);
             tree.forEach(function (cat) {
-                rules = events.rules[cat];
+                rules = rulesList[cat];
                 if (rules !== undefined) {
+                    if (res !== true)
+                        res = true;
                     rules.forEach(function (rule) {
                         console.log("EVENTS EXEC " + rule.name);
                         rule.main(bq, ev);
@@ -45,6 +55,8 @@ function loadRulesHandlers(bq, events) {
                 }
             })
         });
+
+        return res
     }
 
     return events;

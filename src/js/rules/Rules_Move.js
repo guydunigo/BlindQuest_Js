@@ -12,6 +12,8 @@ const Move = function (bq) {
         events: [
             "bq.world.player.move"
         ],
+        // If is instant, execute it directly and doesn't add it to the event list
+        instant: false,
         // Any data for the rule
         //   here, you have the mvt vectors applyed :
         // throw ni; use functions to calculate the vector
@@ -123,7 +125,8 @@ const Move = function (bq) {
             }
         },
         data: [
-            [bq.world.env.codes.water, "drown"]
+            [bq.world.env.codes.water, "drown"],
+            [bq.world.env.codes.sea, "drown"],
         ]
     }
 

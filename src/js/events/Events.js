@@ -31,6 +31,7 @@ const Events = function (bq) {
     const events = {
         model: {},
         rules: {},
+        instants: {},
         add: undefined,
         getNext: undefined,
         isIdle: undefined,
@@ -72,8 +73,13 @@ const Events = function (bq) {
 
     events.add = function (elmt) {
         if (events.isEventGood(elmt)) {
-            fifo.push(elmt);
-            console.log("EVENTS ADDED #" + fifo.length + " " + elmt);
+            if (!events.handle([elmt], events.instants)) {
+                fifo.push(elmt);
+                console.log("EVENTS ADDED #" + fifo.length + " " + elmt);
+            }
+            else {
+                console.log("EVENTS INSTANT " + elmt);
+            }
         }
         return elmt;
     }
