@@ -73,15 +73,13 @@ const Events = function (bq) {
 
     events.add = function (elmt) {
         if (events.isEventGood(elmt)) {
-            if (!events.handle([elmt], events.instants)) {
-                fifo.push(elmt);
-                console.log("EVENTS ADDED #" + fifo.length + " " + elmt);
-            }
-            else {
+            if (events.handle([elmt], events.instants)) {
                 console.log("EVENTS INSTANT " + elmt);
             }
+            fifo.push(elmt);
+            console.log("EVENTS ADDED #" + fifo.length + " " + elmt);
+            return elmt;
         }
-        return elmt;
     }
 
     events.getNext = function () {

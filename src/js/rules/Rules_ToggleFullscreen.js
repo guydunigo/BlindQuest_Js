@@ -15,7 +15,7 @@ const ToggleFullscreen = function (bq) {
                 document.mozFullScreenEnabled ||
                 document.msFullscreenEnabled
             ) {
-                if (document.fullscreen == false) {
+                if (document.fullscreen == false || document.webkitIsFullScreen == false) {
                     if (document.body.requestFullscreen) {
                         document.body.requestFullscreen();
                     } else if (document.body.webkitRequestFullscreen) {

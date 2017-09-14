@@ -12,7 +12,8 @@ const Move = function (bq) {
         events: [
             "bq.world.player.move"
         ],
-        // If is instant, execute it directly and doesn't add it to the event list
+        // If is instant, execute it directly when the event is called
+        //   (doesn't wait for the main loop to handle it)
         instant: false,
         // Any data for the rule
         //   here, you have the mvt vectors applyed :
