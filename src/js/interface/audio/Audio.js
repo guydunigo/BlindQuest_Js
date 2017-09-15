@@ -2,24 +2,40 @@
 // (probably using a library (like howlerJs))
 export default Audio;
 
+const audioFold = "audio/"
+
 const Cur_square = function () {
-    let square = undefined;
+    let cur = undefined;
 
     const stop = function () {
-        if (square !== undefined) {
-            // console.log(`\tAUDIO SQUARE STOP ${square.type}`);
+        if (cur !== undefined) {
+            console.log(`\tAUDIO SQUARE STOP ${cur.square.type}`);
+            cur.sound.stop();
         }
-        square = undefined;
+        cur = undefined;
     }
     const play = function (square) {
         stop();
 
-        square = square;
-        // console.log(`\tAUDIO SQUARE PLAY ${square.type}`);
+        const soundName = square.sound;
+        cur = {
+            square,
+            sound: new Howl({
+                src: [audioFold + "webm/" + soundName + ".webm",
+                audioFold + "mp3/" + soundName + ".mp3"],
+                loop: true,
+                onloaderror: function (id, msg) {
+                    console.log("AUDIO ERROR " + msg);
+                }
+            })
+        }
+
+        cur.sound.play();
+        console.log(`\tAUDIO SQUARE PLAY ${cur.square.type}`);
     }
 
     return {
-        square,
+        cur_square: cur,
         play,
         stop
     }

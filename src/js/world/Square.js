@@ -12,6 +12,9 @@ function Square(world, x, y) {
         get type() {
             return world.getSquareType(sq.x, sq.y);
         },
+        get sound() {
+            return world.env.sounds.squares[sq.type];
+        },
         get prox_squares() {
             return [
                 Square(world, x, y - 1),

@@ -11,6 +11,7 @@ const env = require("broccoli-env").getEnv();
 // Options
 const root = "src";
 const imgsFold = "misc/imgs";
+const audioFold = "sounds/";
 const createSourceMap = (env === "development");
 
 /* --------------------------- html --------------------------- */
@@ -80,8 +81,14 @@ const imgs = funnel(imgsFold, {
     destDir: "imgs"
 });
 
+/* --------------------------- audio --------------------------- */
+const audio = funnel(audioFold, {
+    exclude: ["wav"],
+    destDir: "audio"
+});
+
 /* --------------------------- end --------------------------- */
-let tree = merge([html,/*css,*/js, imgs]);
+let tree = merge([html,/*css,*/js, imgs, audio]);
 
 if (env === "development") {
     tree = new LiveReload(tree, {

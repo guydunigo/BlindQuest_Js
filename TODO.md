@@ -4,6 +4,8 @@ Misc
 * Optimize website and display for screen readers
 * conf for debug messages
 * Play sound
+* Rename audios
+* Sound format (with support ? webm/mp3/ogg/flac ?)
 * Test playing 1 sound file twice at the same time
 * Reference every sounds and their provenance
 * Bq visual theme

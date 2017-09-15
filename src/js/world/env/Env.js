@@ -53,26 +53,26 @@ const Env = function () {
     // throw ni; complete with actual values
     // int or string keys ?
     env.sounds.squares = {
-        plain: "plain",
-        woods: "woods",
-        cave: "cave",
-        water: "water",
-        castle: "castle",
-        wood_path: "wood_path",
-        bridge: "bridge",
-        sand: "sand",
-        mountains: "mountains",
-        monsters: "monsters",
+        plain: "plaine",
+        woods: "foret",
+        cave: "caverne",
+        water: "eau",
+        castle: "chateau",
+        wood_path: "sentier",
+        bridge: "pont",
+        sand: "sable",
+        mountains: "montagne",
+        monsters: "monstre",
         boss: "boss",
         boss_final: "boss_final",
         bonus: "bonus",
-        sea: "sea",
-        castle_gate: "castle_gate",
-        magic: "magic",
+        sea: "mer",
+        castle_gate: "entreechateau",
+        magic: "magie",
         funny: "funny",
         border: "border",
-        start: "start",
-        end: "end"
+        start: "depart",
+        end: "fin"
     };
 
     return env;
