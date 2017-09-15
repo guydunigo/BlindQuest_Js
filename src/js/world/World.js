@@ -134,7 +134,7 @@ const World = function (bq, filename) {
         },
         // Launch music, etc...
         launch() {
-            bq.interface.audio.cur_square.play(world.player.square);
+            bq.interface.audio.players.cur_square.play(world.player.square);
         },
         step
     }

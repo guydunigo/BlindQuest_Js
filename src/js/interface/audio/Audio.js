@@ -2,6 +2,9 @@
 // (probably using a library (like howlerJs))
 export default Audio;
 
+const DEBUG_AUDIO = true;
+const AUDIO_START_MUTE = true;
+
 const audioFold = "audio/"
 
 const Cur_square = function () {
@@ -9,7 +12,9 @@ const Cur_square = function () {
 
     const stop = function () {
         if (cur !== undefined) {
-            console.log(`\tAUDIO SQUARE STOP ${cur.square.type}`);
+            if (DEBUG_AUDIO) {
+                console.log(`AUDIO SQUARE STOP ${cur.square.type}`);
+            }
             cur.sound.stop();
         }
         cur = undefined;
@@ -31,7 +36,9 @@ const Cur_square = function () {
         }
 
         cur.sound.play();
-        console.log(`\tAUDIO SQUARE PLAY ${cur.square.type}`);
+        if (DEBUG_AUDIO) {
+            console.log(`AUDIO SQUARE PLAY ${cur.square.type}`);
+        }
     }
 
     return {
@@ -46,7 +53,9 @@ const Prox = function () {
 
     const stop = function () {
         if (list.length > 0) {
-            // console.log(`\tAUDIO PROX STOP ${list.map((x) => x.type)}`);
+            if (DEBUG_AUDIO) {
+                console.log(`\tAUDIO PROX STOP ${list.map((x) => x.type)}`);
+            }
         }
         list = []
     }
@@ -54,7 +63,10 @@ const Prox = function () {
         stop();
 
         list = prox_squares;
-        // console.log(`\tAUDIO PROX PLAY ${list.map((x) => x.type)}`);
+
+        if (DEBUG_AUDIO) {
+            console.log(`\tAUDIO PROX PLAY ${list.map((x) => x.type)}`);
+        }
     }
 
     return {
@@ -69,7 +81,9 @@ const Action = function () {
 
     const stop = function () {
         if (square !== "") {
-            // console.log(`\tAUDIO ACTION STOP ${square}`);
+            if (DEBUG_AUDIO) {
+                console.log(`\tAUDIO ACTION STOP ${square}`);
+            }
         }
         square = "";
     }
@@ -77,7 +91,9 @@ const Action = function () {
         stop();
 
         square = action_type;
-        // console.log(`\tAUDIO ACTION PLAY ${action_type}`);
+        if (DEBUG_AUDIO) {
+            console.log(`\tAUDIO ACTION PLAY ${action_type}`);
+        }
     }
 
     return {
@@ -88,11 +104,31 @@ const Action = function () {
 }
 
 const Audio = function () {
+    let ismute = false;
+
     const audio = {
-        cur_square: Cur_square(),
-        prox: Prox(),
-        action: Action(),
+        players: {
+            cur_square: Cur_square(),
+            prox: Prox(),
+            action: Action()
+        },
+        get isMute() { return ismute; },
+        set isMute(val) {
+            ismute = val;
+            if (DEBUG_AUDIO) {
+                console.log("AUDIO " + (audio.isMute ? "MUTE" : "DE-MUTE"));
+            }
+            Howler.mute(val);
+            return ismute;
+        },
+        toggleMute: undefined
     }
 
+    audio.isMute = AUDIO_START_MUTE;
+
+    audio.toggleMute = function () {
+        audio.isMute ^= true;
+    };
+
     return audio;
-}
+};

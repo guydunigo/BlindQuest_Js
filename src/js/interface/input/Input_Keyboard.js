@@ -16,7 +16,8 @@ const Keyboard = function (events) {
                 }
             },
             interface: {
-                fullscreen: "f"
+                fullscreen: "f",
+                mute: "m"
             }
         }
     }
@@ -38,6 +39,9 @@ const Keyboard = function (events) {
                 break;
             case kb.conf.interface.fullscreen:
                 events.add("bq.interface.fullscreen");
+                break;
+            case kb.conf.interface.mute:
+                events.add("bq.interface.mute");
                 break;
             default:
                 msg = "NOEVENT ";

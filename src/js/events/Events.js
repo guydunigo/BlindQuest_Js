@@ -60,7 +60,8 @@ const Events = function (bq) {
                 }
             },
             interface: { // 1001 to 2000
-                fullscreen: 1001
+                fullscreen: 1001,
+                mute: 1002
             },
             game: { // 2001 -> 3001
                 stop: 2001
