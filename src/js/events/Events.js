@@ -5,6 +5,8 @@ export default Events;
 
 import loadRulesHandlers from "./Events_rules.js";
 
+const DEBUG_EVENTS = true;
+
 /* throw ni;
 const getParents = function (tree, event) {
     const res = [];
@@ -75,10 +77,14 @@ const Events = function (bq) {
     events.add = function (elmt) {
         if (events.isEventGood(elmt)) {
             if (events.handle([elmt], events.instants)) {
-                console.log("EVENTS INSTANT " + elmt);
+                if (DEBUG_EVENTS) {
+                    console.log("EVENTS INSTANT " + elmt);
+                }
             }
             fifo.push(elmt);
-            console.log("EVENTS ADDED #" + fifo.length + " " + elmt);
+            if (DEBUG_EVENTS) {
+                console.log("EVENTS ADDED #" + fifo.length + " " + elmt);
+            }
             return elmt;
         }
     }
@@ -107,8 +113,11 @@ const Events = function (bq) {
             tree = tree.splice(1);
         }
 
-        if (tmp === undefined)
-            console.log("EVENTS DIRTY " + event);
+        if (tmp === undefined) {
+            if (DEBUG_EVENTS) {
+                console.log("EVENTS DIRTY " + event);
+            }
+        }
 
         return (tmp !== undefined);
     };
@@ -159,7 +168,7 @@ const Events = function (bq) {
         return res;
     };
 
-    loadRulesHandlers(bq, events);
+    loadRulesHandlers(bq, events, DEBUG_EVENTS);
 
     return events;
 };

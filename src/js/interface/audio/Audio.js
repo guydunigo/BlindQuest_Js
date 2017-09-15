@@ -3,6 +3,7 @@
 export default Audio;
 
 const DEBUG_AUDIO = true;
+const DEBUG_AUDIO_STOP = false;
 const AUDIO_START_MUTE = true;
 
 const audioFold = "audio/"
@@ -12,7 +13,7 @@ const Cur_square = function () {
 
     const stop = function () {
         if (cur !== undefined) {
-            if (DEBUG_AUDIO) {
+            if (DEBUG_AUDIO && DEBUG_AUDIO_STOP) {
                 console.log(`AUDIO SQUARE STOP ${cur.square.type}`);
             }
             cur.sound.stop();
@@ -53,7 +54,7 @@ const Prox = function () {
 
     const stop = function () {
         if (list.length > 0) {
-            if (DEBUG_AUDIO) {
+            if (DEBUG_AUDIO && DEBUG_AUDIO_STOP) {
                 console.log(`\tAUDIO PROX STOP ${list.map((x) => x.type)}`);
             }
         }
@@ -81,7 +82,7 @@ const Action = function () {
 
     const stop = function () {
         if (square !== "") {
-            if (DEBUG_AUDIO) {
+            if (DEBUG_AUDIO && DEBUG_AUDIO_STOP) {
                 console.log(`\tAUDIO ACTION STOP ${square}`);
             }
         }

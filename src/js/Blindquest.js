@@ -7,7 +7,7 @@ import Interface from "./interface/Interface.js";
 import World from "./world/World.js";
 
 // miliseconds beetween each game loop
-const TIMEBASE = 1000;
+const TIMEBASE = 200;
 
 const Bq = function (filename) {
     const bq = {
