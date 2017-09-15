@@ -29,7 +29,7 @@ const Player = function (startSquare) {
         player.life = 0;
         player.state = player.states.dead;
 
-        bq.events.add("game.stop")
+        bq.events.add("bq.game.stop")
 
         console.log("\tPLAYER KILLED");
     }

@@ -82,7 +82,7 @@ const Move = function (bq) {
             if (nogo.data && nogo.data.has(mvt_obj.dest.code)) {
                 console.log("RULES MOVE NOGO " + mvt_obj.dest.type);
                 // throw ni; pick random sound ?
-                bq.interface.audio.action.play(nogo.sounds[0]);
+                bq.interface.audio.players.action.play(nogo.sounds[0]);
                 return Mvt(bq.world, mvt_obj.src, [0, 0]);
             }
             else
@@ -103,7 +103,7 @@ const Move = function (bq) {
     move.post.playSquareSound = {
         main: function (bq, mvt_obj) {
             // throw ni;
-            bq.interface.audio.cur_square.play(mvt_obj.dest);
+            bq.interface.audio.players.cur_square.play(mvt_obj.dest);
         }
     }
 
@@ -111,8 +111,8 @@ const Move = function (bq) {
     move.post.playProxSounds = {
         main: function (bq, mvt_obj) {
             // throw ni;
-            bq.interface.audio.prox.stop();
-            bq.interface.audio.prox.play(mvt_obj.dest.prox_squares);
+            bq.interface.audio.players.prox.stop();
+            bq.interface.audio.players.prox.play(mvt_obj.dest.prox_squares);
         }
     }
 
