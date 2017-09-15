@@ -41,7 +41,7 @@ js = new Rollup(js, {
 js = babel(js, {
     browserPolyfill: true, // doesn"t work
     sourceMap: createSourceMap,
-    compact: true,
+    compact: !createSourceMap,
     comments: createSourceMap,
     presets: [["env", {
         target: {
@@ -49,6 +49,28 @@ js = babel(js, {
         }
     }]]
 });
+
+/* -------------- Grab the howler lib -------------- */
+const howlerPath = 'node_modules/howler/dist';
+let howlerFileName = 'howler.min.js';
+if (createSourceMap) {
+    howlerFileName = 'howler.js'
+}
+const howler = funnel(howlerPath, {
+    files: [howlerFileName],
+    destDir: 'howler'
+});
+js = merge([howler, js]);
+/* --------------------------------------------------------- */
+js = concat(
+    js,
+    {
+        headerFiles: ["howler/" + howlerFileName],
+        inputFiles: ['**/*.js'],
+        outputFile: 'script.js',
+        sourceMapConfig: { enabled: createSourceMap }
+    }
+)
 
 /* --------------------------------------------------------- */
 
