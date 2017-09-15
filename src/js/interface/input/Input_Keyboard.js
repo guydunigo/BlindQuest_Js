@@ -1,5 +1,7 @@
 export default Keyboard;
 
+const DEBUG_KB = false;
+
 const Keyboard = function (events) {
     // The conf can be edited anytime during the game
     // through : bq.interface.input.kb.conf.xxx = "z"
@@ -46,7 +48,9 @@ const Keyboard = function (events) {
             default:
                 msg = "NOEVENT ";
         };
-        console.log("\tINPUT KB " + msg + event.key);
+        if (DEBUG_KB) {
+            console.log("\tINPUT KB " + msg + event.key);
+        }
     });
 
     return kb;
