@@ -132,6 +132,22 @@ const World = function (bq, filename) {
             let i = world.correctX(x), j = world.correctY(y);
             return world.env.codeToType(world.getSquareCode(i, j));
         },
+        getSubMap(x1, y1, x2, y2) {
+            let i1, i2, j1, j2;
+            let res = undefined;
+            i1 = world.correctX(x1);
+            i2 = world.correctX(x2);
+            j1 = world.correctX(y1);
+            j2 = world.correctX(y2);
+
+            // If the values haven't been corrected (ie. if the values were not outside the map)
+            if (x1 === i1 && x2 === i2 && y1 === j1 && y2 === j2) {
+                res = world.data.slice(j1, j2).slice(i1, i2);
+            }
+            // throw ni; must work in other cases
+
+            return res;
+        },
         // Launch music, etc...
         launch() {
             bq.interface.audio.players.cur_square.play(world.player.square);

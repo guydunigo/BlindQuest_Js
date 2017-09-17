@@ -100,19 +100,12 @@ const Move = function (bq) {
     // returns : throw ni;
 
     /* playSquareSounds */
-    move.post.playSquareSound = {
+    move.post.playEnvSounds = {
         main: function (bq, mvt_obj) {
             // throw ni;
             bq.interface.audio.players.cur_square.play(mvt_obj.dest);
-        }
-    }
-
-    /* playProxSounds */
-    move.post.playProxSounds = {
-        main: function (bq, mvt_obj) {
-            // throw ni;
-            bq.interface.audio.players.prox.stop();
-            bq.interface.audio.players.prox.play(mvt_obj.dest.prox_squares);
+            pos = bq.world.player.square;
+            submap = bq.world.getSubMap(pos.x - 2, pos.y - 2, pos.x + 2, pos.y + 2);
         }
     }
 

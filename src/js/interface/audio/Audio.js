@@ -6,74 +6,46 @@ const DEBUG_AUDIO = true;
 const DEBUG_AUDIO_STOP = false;
 const AUDIO_START_MUTE = true;
 
+// I think you can use a url here :
 const audioFold = "audio/"
 
-const Cur_square = function () {
-    let cur = undefined;
+const Env = function () {
+    let env_sounds = [];
 
-    const stop = function () {
-        if (cur !== undefined) {
-            if (DEBUG_AUDIO && DEBUG_AUDIO_STOP) {
-                console.log(`AUDIO SQUARE STOP ${cur.square.type}`);
-            }
-            cur.sound.stop();
+    const stopAll = function () {
+        env_sounds.forEach((s) => s.sound.stop());
+        env_sounds.length = 0;
+        if (DEBUG_AUDIO && DEBUG_AUDIO_STOP) {
+            const names = env_sounds.map((x) => x.square.type).join(",");
+            console.log(`AUDIO ENV STOP ${names}`);
         }
-        cur = undefined;
     }
-    const play = function (square) {
-        stop();
-
+    const play = function (square, volume) {
         const soundName = square.sound;
-        cur = {
+        const sound = {
             square,
             sound: new Howl({
                 src: [audioFold + "webm/" + soundName + ".webm",
                 audioFold + "mp3/" + soundName + ".mp3"],
                 loop: true,
+                volume,
                 onloaderror: function (id, msg) {
                     console.log("AUDIO ERROR " + msg);
                 }
             })
-        }
+        };
+        env_sounds.push(sound);
 
-        cur.sound.play();
+        sound.play();
         if (DEBUG_AUDIO) {
-            console.log(`AUDIO SQUARE PLAY ${cur.square.type}`);
+            console.log(`AUDIO SQUARE PLAY ${sound.square.type}`);
         }
     }
 
     return {
-        cur_square: cur,
+        env_sounds,
         play,
-        stop
-    }
-}
-
-const Prox = function () {
-    let list = [];
-
-    const stop = function () {
-        if (list.length > 0) {
-            if (DEBUG_AUDIO && DEBUG_AUDIO_STOP) {
-                console.log(`\tAUDIO PROX STOP ${list.map((x) => x.type)}`);
-            }
-        }
-        list = []
-    }
-    const play = function (prox_squares) {
-        stop();
-
-        list = prox_squares;
-
-        if (DEBUG_AUDIO) {
-            console.log(`\tAUDIO PROX PLAY ${list.map((x) => x.type)}`);
-        }
-    }
-
-    return {
-        list,
-        play,
-        stop
+        stopAll
     }
 }
 
@@ -109,8 +81,7 @@ const Audio = function () {
 
     const audio = {
         players: {
-            cur_square: Cur_square(),
-            prox: Prox(),
+            env: Env(),
             action: Action()
         },
         get isMute() { return ismute; },

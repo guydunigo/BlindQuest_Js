@@ -3,9 +3,12 @@ export default Square;
 
 function Square(world, x, y) {
     let sq;
+    let _x, _y;
     sq = {
-        x: world.correctX(x),
-        y: world.correctY(y),
+        get x() { return _x; },
+        set x(val) { return (_x = world.correctX(val)); },
+        get y() { return _y; },
+        set y(val) { return (_y = world.correctY(y)); },
         get code() {
             return world.getSquareCode(sq.x, sq.y);
         },
@@ -14,14 +17,6 @@ function Square(world, x, y) {
         },
         get sound() {
             return world.env.sounds.squares[sq.type];
-        },
-        get prox_squares() {
-            return [
-                Square(world, x, y - 1),
-                Square(world, x, y + 1),
-                Square(world, x - 1, y),
-                Square(world, x + 1, y)
-            ];
         },
         apply: undefined
     };
