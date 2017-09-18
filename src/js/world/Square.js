@@ -3,7 +3,8 @@ export default Square;
 
 function Square(world, x, y) {
     let sq;
-    let _x, _y;
+    let _x = x,
+        _y = y;
     sq = {
         get x() { return _x; },
         set x(val) { return (_x = world.correctX(val)); },

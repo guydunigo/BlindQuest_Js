@@ -1,8 +1,9 @@
 export default loadRulesHandlers;
 
-function loadRulesHandlers(bq, events, DEBUG_EVENTS) {
+function loadRulesHandlers(bq, events, DEBUG_EVENTS, DEBUG_EVENTS_REGISTER) {
     // Possible memory loss ? rule duplicating ?
     //   throw ni; test modifying the one in events and see if it changes in env too.
+    // throw ni; check rule ?
     events.register = function (rule) {
         const goodTargets = [];
         // Keep only good events
@@ -24,12 +25,12 @@ function loadRulesHandlers(bq, events, DEBUG_EVENTS) {
         // Add them to the list :
         goodTargets.forEach(function (targ) {
             if (dest[targ] instanceof Array) {
-                dest.push(targ);
+                dest[targ].push(rule);
             }
             else {
                 dest[targ] = [rule];
             }
-            if (DEBUG_EVENTS) {
+            if (DEBUG_EVENTS && DEBUG_EVENTS_REGISTER) {
                 console.log("EVENTS REGISTER " + rule.name + " TO " + targ);
             }
         })
@@ -48,8 +49,9 @@ function loadRulesHandlers(bq, events, DEBUG_EVENTS) {
             tree.forEach(function (cat) {
                 rules = rulesList[cat];
                 if (rules !== undefined) {
-                    if (res !== true)
+                    if (res !== true) {
                         res = true;
+                    }
                     rules.forEach(function (rule) {
                         if (DEBUG_EVENTS) {
                             console.log("EVENTS EXEC " + rule.name);

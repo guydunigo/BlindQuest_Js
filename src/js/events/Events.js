@@ -6,6 +6,7 @@ export default Events;
 import loadRulesHandlers from "./Events_rules.js";
 
 const DEBUG_EVENTS = true;
+const DEBUG_EVENTS_REGISTER = false;
 
 /* throw ni;
 const getParents = function (tree, event) {
@@ -58,7 +59,8 @@ const Events = function (bq) {
                         down: 2,
                         left: 3,
                         right: 4
-                    }
+                    },
+                    moved: 5
                 }
             },
             interface: { // 1001 to 2000
@@ -168,7 +170,7 @@ const Events = function (bq) {
         return res;
     };
 
-    loadRulesHandlers(bq, events, DEBUG_EVENTS);
+    loadRulesHandlers(bq, events, DEBUG_EVENTS, DEBUG_EVENTS_REGISTER);
 
     return events;
 };
