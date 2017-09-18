@@ -14,11 +14,11 @@ const PlayEnvSounds = function (bq) {
         instant: true,
         data: {
             radius: 2,
-            prox_sounds: [
+            prox_sounds: new Set([
                 bq.world.env.codes.water,
                 bq.world.env.codes.sea,
-                bq.world.env.codes.bridge,
-            ]
+                bq.world.env.codes.bridge
+            ])
         }
     }
 
@@ -26,6 +26,7 @@ const PlayEnvSounds = function (bq) {
         // throw ni;
         const play = bq.interface.audio.players.env.play;
         const pos = bq.world.player.square;
+        let rel_pos;
         const submap = bq.world.getSubMap(pos.x, pos.y, rule.data.radius);
         let distance, inv_dist;
 
@@ -33,22 +34,32 @@ const PlayEnvSounds = function (bq) {
 
         submap.forEach(function (line, li) {
             line.forEach(function (elmt, ei) {
-                if (ei - rule.data.radius - 1 === 0 && li - rule.data.radius - 1 === 0) {
+                rel_pos = {
+                    x: ei - rule.data.radius,
+                    y: li - rule.data.radius
+                }
+                if (rel_pos.x === 0 && rel_pos.y === 0) {
                     play(bq.world.env.code2sound(elmt));
                 }
-                else if (rule.data.prox_sounds.includes(elmt)) {
+                else if (rule.data.prox_sounds.has(elmt)) {
                     distance = getDistance(
-                        pos.x,
-                        pos.y,
-                        ei - pos.x,
-                        li - pos.y
+                        0,
+                        0,
+                        rel_pos.x,
+                        rel_pos.y
                     );
-                    inv_dist = 1 / distance;
+
+                    // console.log(rel_pos.x,rel_pos.y,distance);
+
+                    inv_dist = 1 / (distance * distance);
                     inv_dist = Number.parseFloat(inv_dist.toFixed(6));
+
                     play(bq.world.env.code2sound(elmt), inv_dist);
                 }
             });
         });
+
+        bq.interface.audio.players.env.debug_printAll();
     }
 
     bq.events.register(rule);

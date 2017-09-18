@@ -4,10 +4,20 @@ export default Audio;
 
 const DEBUG_AUDIO = true;
 const DEBUG_AUDIO_STOP = true;
+const DEBUG_AUDIO_PLAY = false;
+
 const AUDIO_START_MUTE = true;
 
 // I think you can use a url here :
 const audioFold = "audio/"
+
+const extractName = function (howler_obj) {
+    return howler_obj._src.replace(/audio\/webm\/([^.\/]*).*/, (x, y) => y)
+};
+
+const stringifyList = function (list) {
+    return list.map((x) => extractName(x) + "(" + x.volume() + ")").join(", ");
+};
 
 const Env = function () {
     let env_sounds = [];
@@ -16,7 +26,7 @@ const Env = function () {
         env_sounds.forEach((s) => s.stop());
 
         if (env_sounds.length > 0 && DEBUG_AUDIO && DEBUG_AUDIO_STOP) {
-            const names = env_sounds.map((x) => x._src.replace(/audio\/webm\/([^.\/]*).*/, (x, y) => y)).join(",");
+            const names = stringifyList(env_sounds);
             console.log(`AUDIO ENV STOP ${names}`);
         }
 
@@ -35,15 +45,20 @@ const Env = function () {
         env_sounds.push(sound);
 
         sound.play();
-        if (DEBUG_AUDIO) {
-            console.log(`AUDIO SQUARE PLAY ${soundName} VOL ${volume}`);
+        if (DEBUG_AUDIO && DEBUG_AUDIO_PLAY) {
+            console.log(`AUDIO ENV PLAY ${soundName} VOL ${volume}`);
         }
     }
 
     return {
         env_sounds,
         play,
-        stopAll
+        stopAll,
+        debug_printAll() {
+            if (DEBUG_AUDIO) {
+                console.log("AUDIO ENV PLAY " + stringifyList(env_sounds));
+            }
+        }
     }
 }
 

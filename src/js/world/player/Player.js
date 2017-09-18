@@ -19,7 +19,7 @@ const Player = function (startSquare) {
     player.move = function (mvt_obj) {
         player.square = mvt_obj.dest;
 
-        console.log(`\tPLAYER MOVED TO (${player.square.x},${player.square.y}) ON ${player.square.type}`);
+        console.log(`PLAYER MOVED TO (${player.square.x},${player.square.y}) ON ${player.square.type}`);
     }
 
     // Kills the player and stop the game
@@ -30,7 +30,7 @@ const Player = function (startSquare) {
 
         bq.events.add("bq.game.stop")
 
-        console.log("\tPLAYER KILLED");
+        console.log("PLAYER KILLED");
     }
 
     console.log(`PLAYER PLACED AT (${startSquare.x},${startSquare.y}) ON ${startSquare.type}`);
