@@ -55,12 +55,14 @@ const Move = function (bq) {
 
             // actual move
             if (!mvt.doesNothing()) {
-                bq.world.player.moveTo(mvt);
+                bq.world.player.move(mvt);
 
                 // post
                 Object.values(move.post).forEach(function (func) {
                     func.main(bq, mvt);
                 });
+
+                bq.events.add("bq.world.player.moved");
             }
         }
     };
@@ -98,16 +100,6 @@ const Move = function (bq) {
     /* --- move.post --- */
     // args : new bq obj and mvt obj
     // returns : throw ni;
-
-    /* playSquareSounds */
-    move.post.playEnvSounds = {
-        main: function (bq, mvt_obj) {
-            // throw ni;
-            bq.interface.audio.players.cur_square.play(mvt_obj.dest);
-            pos = bq.world.player.square;
-            submap = bq.world.getSubMap(pos.x - 2, pos.y - 2, pos.x + 2, pos.y + 2);
-        }
-    }
 
     /* lethal squares */
     move.post.letalSquares = {
