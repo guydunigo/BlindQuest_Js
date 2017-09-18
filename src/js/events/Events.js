@@ -5,7 +5,7 @@ export default Events;
 
 import loadRulesHandlers from "./Events_rules.js";
 
-const DEBUG_EVENTS = true;
+const DEBUG_EVENTS = false;
 const DEBUG_EVENTS_REGISTER = false;
 
 /* throw ni;

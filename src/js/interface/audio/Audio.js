@@ -3,7 +3,7 @@
 export default Audio;
 
 const DEBUG_AUDIO = true;
-const DEBUG_AUDIO_STOP = false;
+const DEBUG_AUDIO_STOP = true;
 const AUDIO_START_MUTE = true;
 
 // I think you can use a url here :
@@ -13,32 +13,30 @@ const Env = function () {
     let env_sounds = [];
 
     const stopAll = function () {
-        env_sounds.forEach((s) => s.sound.stop());
-        env_sounds.length = 0;
-        if (DEBUG_AUDIO && DEBUG_AUDIO_STOP) {
-            const names = env_sounds.map((x) => x.square.type).join(",");
+        env_sounds.forEach((s) => s.stop());
+
+        if (env_sounds.length > 0 && DEBUG_AUDIO && DEBUG_AUDIO_STOP) {
+            const names = env_sounds.map((x) => x._src.replace(/audio\/webm\/([^.\/]*).*/, (x, y) => y)).join(",");
             console.log(`AUDIO ENV STOP ${names}`);
         }
+
+        env_sounds.length = 0;
     }
-    const play = function (square, volume) {
-        const soundName = square.sound;
-        const sound = {
-            square,
-            sound: new Howl({
-                src: [audioFold + "webm/" + soundName + ".webm",
-                audioFold + "mp3/" + soundName + ".mp3"],
-                loop: true,
-                volume,
-                onloaderror: function (id, msg) {
-                    console.log("AUDIO ERROR " + msg);
-                }
-            })
-        };
+    const play = function (soundName, volume = 1) {
+        const sound = new Howl({
+            src: [audioFold + "webm/" + soundName + ".webm",
+            audioFold + "mp3/" + soundName + ".mp3"],
+            loop: true,
+            volume,
+            onloaderror: function (id, msg) {
+                console.log("AUDIO ERROR " + soundName + " : " + msg);
+            }
+        });
         env_sounds.push(sound);
 
         sound.play();
         if (DEBUG_AUDIO) {
-            console.log(`AUDIO SQUARE PLAY ${sound.square.type}`);
+            console.log(`AUDIO SQUARE PLAY ${soundName} VOL ${volume}`);
         }
     }
 

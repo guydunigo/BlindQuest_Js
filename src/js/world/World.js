@@ -136,6 +136,8 @@ const World = function (bq, filename) {
             let res = [], tmp, i, j;
 
             if (y2 === undefined) {
+                x1 -= x2_or_radius;
+                y1 -= x2_or_radius;
                 y2 = y1 + x2_or_radius * 2
                 x2_or_radius = x1 + x2_or_radius * 2
             }
