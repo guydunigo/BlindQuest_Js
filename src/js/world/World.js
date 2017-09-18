@@ -74,7 +74,7 @@ const checkWorldPostExtract = function (world) {
 const findStartSquare = function (world) {
     let pos = undefined;
 
-    world.data.map(function (y, indexY) {
+    world.data.forEach(function (y, indexY) {
         y.map(function (x, indexX) {
             if (x === world.env.codes.start) {
                 pos = [indexX, indexY];
@@ -84,6 +84,7 @@ const findStartSquare = function (world) {
     if (pos === undefined) {
         throw new Error("No start square was found.");
     }
+
     return Square(world, ...pos);
 }
 
@@ -129,28 +130,29 @@ const World = function (bq, filename) {
             return world.data[j][i];
         },
         getSquareType(x, y) {
-            let i = world.correctX(x), j = world.correctY(y);
-            return world.env.codeToType(world.getSquareCode(i, j));
+            return world.env.code2Type(world.getSquareCode(x, y));
         },
-        getSubMap(x1, y1, x2, y2) {
-            let i1, i2, j1, j2;
-            let res = undefined;
-            i1 = world.correctX(x1);
-            i2 = world.correctX(x2);
-            j1 = world.correctX(y1);
-            j2 = world.correctX(y2);
+        getSubMap(x1, y1, x2_or_radius, y2) {
+            let res = [], tmp, i, j;
 
-            // If the values haven't been corrected (ie. if the values were not outside the map)
-            if (x1 === i1 && x2 === i2 && y1 === j1 && y2 === j2) {
-                res = world.data.slice(j1, j2).slice(i1, i2);
+            if (y2 === undefined) {
+                y2 = y1 + x2_or_radius * 2
+                x2_or_radius = x1 + x2_or_radius * 2
             }
-            // throw ni; must work in other cases
+
+            for (j = y1; j <= y2; j++) {
+                tmp = []
+                for (i = x1; i <= x2_or_radius; i++) {
+                    tmp.push(world.data[world.correctY(j)][world.correctX(i)]);
+                }
+                res.push(tmp);
+            }
 
             return res;
         },
         // Launch music, etc...
         launch() {
-            bq.interface.audio.players.cur_square.play(world.player.square);
+            bq.events.add("bq.world.player.moved");
         },
         step
     }

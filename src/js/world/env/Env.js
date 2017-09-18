@@ -15,12 +15,13 @@ const Env = function () {
     const env = {
         // square codes
         codes: {},
-        codeToType: undefined,
+        code2Type: undefined,
         // Effect sounds and music names
         sounds: {
             squares: {},
             effects: {}
-        }
+        },
+        code2sound: undefined
     };
 
     /* ------ codes ------ */
@@ -48,7 +49,7 @@ const Env = function () {
     };
 
     const conv_codes = reverseObj(env.codes);
-    env.codeToType = (code) => conv_codes[code];
+    env.code2Type = (code) => conv_codes[code];
 
     // throw ni; complete with actual values
     // int or string keys ?
@@ -74,6 +75,7 @@ const Env = function () {
         start: "depart",
         end: "fin"
     };
+    env.code2sound = (code) => env.sounds.squares[env.code2Type(code)];
 
     return env;
 }

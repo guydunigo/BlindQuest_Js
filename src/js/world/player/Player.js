@@ -16,8 +16,7 @@ const Player = function (startSquare) {
         }
     };
 
-    // Check if 
-    player.moveTo = function (mvt_obj) {
+    player.move = function (mvt_obj) {
         player.square = mvt_obj.dest;
 
         console.log(`\tPLAYER MOVED TO (${player.square.x},${player.square.y}) ON ${player.square.type}`);
