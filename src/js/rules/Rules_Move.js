@@ -84,7 +84,6 @@ const Move = function (bq) {
             if (nogo.data && nogo.data.has(mvt_obj.dest.code)) {
                 console.log("RULES MOVE NOGO " + mvt_obj.dest.type);
                 // throw ni; pick random sound ?
-                bq.interface.audio.players.action.play(nogo.sounds[0]);
                 return Mvt(bq.world, mvt_obj.src, [0, 0]);
             }
             else
@@ -111,8 +110,8 @@ const Move = function (bq) {
             }
         },
         data: [
-            [bq.world.env.codes.water, "drown"],
-            [bq.world.env.codes.sea, "drown"],
+            [bq.world.env.codes.water, "noyade"],
+            [bq.world.env.codes.sea, "noyade"],
         ]
     }
 

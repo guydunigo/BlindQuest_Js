@@ -28,8 +28,10 @@ const ShowProxMap = function (bq) {
     const code2Type = bq.world.env.code2Type;
 
     rule.main = function (bq, event) {
-
         const div = document.createElement("div");
+        const table = document.createElement("table");
+        let line, cell, content, tmp;
+
         div.id = "proxMap";
         const pos = bq.world.player.square;
         const prox_map = bq.world.getSubMap(pos.x - rule.data.radius,
@@ -37,14 +39,33 @@ const ShowProxMap = function (bq) {
             pos.x + rule.data.radius,
             pos.y + rule.data.radius);
 
-        const res = prox_map.map(function (line) {
-            const formattedLine = line.map(function (code) {
-                return formatType(code2Type(code));
+        prox_map.forEach(function (l, li) {
+            line = document.createElement("tr");
+            l.forEach(function (c, ci) {
+                cell = document.createElement("td");
+                content = document.createTextNode(formatType(code2Type(c)));
+                if (ci == rule.data.radius && li == rule.data.radius) {
+                    tmp = document.createElement("strong");
+                    tmp.style.color = "red";
+                    tmp.appendChild(content);
+                    content = tmp;
+                }
+                cell.appendChild(content);
+                line.appendChild(cell);
             });
-            return formattedLine.join(" ");
-        }).join("\n");
+            table.appendChild(line);
+        });
 
-        div.textContent = res;
+        div.style.position = "fixed";
+        div.style.top = "0px";
+
+        div.appendChild(table);
+
+        tmp = document.getElementById("proxMap");
+        if (tmp != undefined)
+            tmp.parentNode.removeChild(tmp);
+
+        document.body.appendChild(div);
     };
 
     bq.events.register(rule);

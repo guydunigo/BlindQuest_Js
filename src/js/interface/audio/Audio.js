@@ -62,40 +62,12 @@ const Env = function () {
     }
 }
 
-const Action = function () {
-    let square = "";
-
-    const stop = function () {
-        if (square !== "") {
-            if (DEBUG_AUDIO && DEBUG_AUDIO_STOP) {
-                console.log(`\tAUDIO ACTION STOP ${square}`);
-            }
-        }
-        square = "";
-    }
-    const play = function (action_type) {
-        stop();
-
-        square = action_type;
-        if (DEBUG_AUDIO) {
-            console.log(`\tAUDIO ACTION PLAY ${action_type}`);
-        }
-    }
-
-    return {
-        square,
-        play,
-        stop
-    }
-}
-
 const Audio = function () {
     let ismute = false;
 
     const audio = {
         players: {
-            env: Env(),
-            action: Action()
+            env: Env()
         },
         get isMute() { return ismute; },
         set isMute(val) {
