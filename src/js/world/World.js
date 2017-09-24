@@ -8,45 +8,41 @@ import Square from "./Square.js";
 
 /* Try to open the given filename and extract the world */
 // returns : {name:String,data:Array(Array(Number))}
-const loadWorldFile = function (filename) {
-    const fileContent = fetchWorld(filename);
+const loadWorldFile = function (world, fileContent) {
 
-    checkWorldPreExtract(fileContent.raw_data);
+    checkWorldPreExtract(fileContent);
 
-    const world = extractWorld(fileContent.raw_data);
+    const tmp_world = extractWorld(fileContent);
 
-    checkWorldPostExtract(world);
+    checkWorldPostExtract(tmp_world);
+
+    world.isReady = true;
 
     return world;
 };
 
 /* Open world (download json, from fs, local drag,...) */
 // returns : {filename:String,raw_data:String}
-const fetchWorld = function (name) {
+const fetchWorldFile = function (world, name, callback) {
     // throw ni
-    name;
-    return TEST_MAP;
+    const fileRequest = new XMLHttpRequest();
+    fileRequest.open("GET", name, true);
+    fileRequest.onreadystatechange = function () {
+        // Request Complete and success : 
+        if (fileRequest.readyState === 4 && fileRequest.status === 200) {
+            console.log("Map " + name + " fetched !");
+            callback(world, fileRequest.responseText)
+        }
+        console.log(fileRequest.status)
+    }
+    fileRequest.send(null);
+
+    return fileRequest;
 };
 
 /* Extract the world and the worlds name from the raw_world string */
-// Raw data follows : 
-//  // First line : World name
-//  // Others : square codes separated by spaces
-// returns : {name:String,data:Array(Array(Number))}
 const extractWorld = function (raw_data) {
-    const lines = raw_data.split("\n");
-
-    const name = lines[0];
-
-    const dataLines = lines.slice(1);
-    const data = dataLines.map(
-        x => x.split(" ").map(y => parseInt(y) || 0)
-    );
-
-    return {
-        name,
-        data
-    };
+    return JSON.parse(raw_data);
 };
 
 /* Check world file content conformity (stability/security ?) */
@@ -94,6 +90,7 @@ const step = function (world) {
 
 const World = function (bq, filename) {
     const world = {
+        isReady: false,
         name: "",
         data: [[]],
         env: {},
@@ -159,9 +156,12 @@ const World = function (bq, filename) {
         step
     }
 
-    const tmp = loadWorldFile(filename);
+    /*const tmp = loadWorldFile(filename);
     world.name = tmp.name;
-    world.data = tmp.data;
+    world.data = tmp.data;*/
+
+    fetchWorldFile(world, filename, loadWorldFile);
+    while (world.isReady == false); // wait for the world to be ready
 
     world.env = Env();
 
