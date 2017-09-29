@@ -11,6 +11,7 @@ import Square from "./Square.js";
 const loadWorldFile = function (world, fileContent) {
     checkWorld(fileContent);
 
+    // safe ?
     Object.keys(fileContent).forEach(function (key) {
         world[key] = fileContent[key];
     })
