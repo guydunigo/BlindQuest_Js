@@ -9,15 +9,10 @@ import Square from "./Square.js";
 /* Try to open the given filename and extract the world */
 // returns : {name:String,data:Array(Array(Number))}
 const loadWorldFile = function (world, fileContent) {
+    checkWorld(fileContent);
 
-    checkWorldPreExtract(fileContent);
-
-    const tmp_world = extractWorld(fileContent);
-
-    checkWorldPostExtract(tmp_world);
-
-    Object.keys(tmp_world).forEach(function (key) {
-        world[key] = tmp_world[key];
+    Object.keys(fileContent).forEach(function (key) {
+        world[key] = fileContent[key];
     })
 
     endWorldLoading(world);
@@ -32,35 +27,13 @@ const endWorldLoading = function (world) {
 }
 
 /* Open world (download json, from fs, local drag,...) */
-// returns : {filename:String,raw_data:String}
-const fetchWorldFile = function (world, name, callback) {
-    // throw ni
-    const fileRequest = new XMLHttpRequest();
-    fileRequest.open("GET", name, true);
-    fileRequest.onreadystatechange = function () {
-        // Request Complete and success : 
-        if (fileRequest.readyState === 4 && fileRequest.status === 200) {
-            console.log("Map " + name + " fetched !");
-            callback(world, fileRequest.responseText);
-        }
-        console.log(fileRequest.status)
-    }
-    fileRequest.send(null);
-
-    return fileRequest;
+// returns : json file
+const fetchWorldFile = function (name) {
+    // throw ni; handle 404
+    return fetch(new Request(name)).then((response) => response.json());
 };
 
-/* Extract the world and the worlds name from the raw_world string */
-const extractWorld = function (raw_data) {
-    return JSON.parse(raw_data);
-};
-
-/* Check world file content conformity (stability/security ?) */
-const checkWorldPreExtract = function (raw_data) {
-    // throw ni + ?tryRepair?
-    return raw_data;
-};
-const checkWorldPostExtract = function (world) {
+const checkWorld = function (world) {
     // throw ni + ?tryRepair?
 
     // Non-empty world name
@@ -169,8 +142,5 @@ const World = function (bq, filename) {
     world.env = Env();
     world.player = Player();
 
-    fetchWorldFile(world, filename, loadWorldFile);
-    //while (world.isReady == false); // wait for the world to be ready
-
-    return world;
+    return fetchWorldFile(filename).then((response) => Promise.resolve(loadWorldFile(world, response)));
 };

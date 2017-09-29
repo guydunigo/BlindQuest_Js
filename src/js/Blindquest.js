@@ -27,7 +27,7 @@ const Bq = function (filename) {
     };
 
     bq.launch = function () {
-        if (bq.state === bq.state.initialized) {
+        if (bq.state === bq.states.initialized) {
             console.log("Starting BlindQuest...");
             bq.world.launch();
             bq.state = bq.states.running;
@@ -69,9 +69,10 @@ const Bq = function (filename) {
     });
 
     bq.interface = Interface(bq.events);
-    new Promise(function (resolve) { bq.world = World(bq, filename); resolve(); })
-        .then(function () { bq.rules = Rules(bq); })
-        .then(function () { bq.state = bq.states.initialized; })
+    World(bq, filename).then(function (world) { bq.world = world; return Promise.resolve(); })
+        .then(function () { bq.rules = Rules(bq); return Promise.resolve(); })
+        .then(function () { bq.state = bq.states.initialized; return Promise.resolve(); })
+        .then(function () { bq.launch(); return Promise.resolve(); })
 
     return bq;
 };
