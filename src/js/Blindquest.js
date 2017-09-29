@@ -61,6 +61,26 @@ const Bq = function (filename) {
 
     // throw ni; temporary :
     bq.events.register({
+        name: "bq.game.loading display",
+        events: ["bq.game.loading"],
+        main: function (bq, event) {
+            document.getElementById("msg")
+                .textContent = "Game loading...";
+            console.log("#########   Loading   #########");
+        },
+        instant: true
+    });
+    bq.events.register({
+        name: "bq.game.loaded display",
+        events: ["bq.game.loaded"],
+        main: function (bq, event) {
+            event;
+            document.getElementById("msg").textContent = "Game loaded, have fun!";
+            console.log("#########   Loaded    #########");
+        },
+        instant: true
+    });
+    bq.events.register({
         name: "bq.game.stop",
         events: ["bq.game.stop"],
         main: function (bq) {
@@ -68,11 +88,14 @@ const Bq = function (filename) {
         }
     });
 
+    bq.events.add("bq.game.loading");
+
     bq.interface = Interface(bq.events);
     World(bq, filename).then(function (world) { bq.world = world; return Promise.resolve(); })
         .then(function () { bq.rules = Rules(bq); return Promise.resolve(); })
         .then(function () { bq.state = bq.states.initialized; return Promise.resolve(); })
         .then(function () { bq.launch(); return Promise.resolve(); })
+        .then(function () { bq.events.add("bq.game.loaded"); return Promise.resolve(); });
 
     return bq;
 };

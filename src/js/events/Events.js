@@ -68,7 +68,10 @@ const Events = function (bq) {
                 mute: 1002
             },
             game: { // 2001 -> 3001
-                stop: 2001
+                stop: 2001,
+                launched: 2002,
+                loading: 2003,
+                loaded: 2004
             }
         }
     };
