@@ -26,15 +26,17 @@ const Bq = function (filename) {
         }
     };
 
-    bq.events = Events(bq);
-    bq.interface = Interface(bq.events);
-    bq.world = World(bq, filename);
-    bq.rules = Rules(bq);
-
     bq.launch = function () {
-        bq.world.launch();
-        bq.state = bq.states.running;
-        return bq.play();
+        if (bq.state === bq.state.initialized) {
+            console.log("Starting BlindQuest...");
+            bq.world.launch();
+            bq.state = bq.states.running;
+            return bq.play();
+        }
+        else {
+            console.log("BlindQuest is not fully initialized !");
+            return bq;
+        }
     }
 
     bq.play = function () {
@@ -55,6 +57,8 @@ const Bq = function (filename) {
         return bq;
     }
 
+    bq.events = Events(bq);
+
     // throw ni; temporary :
     bq.events.register({
         name: "bq.game.stop",
@@ -64,7 +68,10 @@ const Bq = function (filename) {
         }
     });
 
-    bq.state = bq.states.initialized;
+    bq.interface = Interface(bq.events);
+    new Promise(function (resolve) { bq.world = World(bq, filename); resolve(); })
+        .then(function () { bq.rules = Rules(bq); })
+        .then(function () { bq.state = bq.states.initialized; })
 
     return bq;
 };

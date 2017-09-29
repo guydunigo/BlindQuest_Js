@@ -5,11 +5,12 @@ const main = function () {
     document.getElementById("msg")
         .textContent = "Game loaded, have fun!"
 
-    const b = Bq("maps/carte_test.json");
-
-    console.log(b);
-
-    b.launch();
+    let b;
+    new Promise(function(resolve) {
+        b = Bq("maps/carte_test.json");
+        console.log(b);
+        resolve();
+    }).then(() => b.launch())
 }
 
 document.addEventListener("DOMContentLoaded", main);

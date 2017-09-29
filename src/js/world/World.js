@@ -16,10 +16,20 @@ const loadWorldFile = function (world, fileContent) {
 
     checkWorldPostExtract(tmp_world);
 
+    Object.keys(tmp_world).forEach(function (key) {
+        world[key] = tmp_world[key];
+    })
+
+    endWorldLoading(world);
+
     world.isReady = true;
 
     return world;
 };
+
+const endWorldLoading = function (world) {
+    world.player.placeOn(findStartSquare(world));
+}
 
 /* Open world (download json, from fs, local drag,...) */
 // returns : {filename:String,raw_data:String}
@@ -31,7 +41,7 @@ const fetchWorldFile = function (world, name, callback) {
         // Request Complete and success : 
         if (fileRequest.readyState === 4 && fileRequest.status === 200) {
             console.log("Map " + name + " fetched !");
-            callback(world, fileRequest.responseText)
+            callback(world, fileRequest.responseText);
         }
         console.log(fileRequest.status)
     }
@@ -156,16 +166,11 @@ const World = function (bq, filename) {
         step
     }
 
-    /*const tmp = loadWorldFile(filename);
-    world.name = tmp.name;
-    world.data = tmp.data;*/
+    world.env = Env();
+    world.player = Player();
 
     fetchWorldFile(world, filename, loadWorldFile);
-    while (world.isReady == false); // wait for the world to be ready
-
-    world.env = Env();
-
-    world.player = Player(findStartSquare(world));
+    //while (world.isReady == false); // wait for the world to be ready
 
     return world;
 };
