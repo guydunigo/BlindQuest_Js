@@ -3,11 +3,6 @@ Misc
 * ~~FIRST~~ Later : **Order TODO !**
 * Optimize website and display for screen readers
 * conf for debug messages
-* Play sound
-* Rename audios
-* Sound format (with support ? webm/mp3/ogg/flac ?)
-* Test playing 1 sound file twice at the same time
-* Reference every sounds and their provenance
 * Bq visual theme
 * Env files to js script ? security ? sandbox ?
 * External repo for the sound/music
@@ -20,9 +15,9 @@ Features to add
 ===============
 * Files
     * Maps
-        * **maps to JSON directly ?**
+        * ~~**maps to JSON directly**~~
         * Open file (map) with nodeJs
-        * download file (map) in js
+        * ~~download file (map) in js~~
         * import local ? (drag and drop ?)
     * Save/Load
         * local
@@ -42,19 +37,20 @@ Features to add
             * Voice ?
             * displayable
         * Wiki (github)
-    * Save / Load locally
-        * Online
     * Simple onomatopoeia appearing on the blank page
-    * Fullscreen
-    * Mute button
+    * ~~Fullscreen~~
+    * ~~Mute button~~
+        * Visual
     * Pause (and mute ?)
     * Character describing what's happening ?
         ex : "Damn it ! The effects of *potion* are nearly off."
         * Or sidekick
 * Environment
     * Player to more generic class *character* for monsters
-    * Load map
+    * ~~Load map~~
     * Map editor
+        * Display map with color
+        * Export json file
     * Day/Night ? (+ sounds)
     * Weather (wind, rain, storm, ... + different strength)
         * Covering the other sounds
@@ -70,7 +66,7 @@ Features to add
                 * Jam ? (prevent enemies from coming in)
             * Timed events *tic tac*
             * Buttons / Levers / ...
-            * Pressplates : *click* when stepping on it
+            * Pressplates : *click* or *crrrr* when stepping on it
         * Towns
             * NPCs
                 * Voices
@@ -82,7 +78,7 @@ Features to add
                     * Mana ? Stamina ? bonus ?
 * Move around
     * Touch (mobile) support
-    * ability to go through walls, doors, ... (remove elmnts from nogo.data)
+    * ability to go through walls, doors, ... (temporarily remove elmnts from nogo.data)
     * 3d ? (df style)
         * command to get position (=> number of *bip*s)
     * Change orientation
@@ -92,15 +88,21 @@ Features to add
             * Or snake-like line showing only the n last cases used
                 * Can be done with a voice telling *left left right ...*
         * Letal squares
-        * Nogo squares
+        * ~~Nogo squares~~
             * *Bumping* sound when trying to go
-        * Looping map : (west is east, north is south, violets are blue, roses are blue...)
+        * ~~Looping map : (west is east, north is south, violets are blue, roses are red...)~~
 * Sounds
-    * Create basic audio interface logging before linking to any lib
-    * Hear current square sound
+    * ~~Create basic audio interface logging before linking to any lib~~
+    * ~~Play sound~~
+    * Test playing 1 sound file twice at the same time
+    * Rename audio file
+    * Equalize sounds
+    * Sound format (with support ? webm/mp3/ogg/flac ?)
+    * ~~Hear current square sound~~
         * Volumetric audio (stereo) with orientation
-    * Hear close squares sounds
-        * Hear second close squares sounds but softened
+    * ~~Hear close squares sounds~~
+        * ~~Hear second close squares sounds but softened~~
+            * Check the attenuation formula ?
     * Theme/Style or instrument rather than whole music ?
 * Fights
     * Life

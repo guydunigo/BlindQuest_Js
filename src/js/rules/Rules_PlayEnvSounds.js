@@ -14,7 +14,7 @@ const PlayEnvSounds = function (bq) {
         instant: true,
         data: {
             radius: 2,
-            prox_sounds: new Set([
+            prox_sounds: new Set([ // throw ni; Expand this list
                 bq.world.env.codes.water,
                 bq.world.env.codes.sea,
                 bq.world.env.codes.bridge
