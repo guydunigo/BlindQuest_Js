@@ -3,9 +3,10 @@ export default Player;
 const Player = function (startSquare) {
     // throw ni; Use config.js for some parameters
     const player = {
-        square: startSquare,
+        square: undefined,
         life: 10,
         move: undefined,
+        placeOn: undefined,
         kill: undefined,
         state: 0,
         // Again, the numbers don't have any purpose for now.
@@ -15,6 +16,13 @@ const Player = function (startSquare) {
             fighting: 3
         }
     };
+
+    player.placeOn = function (square) {
+        player.square = square;
+        if (square !== undefined) {
+            console.log(`PLAYER PLACED AT (${square.x},${square.y}) ON ${square.type}`);
+        }
+    }
 
     player.move = function (mvt_obj) {
         player.square = mvt_obj.dest;
@@ -33,8 +41,7 @@ const Player = function (startSquare) {
         console.log("PLAYER KILLED");
     }
 
-    console.log(`PLAYER PLACED AT (${startSquare.x},${startSquare.y}) ON ${startSquare.type}`);
-
+    player.placeOn(startSquare);
     player.state = player.states.wandering;
 
     return player;
