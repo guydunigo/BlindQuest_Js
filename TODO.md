@@ -3,6 +3,7 @@ Misc
 * ~~FIRST~~ Later : **Order TODO !**
 * Optimize website and display for screen readers
 * conf for debug messages
+* Trim martreauhit sound
 * Bq visual theme
 * Env files to js script ? security ? sandbox ?
 * External repo for the sound/music

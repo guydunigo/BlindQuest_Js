@@ -19,6 +19,17 @@ const stringifyList = function (list) {
     return list.map((x) => extractName(x) + "(" + x.volume() + ")").join(", ");
 };
 
+const keepPlayingTracks = function (list) {
+    const res = []
+    list.forEach(function (elmt) {
+        if (elmt.playing()) {
+            res.push(elmt);
+        }
+    });
+
+    return res;
+};
+
 const Env = function () {
     let env_sounds = [];
 
@@ -62,12 +73,56 @@ const Env = function () {
     }
 }
 
+const Actions = function () {
+    let act_sounds = [];
+
+    const stopAll = function () {
+        act_sounds.forEach((s) => s.stop());
+
+        if (act_sounds.length > 0 && DEBUG_AUDIO && DEBUG_AUDIO_STOP) {
+            const names = stringifyList(act_sounds);
+            console.log(`AUDIO ACTION STOP ${names}`);
+        }
+
+        act_sounds.length = 0;
+    }
+    const play = function (soundName, volume = 1) {
+        act_sounds = keepPlayingTracks(act_sounds);
+
+        const sound = new Howl({
+            src: [audioFold + "webm/" + soundName + ".webm",
+            audioFold + "mp3/" + soundName + ".mp3"],
+            onloaderror: function (id, msg) {
+                console.log("AUDIO ERROR " + soundName + " : " + msg);
+            }
+        });
+        act_sounds.push(sound);
+
+        sound.play();
+        if (DEBUG_AUDIO && DEBUG_AUDIO_PLAY) {
+            console.log(`AUDIO ACTION PLAY ${soundName}`);
+        }
+    }
+
+    return {
+        act_sounds,
+        play,
+        stopAll,
+        debug_printAll() {
+            if (DEBUG_AUDIO) {
+                console.log("AUDIO ENV PLAY " + stringifyList(act_sounds));
+            }
+        }
+    }
+}
+
 const Audio = function () {
     let ismute = false;
 
     const audio = {
         players: {
-            env: Env()
+            env: Env(),
+            actions: Actions()
         },
         get isMute() { return ismute; },
         set isMute(val) {

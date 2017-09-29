@@ -84,6 +84,8 @@ const Move = function (bq) {
             if (nogo.data && nogo.data.has(mvt_obj.dest.code)) {
                 console.log("RULES MOVE NOGO " + mvt_obj.dest.type);
                 // throw ni; pick random sound ?
+                // throw ni; change sound
+                bq.interface.audio.players.actions.play("marteauhit");
                 return Mvt(bq.world, mvt_obj.src, [0, 0]);
             }
             else
@@ -105,7 +107,11 @@ const Move = function (bq) {
         main: function (bq, mvt_obj) {
             const letalTypes = move.post.letalSquares.data.map((x) => x[0]);
             if (letalTypes.includes(mvt_obj.dest.code)) {
+                const index = letalTypes.indexOf(mvt_obj.dest.code);
+                const letalSounds = move.post.letalSquares.data.map((x) => x[1]);
                 console.log("RULES MOVE LETHAL " + mvt_obj.dest.type);
+
+                bq.interface.audio.players.actions.play(letalSounds[index]);
                 bq.world.player.kill(bq);
             }
         },
