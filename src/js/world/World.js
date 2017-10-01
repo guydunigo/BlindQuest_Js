@@ -1,7 +1,6 @@
 // Defines the World class
 export default World;
 
-import TEST_MAP from "../tests/test_world.js";
 import Env from "./env/Env.js";
 import Player from "./player/Player.js";
 import Square from "./Square.js";

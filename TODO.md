@@ -97,6 +97,9 @@ Features to add
     * ~~Play sound~~
     * Test playing 1 sound file twice at the same time
     * Rename audio file
+    * Sound equalizers in conf file
+        * to json
+        * in menu
     * Equalize sounds
     * Sound format (with support ? webm/mp3/ogg/flac ?)
     * ~~Hear current square sound~~

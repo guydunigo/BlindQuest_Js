@@ -1,6 +1,8 @@
 export default loadRulesHandlers;
 
-function loadRulesHandlers(bq, events, DEBUG_EVENTS, DEBUG_EVENTS_REGISTER) {
+import opts from "../config.js";
+
+function loadRulesHandlers(bq, events) {
     // Possible memory loss ? rule duplicating ?
     //   throw ni; test modifying the one in events and see if it changes in env too.
     // throw ni; check rule ?
@@ -30,7 +32,7 @@ function loadRulesHandlers(bq, events, DEBUG_EVENTS, DEBUG_EVENTS_REGISTER) {
             else {
                 dest[targ] = [rule];
             }
-            if (DEBUG_EVENTS && DEBUG_EVENTS_REGISTER) {
+            if (opts.DEBUG.EVENTS && opts.DEBUG.EVENTS_REGISTER) {
                 console.log("EVENTS REGISTER " + rule.name + " TO " + targ);
             }
         })
@@ -53,7 +55,7 @@ function loadRulesHandlers(bq, events, DEBUG_EVENTS, DEBUG_EVENTS_REGISTER) {
                         res = true;
                     }
                     rules.forEach(function (rule) {
-                        if (DEBUG_EVENTS) {
+                        if (opts.DEBUG.EVENTS) {
                             console.log("EVENTS EXEC " + rule.name);
                         }
                         rule.main(bq, ev);

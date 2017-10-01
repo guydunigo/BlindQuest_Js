@@ -9,11 +9,6 @@ const Interface = function (events) {
         input: Input(events),
         audio: Audio(),
         disp: {},
-        step(interEvents) {
-            for (const ev of interEvents) {
-                console.log("INTERFACE EXEC " + ev);
-            }
-        }
     };
 
     return inter;

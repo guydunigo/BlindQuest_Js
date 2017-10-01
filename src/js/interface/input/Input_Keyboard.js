@@ -1,6 +1,6 @@
 export default Keyboard;
 
-const DEBUG_KB = false;
+import opts from "../../config.js";
 
 const Keyboard = function (events) {
     // The conf can be edited anytime during the game
@@ -48,7 +48,7 @@ const Keyboard = function (events) {
             default:
                 msg = "NOEVENT ";
         };
-        if (DEBUG_KB) {
+        if (opts.DEBUG.KB) {
             console.log("\tINPUT KB " + msg + event.key);
         }
     });

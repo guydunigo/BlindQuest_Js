@@ -1,13 +1,12 @@
 // Main game loop
 export default Bq;
 
+import opts from "./config.js";
+
 import Events from "./events/Events.js";
 import Rules from "./rules/Rules.js";
 import Interface from "./interface/Interface.js";
 import World from "./world/World.js";
-
-// miliseconds beetween each game loop
-const TIMEBASE = 200;
 
 const Bq = function (filename) {
     const bq = {
@@ -51,7 +50,7 @@ const Bq = function (filename) {
         if (bq.state !== bq.states.stopped) {
             // I find this way of doing the loop quite funny ^^
             // It can't provide a reliable time tracking though
-            setTimeout(() => bq.play(), TIMEBASE);
+            setTimeout(() => bq.play(), opts.TIMEBASE);
         }
 
         return bq;

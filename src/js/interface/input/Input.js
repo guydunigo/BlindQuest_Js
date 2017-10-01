@@ -3,7 +3,6 @@ export default Input;
 
 import Keyboard from "./Input_Keyboard.js"
 
-
 const conf = {
     world: {
         player: {

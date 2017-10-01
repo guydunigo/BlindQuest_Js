@@ -24,13 +24,13 @@ const PlayEnvSounds = function (bq) {
 
     rule.main = function (bq, event) {
         // throw ni;
-        const play = bq.interface.audio.players.env.play;
+        const env_player = bq.interface.audio.players.env;
         const pos = bq.world.player.square;
         let rel_pos;
         const submap = bq.world.getSubMap(pos.x, pos.y, rule.data.radius);
         let distance, inv_dist;
 
-        bq.interface.audio.players.env.stopAll();
+        env_player.stopAll();
 
         submap.forEach(function (line, li) {
             line.forEach(function (elmt, ei) {
@@ -39,7 +39,7 @@ const PlayEnvSounds = function (bq) {
                     y: li - rule.data.radius
                 }
                 if (rel_pos.x === 0 && rel_pos.y === 0) {
-                    play(bq.world.env.code2sound(elmt));
+                    env_player.playPlayer(bq.world.env.code2sound(elmt));
                 }
                 else if (rule.data.prox_sounds.has(elmt)) {
                     distance = getDistance(
@@ -54,7 +54,7 @@ const PlayEnvSounds = function (bq) {
                     inv_dist = 1 / (distance * distance);
                     inv_dist = Number.parseFloat(inv_dist.toFixed(6));
 
-                    play(bq.world.env.code2sound(elmt), inv_dist);
+                    env_player.playProx(bq.world.env.code2sound(elmt), inv_dist);
                 }
             });
         });
