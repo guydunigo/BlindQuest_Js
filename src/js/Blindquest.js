@@ -20,21 +20,23 @@ const Bq = function (filename) {
         launch: undefined,
         play: undefined,
         states: {
-            initialized: 1,
-            running: 2,
+            loaded: 1,
+            launched: 2,
             paused: 3,
             stopped: 4
         }
     };
 
     bq.launch = function () {
-        if (bq.state === bq.states.initialized) {
+        bq.events.add("bq.game.launching");
+        if (bq.state === bq.states.loaded) {
             bq.world.launch();
-            bq.state = bq.states.running;
+            bq.state = bq.states.launched;
+            bq.events.add("bq.game.launched");
             return bq.play();
         }
         else {
-            bq.interface.disp.write("BlindQuest is not fully initialized !");
+            bq.interface.disp.write("BlindQuest is not fully loaded !");
             return bq;
         }
     }
@@ -43,7 +45,7 @@ const Bq = function (filename) {
     bq.play = function () {
         const events = bq.events.getPendings();
 
-        if (bq.state === bq.states.running) {
+        if (bq.state === bq.states.launched) {
             bq.world.step(bq.world);
             bq.events.handle(events);
         }
@@ -65,7 +67,7 @@ const Bq = function (filename) {
         name: "bq.game.stop",
         events: ["bq.game.stop"],
         main: function (bq) {
-            bq.state = bq.states.stopped;
+            bq.events.add("bq.game.stopped");
         }
     });
 
@@ -76,9 +78,7 @@ const Bq = function (filename) {
         .then(function () { bq.rules = Rules(bq); return Promise.resolve(); })
         .then(function () { bq.state = bq.states.initialized; return Promise.resolve(); })
         .then(function () { bq.events.add("bq.game.loaded"); return Promise.resolve(); })
-        .then(function () { bq.events.add("bq.game.launching"); return Promise.resolve(); })
         .then(function () { bq.launch(); return Promise.resolve(); })
-        .then(function () { bq.events.add("bq.game.launched"); return Promise.resolve(); });
 
     return bq;
 };

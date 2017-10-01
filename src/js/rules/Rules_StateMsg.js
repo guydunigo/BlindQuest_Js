@@ -33,6 +33,7 @@ const Base = function (bq) {
             "bq.game.loaded": "Game loaded.",
             "bq.game.launching": "Launching game...",
             "bq.game.launched": "Game launched, have fun!",
+            "bq.game.stopped": "Game stopped (you either died or quit).",
             length_total: 30,
             length_limits: 9
         }

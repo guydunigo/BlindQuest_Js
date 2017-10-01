@@ -3,6 +3,7 @@ Misc
 * ~~FIRST~~ Later : **Order TODO !**
 * Optimize website and display for screen readers
 * conf for debug messages
+* Webapps
 * Trim martreauhit sound
 * Bq visual theme
 * Env files to js script ? security ? sandbox ?
@@ -85,10 +86,10 @@ Features to add
     * Change orientation
         * *Ding* when facing North (or West)
     * Map
-        * Draw it on the screen as the player discovers ne squares ? (would break the audio-exclusive rule :/)
+        * Draw it on the screen as the player discovers new squares ? (would break the audio-exclusive rule :/)
             * Or snake-like line showing only the n last cases used
                 * Can be done with a voice telling *left left right ...*
-        * Letal squares
+        * ~~Letal squares~~
         * ~~Nogo squares~~
             * *Bumping* sound when trying to go
         * ~~Looping map : (west is east, north is south, violets are blue, roses are red...)~~

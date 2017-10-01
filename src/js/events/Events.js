@@ -71,7 +71,10 @@ const Events = function (bq) {
                 launching: 2002,
                 launched: 2003,
                 loading: 2004,
-                loaded: 2005
+                loaded: 2005,
+                pause: 2006,
+                paused: 2007,
+                stopped: 2008,
             }
         }
     };
