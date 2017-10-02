@@ -10,6 +10,7 @@ import ChangeState from "./Rules_ChangeState.js";
 import Pause from "./Rules_Pause.js";
 import Stop from "./Rules_Stop.js";
 import Bonus from "./Rules_Bonus.js";
+import StartFight from "./Rules_StartFight.js";
 
 const Rules = function (bq) {
     // throw ni; order them in a tree ?
@@ -22,7 +23,8 @@ const Rules = function (bq) {
         change_state: ChangeState(bq),
         pause: Pause(bq),
         stop: Stop(bq),
-        bonus: Bonus(bq)
+        bonus: Bonus(bq),
+        start_fight: StartFight(bq),
     };
 
     return rules;

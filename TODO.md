@@ -85,6 +85,7 @@ Features to add
         * command to get position (=> number of *bip*s)
     * Change orientation
         * *Ding* when facing North (or West)
+    * Only one move per gameloop ? Prevent moving left and right at the same time)
     * Map
         * Draw it on the screen as the player discovers new squares ? (would break the audio-exclusive rule :/)
             * Or snake-like line showing only the n last cases used
@@ -137,5 +138,9 @@ Features to add
         * Bonuses
         * Keys
 * Boni (/bonuses) : (potions, enchantments)
-    * Instant + in Bag + static
+    * ~~Instant~~
+        * other types
+            * random type
+    * in Bag
+    * static
     * Fade off sound ?

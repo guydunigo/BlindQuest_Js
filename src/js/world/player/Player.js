@@ -9,18 +9,20 @@ const Player = function (startSquare) {
         square: undefined,
         get life() { return life },
         set life(nlife) {
-            return (life = nlife > opts.PLAYER.MAX_LIFE ? opts.PLAYER.MAX_LIFE: nlife);
+            return (life = nlife > opts.PLAYER.MAX_LIFE ? opts.PLAYER.MAX_LIFE : nlife);
         },
         move: undefined,
         placeOn: undefined,
         kill: undefined,
+        createEnemy: undefined,
         state: 0,
         // Again, the numbers don't have any purpose for now.
         states: {
             wandering: 1,
             dead: 2,
             fighting: 3
-        }
+        },
+        cur_enemy: undefined
     };
 
     player.placeOn = function (square) {
@@ -45,6 +47,14 @@ const Player = function (startSquare) {
         bq.events.add("bq.game.stop")
 
         console.log("PLAYER KILLED");
+    }
+
+    player.createEnemy = function (square) {
+        const en = opts.MONSTERS[square.code];
+        if ( en !== undefined) {
+            player.cur_enemy = en; // throw ni; check if it doesn't modify all the monsters
+            console.log(player.cur_enemy);
+        }
     }
 
     player.placeOn(startSquare);

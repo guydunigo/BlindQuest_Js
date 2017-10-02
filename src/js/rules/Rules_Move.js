@@ -3,6 +3,8 @@ export default Move;
 import Mvt from "./Movement.js";
 
 const Move = function (bq) {
+    const codes = bq.world.env.codes;
+
     const move = {
         // debug purpose only
         name: "bq.world.player.move",
@@ -92,14 +94,14 @@ const Move = function (bq) {
                 return mvt_obj;
         },
         data: new Set([
-            bq.world.env.codes.mountains,
-            bq.world.env.codes.border
+            codes.mountains,
+            codes.border
         ]),
         sounds: ["bump_wall"],
     }
 
     // throw ni; Add proba to escape ? + with damages ?
-    move.pre.fighting = {
+    move.pre.static_fights = {
         main: function (bq, mvt_obj) {
             const p = bq.world.player;
             let res = mvt_obj;
@@ -128,19 +130,32 @@ const Move = function (bq) {
             }
         },
         data: [
-            [bq.world.env.codes.water, "noyade"],
-            [bq.world.env.codes.sea, "noyade"],
+            [codes.water, "noyade"],
+            [codes.sea, "noyade"],
         ]
     }
 
     move.post.bonus = {
         main(bq, mvt_obj) {
-            if (mvt_obj.dest.code === bq.world.env.codes.bonus) {
+            if (mvt_obj.dest.code === codes.bonus) {
                 bq.events.add("bq.world.player.bonus");
                 // Change case code :
                 mvt_obj.dest.code = bq.world.getNewCode(mvt_obj.dest);
             }
         }
+    }
+
+    move.post.fight = {
+        main(bq, mvt_obj) {
+            if (move.post.fight.data.has(mvt_obj.dest.code)) {
+                bq.events.add("bq.world.player.start_fight");
+            }
+        },
+        data: new Set([
+            codes.monster,
+            codes.boss,
+            codes.boss_final,
+        ])
     }
 
     // Don't forget to register your rule to the events defined in move.events

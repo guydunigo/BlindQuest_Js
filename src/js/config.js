@@ -36,7 +36,7 @@ export const ENV = {
         bridge: 6,
         sand: 7,
         mountains: 8,
-        monsters: 10,
+        monster: 10,
         boss: 11,
         boss_final: 12,
         bonus: 13,
@@ -58,7 +58,7 @@ export const ENV = {
         bridge: "pont",
         sand: "sable",
         mountains: "montagne",
-        monsters: "monstre",
+        monster: "monstre",
         boss: "boss",
         boss_final: "boss_final",
         bonus: "bonus",
@@ -70,11 +70,17 @@ export const ENV = {
         start: "depart",
         end: "fin"
     }
-}
+};
 
 export const PLAYER = {
     MAX_LIFE: 10,
-}
+};
+
+// type, life, damages
+export const MONSTERS = {};
+MONSTERS[ENV.CODES.monster] = { life: 1, damages: 1 };
+MONSTERS[ENV.CODES.boss] = { life: 2, damages: 2 };
+MONSTERS[ENV.CODES.boss_final] = { life: 3, damages: 3 };
 
 export const BAD_SQUARES_CODES = new Set([
     ENV.CODES.bonus, // Prevent loops
@@ -82,7 +88,7 @@ export const BAD_SQUARES_CODES = new Set([
     ENV.CODES.border,
     ENV.CODES.water,
     ENV.CODES.sea
-])
+]);
 
 export default {
     AUDIO,
@@ -90,5 +96,6 @@ export default {
     BQ,
     DEBUG,
     ENV,
+    MONSTERS,
     PLAYER,
 };

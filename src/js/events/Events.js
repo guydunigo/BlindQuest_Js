@@ -61,6 +61,7 @@ const Events = function (bq) {
                     },
                     moved: 5,
                     bonus: 6,
+                    start_fight: 7
                 }
             },
             interface: { // 1001 to 2000

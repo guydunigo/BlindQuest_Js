@@ -8,7 +8,7 @@ const formatDebug = function (event, length_total, length_limits) {
     const l = getLastElmt(event);
     const spaces = (length_total - l.length - length_limits * 2) / 2;
     let lims = "";
-    for (let i = 0; i <= length_limits; i++) {
+    for (let i = 0; i < length_limits; i++) {
         lims += "#";
     }
     let spaces_r = "";
