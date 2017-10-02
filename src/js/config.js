@@ -72,7 +72,12 @@ export const ENV = {
     }
 }
 
+export const PLAYER = {
+    MAX_LIFE: 10,
+}
+
 export const BAD_SQUARES_CODES = new Set([
+    ENV.CODES.bonus, // Prevent loops
     ENV.CODES.mountains,
     ENV.CODES.border,
     ENV.CODES.water,
@@ -85,4 +90,5 @@ export default {
     BQ,
     DEBUG,
     ENV,
+    PLAYER,
 };

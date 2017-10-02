@@ -86,7 +86,7 @@ const Move = function (bq) {
                 // throw ni; pick random sound ?
                 // throw ni; change sound
                 bq.interface.audio.players.actions.play("marteauhit");
-                return Mvt(bq.world, mvt_obj.src, [0, 0]);
+                return Mvt(bq.world, mvt_obj.src);
             }
             else
                 return mvt_obj;
@@ -96,6 +96,18 @@ const Move = function (bq) {
             bq.world.env.codes.border
         ]),
         sounds: ["bump_wall"],
+    }
+
+    // throw ni; Add proba to escape ? + with damages ?
+    move.pre.fighting = {
+        main: function (bq, mvt_obj) {
+            const p = bq.world.player;
+            let res = mvt_obj;
+            if (p.state === p.states.fighting) {
+                res = Mvt(bq.world, mvt_obj.src);
+            }
+            return res;
+        }
     }
 
     /* --- move.post --- */
@@ -119,6 +131,16 @@ const Move = function (bq) {
             [bq.world.env.codes.water, "noyade"],
             [bq.world.env.codes.sea, "noyade"],
         ]
+    }
+
+    move.post.bonus = {
+        main(bq, mvt_obj) {
+            if (mvt_obj.dest.code === bq.world.env.codes.bonus) {
+                bq.events.add("bq.world.player.bonus");
+                // Change case code :
+                mvt_obj.dest.code = bq.world.getNewCode(mvt_obj.dest);
+            }
+        }
     }
 
     // Don't forget to register your rule to the events defined in move.events

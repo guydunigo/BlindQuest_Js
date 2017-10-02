@@ -59,7 +59,8 @@ const Events = function (bq) {
                         left: 3,
                         right: 4
                     },
-                    moved: 5
+                    moved: 5,
+                    bonus: 6,
                 }
             },
             interface: { // 1001 to 2000

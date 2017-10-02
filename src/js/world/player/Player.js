@@ -1,10 +1,16 @@
 export default Player;
 
+import opts from "../../config.js";
+
 const Player = function (startSquare) {
+    let life = opts.PLAYER.MAX_LIFE;
     // throw ni; Use config.js for some parameters
     const player = {
         square: undefined,
-        life: 10,
+        get life() { return life },
+        set life(nlife) {
+            return (life = nlife > opts.PLAYER.MAX_LIFE ? opts.PLAYER.MAX_LIFE: nlife);
+        },
         move: undefined,
         placeOn: undefined,
         kill: undefined,

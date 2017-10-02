@@ -9,6 +9,7 @@ import PlayEnvSounds from "./Rules_PlayEnvSounds.js";
 import ChangeState from "./Rules_ChangeState.js";
 import Pause from "./Rules_Pause.js";
 import Stop from "./Rules_Stop.js";
+import Bonus from "./Rules_Bonus.js";
 
 const Rules = function (bq) {
     // throw ni; order them in a tree ?
@@ -20,7 +21,8 @@ const Rules = function (bq) {
         play_env_sounds: PlayEnvSounds(bq),
         change_state: ChangeState(bq),
         pause: Pause(bq),
-        stop: Stop(bq)
+        stop: Stop(bq),
+        bonus: Bonus(bq)
     };
 
     return rules;
