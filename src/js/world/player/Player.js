@@ -2,18 +2,25 @@ export default Player;
 
 import opts from "../../config.js";
 
-const Player = function (startSquare) {
+const Player = function (bq, startSquare) {
     let life = opts.PLAYER.MAX_LIFE;
-    // throw ni; Use config.js for some parameters
-    const player = {
+    let player;
+    player = {
         square: undefined,
         get life() { return life },
         set life(nlife) {
-            return (life = nlife > opts.PLAYER.MAX_LIFE ? opts.PLAYER.MAX_LIFE : nlife);
+            life = nlife > opts.PLAYER.MAX_LIFE ? opts.PLAYER.MAX_LIFE : nlife;
+            if (life <= 0) {
+                player.die(bq);
+            }
+            return life;
         },
+        damages: opts.PLAYER.DEFAULT_DAMAGES,
+        proba_hit: opts.PLAYER.PROBA_HIT,
         move: undefined,
         placeOn: undefined,
         kill: undefined,
+        die: undefined,
         createEnemy: undefined,
         state: 0,
         // Again, the numbers don't have any purpose for now.
@@ -42,6 +49,10 @@ const Player = function (startSquare) {
     // throw ni; use an event/rule ?
     player.kill = function (bq) {
         player.life = 0;
+        player.die(bq);
+    }
+
+    player.die = function (bq) {
         player.state = player.states.dead;
 
         bq.events.add("bq.game.stop")
@@ -51,7 +62,7 @@ const Player = function (startSquare) {
 
     player.createEnemy = function (square) {
         const en = opts.MONSTERS[square.code];
-        if ( en !== undefined) {
+        if (en !== undefined) {
             player.cur_enemy = en; // throw ni; check if it doesn't modify all the monsters
             console.log(player.cur_enemy);
         }

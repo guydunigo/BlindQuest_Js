@@ -51,7 +51,7 @@ const Events = function (bq) {
     // btw : numbers are irrelevant actually
     events.model = {
         bq: {
-            world: {
+            world: { // 1 -> 1000
                 player: { // 1 -> 100
                     move: {
                         up: 1,
@@ -61,7 +61,9 @@ const Events = function (bq) {
                     },
                     moved: 5,
                     bonus: 6,
-                    start_fight: 7
+                    start_fight: 7,
+                    attack: 8,
+                    damaged: 9,
                 }
             },
             interface: { // 1001 to 2000

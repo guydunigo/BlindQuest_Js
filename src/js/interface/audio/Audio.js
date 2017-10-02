@@ -90,7 +90,7 @@ const Actions = function () {
 
         act_sounds.length = 0;
     }
-    const play = function (soundName, volume = 1) {
+    const play = function (soundName, volume = 1, callback = undefined) {
         act_sounds = keepPlayingTracks(act_sounds);
 
         const sound = new Howl({
@@ -106,6 +106,10 @@ const Actions = function () {
         sound.play();
         if (opts.DEBUG.AUDIO && opts.DEBUG.AUDIO_PLAY) {
             console.log(`AUDIO ACTION PLAY ${soundName}`);
+        }
+
+        if (callback !== undefined) {
+            sound.on("end", callback);
         }
     }
 

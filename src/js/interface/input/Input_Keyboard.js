@@ -14,7 +14,8 @@ const Keyboard = function (events) {
                         down: "ArrowDown",
                         left: "ArrowLeft",
                         right: "ArrowRight"
-                    }
+                    },
+                    attack: " "
                 }
             },
             interface: {
@@ -48,6 +49,9 @@ const Keyboard = function (events) {
                 break;
             case kb.conf.interface.pause:
                 events.add("bq.game.pause");
+                break;
+            case kb.conf.world.player.attack:
+                events.add("bq.world.player.attack");
                 break;
             default:
                 msg = "NOEVENT ";

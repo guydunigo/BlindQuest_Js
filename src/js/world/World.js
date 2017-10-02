@@ -165,7 +165,7 @@ const World = function (bq, filename) {
     }
 
     world.env = Env();
-    world.player = Player();
+    world.player = Player(bq);
 
     return fetchWorldFile(filename).then((response) => Promise.resolve(loadWorldFile(world, response)));
 };
