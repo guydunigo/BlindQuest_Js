@@ -1,6 +1,8 @@
 // Defines the World class
 export default World;
 
+import opts from "../config.js";
+
 import Env from "./env/Env.js";
 import Player from "./player/Player.js";
 import Square from "./Square.js";
@@ -132,11 +134,34 @@ const World = function (bq, filename) {
 
             return res;
         },
+        getNewCode: undefined,
+        isSquareCodeGood(code) {
+            return !(opts.BAD_SQUARES_CODES.has(code))
+        },
         // Launch music, etc...
         launch() {
             bq.events.add("bq.world.player.moved");
         },
         step
+    }
+    // Return a new code based on the "good" close squares 
+    world.getNewCode = function (square) {
+        // N,S,W,E,NW,NE,SW,SE
+        const dir_list = [
+            [0, -1], [0, 1], [-1, 0], [1, 0],
+            [-1, -1], [1, -1], [-1, 1], [1, 1]
+        ]
+        let res = world.env.codes.plain;
+        let code;
+
+        for (const i of dir_list) {
+            code = square.apply(i).code;
+            if (world.isSquareCodeGood(code)) {
+                res = code;
+                break;
+            }
+        }
+        return res;
     }
 
     world.env = Env();

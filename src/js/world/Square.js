@@ -13,6 +13,9 @@ function Square(world, x, y) {
         get code() {
             return world.getSquareCode(sq.x, sq.y);
         },
+        set code(new_code) {
+            (world.data[sq.y][sq.x] = new_code);
+        },
         get type() {
             return world.getSquareType(sq.x, sq.y);
         },
