@@ -4,6 +4,7 @@
 
 export const BQ = {
     // miliseconds beetween each game loop
+    FILENAME: "maps/carte_test.json",
     TIMEBASE: 200
 }
 
@@ -24,7 +25,64 @@ export const DEBUG = {
     EVENTS_REGISTER: false
 };
 
+export const ENV = {
+    CODES: {
+        plain: 0,
+        woods: 1,
+        cave: 2,
+        water: 3,
+        castle: 4,
+        wood_path: 5,
+        bridge: 6,
+        sand: 7,
+        mountains: 8,
+        monsters: 10,
+        boss: 11,
+        boss_final: 12,
+        bonus: 13,
+        sea: 14,
+        castle_gate: 15,
+        magic: 16,
+        funny: 17,
+        border: 97,
+        start: 98,
+        end: 99
+    },
+    SOUNDS: {
+        plain: "plaine",
+        woods: "foret",
+        cave: "caverne",
+        water: "eau",
+        castle: "chateau",
+        wood_path: "sentier",
+        bridge: "pont",
+        sand: "sable",
+        mountains: "montagne",
+        monsters: "monstre",
+        boss: "boss",
+        boss_final: "boss_final",
+        bonus: "bonus",
+        sea: "mer",
+        castle_gate: "entreechateau",
+        magic: "magie",
+        funny: "funny",
+        border: "border",
+        start: "depart",
+        end: "fin"
+    }
+}
+
+export const BAD_SQUARES_CODES = new Set([
+    ENV.CODES.mountains,
+    ENV.CODES.border,
+    ENV.CODES.water,
+    ENV.CODES.sea
+])
+
 export default {
     AUDIO,
+    BAD_SQUARES_CODES,
+    BQ,
     DEBUG,
+    ENV,
 };

@@ -10,7 +10,7 @@ import World from "./world/World.js";
 
 import StateMsg from "./rules/Rules_StateMsg.js";
 
-const Bq = function (filename) {
+const Bq = function (filename = undefined) {
     const bq = {
         state: 0,
         world: {},
@@ -63,18 +63,10 @@ const Bq = function (filename) {
     bq.interface = Interface(bq.events);
 
     // throw ni; temporary :
-    bq.events.register({
-        name: "bq.game.stop",
-        events: ["bq.game.stop"],
-        main: function (bq) {
-            bq.events.add("bq.game.stopped");
-        }
-    });
-
     StateMsg(bq);
     bq.events.add("bq.game.loading");
 
-    World(bq, filename).then(function (world) { bq.world = world; return Promise.resolve(); })
+    World(bq, filename === undefined ? opts.BQ.FILENAME: filename).then(function (world) { bq.world = world; return Promise.resolve(); })
         .then(function () { bq.rules = Rules(bq); return Promise.resolve(); })
         .then(function () { bq.state = bq.states.initialized; return Promise.resolve(); })
         .then(function () { bq.events.add("bq.game.loaded"); return Promise.resolve(); })

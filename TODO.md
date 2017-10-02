@@ -124,6 +124,8 @@ Features to add
             * With 3d audio
     * Possibility to get pushed away
     * Fleeing
+        * Proba
+        * With damage
 * Player
     * Timer clock *Ding* when a spell finished loading
     * Mana and stamina

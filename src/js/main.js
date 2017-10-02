@@ -2,7 +2,7 @@
 import Bq from "./Blindquest.js"
 
 const main = function () {
-    const b = Bq("maps/carte_defaut.json");
+    const b = Bq();
     console.log(b);
 }
 

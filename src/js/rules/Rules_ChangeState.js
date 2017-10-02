@@ -20,7 +20,6 @@ const Base = function (bq) {
         if (Object.keys(rule.data).includes(event)) {
             bq.state = rule.data[event];
         }
-        console.log(bq.state);
     };
 
     bq.events.register(rule);
