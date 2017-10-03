@@ -18,19 +18,20 @@ const PlayEnvSounds = function (bq) {
                 bq.world.env.codes.water,
                 bq.world.env.codes.sea,
                 bq.world.env.codes.bridge
-            ])
+            ]),
+            prev_code: 0,
         }
     }
 
     rule.main = function (bq, event) {
-        // throw ni;
+        event;
         const env_player = bq.interface.audio.players.env;
         const pos = bq.world.player.square;
         let rel_pos;
         const submap = bq.world.getSubMap(pos.x, pos.y, rule.data.radius);
         let distance, inv_dist;
 
-        env_player.stopAll();
+        env_player.stopProx();
 
         submap.forEach(function (line, li) {
             line.forEach(function (elmt, ei) {
@@ -39,7 +40,11 @@ const PlayEnvSounds = function (bq) {
                     y: li - rule.data.radius
                 }
                 if (rel_pos.x === 0 && rel_pos.y === 0) {
-                    env_player.playPlayer(bq.world.env.code2sound(elmt));
+                    if (elmt !== rule.data.prev_code) {
+                        env_player.playPlayer(bq.world.env.code2sound(elmt));
+                        rule.data.prev_code = elmt;
+                    }
+                    bq.interface.audio.players.actions.play("walking-in-snow-soundjay_short");
                 }
                 else if (rule.data.prox_sounds.has(elmt)) {
                     distance = getDistance(

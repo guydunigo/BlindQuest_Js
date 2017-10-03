@@ -27,17 +27,28 @@ const keepPlayingTracks = function (list) {
 };
 
 const Env = function () {
-    let env_sounds = [];
+    let prox_sounds = [];
+    let player_sound = undefined;
 
-    const stopAll = function () {
-        env_sounds.forEach((s) => s.stop());
+    const stopPlayer = function () {
+        if (player_sound !== undefined) {
+            player_sound.stop();
+            player_sound = undefined;
+        }
+    }
+    const stopProx = function () {
+        prox_sounds.forEach((s) => s.stop());
 
-        if (env_sounds.length > 0 && opts.DEBUG.AUDIO && opts.DEBUG.AUDIO_STOP) {
-            const names = stringifyList(env_sounds);
+        if (prox_sounds.length > 0 && opts.DEBUG.AUDIO && opts.DEBUG.AUDIO_STOP) {
+            const names = stringifyList(prox_sounds);
             console.log(`AUDIO ENV STOP ${names}`);
         }
 
-        env_sounds.length = 0;
+        prox_sounds.length = 0;
+    }
+    const stopAll = function () {
+        stopProx();
+        stopPlayer();
     }
     const play = function (soundName, volume = 1) {
         const sound = new Howl({
@@ -49,29 +60,33 @@ const Env = function () {
                 console.log("AUDIO ERROR " + soundName + " : " + msg);
             }
         });
-        env_sounds.push(sound);
 
         sound.play();
         if (opts.DEBUG.AUDIO && opts.DEBUG.AUDIO_PLAY) {
             console.log(`AUDIO ENV PLAY ${soundName} VOL ${volume}`);
         }
+
+        return sound;
     };
     const playPlayer = function (soundName, volume = 1) {
-        play(soundName, volume * opts.AUDIO.VOLUME_ENV_PLAYER);
+        stopPlayer();
+        player_sound = play(soundName, volume * opts.AUDIO.VOLUME_ENV_PLAYER);
     }
     const playProx = function (soundName, volume = 1) {
-        play(soundName, volume * opts.AUDIO.VOLUME_ENV_PROX);
+        prox_sounds.push(play(soundName, volume * opts.AUDIO.VOLUME_ENV_PROX));
     }
 
     return {
-        env_sounds,
-        play,
+        prox_sounds,
+        /*play,*/
         playPlayer,
         playProx,
+        stopPlayer,
+        stopProx,
         stopAll,
         debug_printAll() {
             if (opts.DEBUG.AUDIO) {
-                console.log("AUDIO ENV PLAY " + stringifyList(env_sounds));
+                //console.log("AUDIO ENV PLAY " + stringifyList(prox_sounds));
             }
         }
     }
