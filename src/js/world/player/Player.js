@@ -63,7 +63,11 @@ const Player = function (bq, startSquare) {
     player.createEnemy = function (square) {
         const en = opts.MONSTERS[square.code];
         if (en !== undefined) {
-            player.cur_enemy = en; // throw ni; check if it doesn't modify all the monsters
+            player.cur_enemy = {
+                life: en.life,
+                damages: en.damages,
+                proba_hit: en.proba_hit
+            }; // throw ni; check if it doesn't modify all the monsters
             console.log(player.cur_enemy);
         }
     }

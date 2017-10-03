@@ -13,19 +13,21 @@ const Base = function (bq) {
     }
 
     const fight = function (attacker, receiver, sound_hit, sound_missed, receiver_hurt, callback) {
-        if (Math.random() < attacker.proba_hit) {
-            // hit
-            bq.interface.audio.players.actions.play(sound_hit, 1,
-                () => bq.interface.audio.players.actions.play(receiver_hurt, 1, callback));
+        if (attacker.life > 0) {
+            if (Math.random() < attacker.proba_hit) {
+                // hit
+                bq.interface.audio.players.actions.play(sound_hit, 1,
+                    () => bq.interface.audio.players.actions.play(receiver_hurt, 1, callback));
 
-            receiver.life -= attacker.damages;
+                receiver.life -= attacker.damages;
 
-            console.log("FIGHT HIT a : " + attacker.life + " r : " + receiver.life);
-        }
-        else {
-            // missed
-            bq.interface.audio.players.actions.play(sound_missed, 1, callback);
-            console.log("FIGHT MISSED");
+                console.log("FIGHT HIT a : " + attacker.life + " r : " + receiver.life);
+            }
+            else {
+                // missed
+                bq.interface.audio.players.actions.play(sound_missed, 1, callback);
+                console.log("FIGHT MISSED");
+            }
         }
     }
 
@@ -35,7 +37,15 @@ const Base = function (bq) {
         // throw ni; random damages
         if (p.state == p.states.fighting) {
             fight(p, p.cur_enemy, "epeehit", "epeemissed", "monstreblesse",
-                () => fight(p.cur_enemy, p, "marteauhit", "epeemissed", "joueurblesse"));
+                () => {
+                    if (p.cur_enemy.life > 0)
+                        fight(p.cur_enemy, p, "marteauhit", "epeemissed", "joueurblesse");
+                }
+            );
+
+            if (p.cur_enemy.life <= 0) {
+                bq.events.add("bq.world.player.end_fight");
+            }
         }
     };
 

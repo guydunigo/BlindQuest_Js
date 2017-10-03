@@ -4,7 +4,7 @@
 
 export const BQ = {
     // miliseconds beetween each game loop
-    FILENAME: "maps/carte_test.json",
+    FILENAME: "maps/carte_defaut.json",
     TIMEBASE: 200
 }
 
