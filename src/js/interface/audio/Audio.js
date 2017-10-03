@@ -141,7 +141,7 @@ const Actions = function () {
 }
 
 const Heart = function () {
-    const soundName = "heartbeat";
+    const soundName = "heartbeat_2";
     let heartbeat = new Howl({
         src: [audioFold + "webm/" + soundName + ".webm",
         audioFold + "mp3/" + soundName + ".mp3"],

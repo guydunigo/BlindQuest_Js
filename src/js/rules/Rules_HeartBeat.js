@@ -8,6 +8,7 @@ const Base = function (bq) {
         events: [
             "bq.world.player.life_changed"
         ],
+        instant: true,
         data: {
             start_under: 5,
         }
@@ -16,7 +17,10 @@ const Base = function (bq) {
     rule.main = function (bq, event) {
         event;
         const p = bq.world.player;
-        if (p.life <= rule.data.start_under) {
+        if (p.life <= 0) {
+            bq.interface.audio.players.heart.pause();
+        }
+        else if (p.life <= rule.data.start_under) {
             bq.interface.audio.players.heart.play(1 / p.life);
         }
     };
