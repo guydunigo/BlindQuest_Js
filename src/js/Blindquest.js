@@ -11,6 +11,7 @@ import World from "./world/World.js";
 import StateMsg from "./rules/Rules_StateMsg.js";
 
 const Bq = function (filename = undefined) {
+    const t_start = Date.now();
     const bq = {
         state: 0,
         world: {},
@@ -44,6 +45,7 @@ const Bq = function (filename = undefined) {
     // Game loop :
     bq.play = function () {
         const events = bq.events.getPendings();
+        const t_start = Date.now();
 
         if (bq.state === bq.states.launched) {
             bq.world.step(bq.world);
@@ -54,6 +56,10 @@ const Bq = function (filename = undefined) {
             // I find this way of doing the loop quite funny ^^
             // It can't provide a reliable time tracking though
             setTimeout(() => bq.play(), opts.TIMEBASE);
+        }
+
+        if (opts.DEBUG.BQ && opts.DEBUG.BQ_PLAY_LOOP) {
+            console.log("BQ LOOP DONE IN " + (Date.now() - t_start) + "ms");
         }
 
         return bq;
@@ -71,6 +77,12 @@ const Bq = function (filename = undefined) {
         .then(function () { bq.state = bq.states.initialized; return Promise.resolve(); })
         .then(function () { bq.events.add("bq.game.loaded"); return Promise.resolve(); })
         .then(function () { bq.launch(); return Promise.resolve(); })
+        .then(function () {
+            if (opts.DEBUG.BQ) {
+                console.log("BQ LOADED IN " + (Date.now() - t_start) + "ms");
+            }
+            return Promise.resolve();
+        });
 
     return bq;
 };

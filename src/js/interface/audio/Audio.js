@@ -77,8 +77,8 @@ const Env = function () {
     }
 
     return {
-        prox_sounds,
-        /*play,*/
+        // prox_sounds,
+        // play,
         playPlayer,
         playProx,
         stopPlayer,
@@ -86,7 +86,7 @@ const Env = function () {
         stopAll,
         debug_printAll() {
             if (opts.DEBUG.AUDIO) {
-                //console.log("AUDIO ENV PLAY " + stringifyList(prox_sounds));
+                console.log("AUDIO ENV PLAY " + stringifyList([player_sound, ...prox_sounds]));
             }
         }
     }
@@ -129,7 +129,7 @@ const Actions = function () {
     }
 
     return {
-        act_sounds,
+        // act_sounds,
         play,
         stopAll,
         debug_printAll() {
@@ -140,13 +140,49 @@ const Actions = function () {
     }
 }
 
+const Heart = function () {
+    const soundName = "heartbeat";
+    let heartbeat = new Howl({
+        src: [audioFold + "webm/" + soundName + ".webm",
+        audioFold + "mp3/" + soundName + ".mp3"],
+        autoplay: false,
+        loop: true,
+        onloaderror: function (id, msg) {
+            console.log("AUDIO ERROR " + soundName + " : " + msg);
+        },
+        volume: opts.AUDIO.VOLUME_HEART,
+    });
+    heartbeat.pause();
+
+    const pause = function () {
+        heartbeat.pause();
+    }
+    const play = function (volume = 1) {
+        heartbeat.volume(volume * opts.AUDIO.VOLUME_HEART);
+
+        if (!heartbeat.playing())
+            heartbeat.play();
+
+        if (opts.DEBUG.AUDIO && opts.DEBUG.AUDIO_PLAY) {
+            console.log("AUDIO HEART PLAY " + heartbeat.volume());
+        }
+    }
+
+    return {
+        // heartbeat,
+        play,
+        pause
+    }
+}
+
 const Audio = function () {
     let ismute = false;
 
     const audio = {
         players: {
             env: Env(),
-            actions: Actions()
+            actions: Actions(),
+            heart: Heart(),
         },
         get isMute() { return ismute; },
         set isMute(val) {

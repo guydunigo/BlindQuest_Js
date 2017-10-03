@@ -10,16 +10,19 @@ export const BQ = {
 
 export const AUDIO = {
     VOLUME_ENV: 1,
-    VOLUME_ENV_PLAYER: 0.75,
+    VOLUME_ENV_PLAYER: 0.65,
     VOLUME_ENV_PROX: 0.5,
     VOLUME_ACTION: 1,
-    AUDIO_START_MUTE: true
+    VOLUME_HEART: 1,
+    AUDIO_START_MUTE: false
 };
 
 export const DEBUG = {
+    BQ: true,
+    BQ_PLAY_LOOP: false,
     AUDIO: true,
     AUDIO_STOP: false,
-    AUDIO_PLAY: false,
+    AUDIO_PLAY: true,
     KB: false,
     EVENTS: false,
     EVENTS_REGISTER: false
@@ -73,7 +76,7 @@ export const ENV = {
 };
 
 export const PLAYER = {
-    MAX_LIFE: 10,
+    MAX_LIFE: 15,
     DEFAULT_DAMAGES: 1,
     PROBA_HIT: 0.75
 };

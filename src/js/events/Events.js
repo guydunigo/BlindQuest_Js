@@ -65,6 +65,7 @@ const Events = function (bq) {
                     attack: 8,
                     damaged: 9,
                     end_fight: 10,
+                    life_changed: 11,
                 }
             },
             interface: { // 1001 to 2000

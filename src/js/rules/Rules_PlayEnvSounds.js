@@ -56,7 +56,7 @@ const PlayEnvSounds = function (bq) {
 
                     // console.log(rel_pos.x,rel_pos.y,distance);
 
-                    inv_dist = 1 / (distance * distance);
+                    inv_dist = 1 / (distance);
                     inv_dist = Number.parseFloat(inv_dist.toFixed(6));
 
                     env_player.playProx(bq.world.env.code2sound(elmt), inv_dist);

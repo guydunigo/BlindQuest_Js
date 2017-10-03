@@ -13,6 +13,7 @@ const Player = function (bq, startSquare) {
             if (life <= 0) {
                 player.die(bq);
             }
+            bq.events.add("bq.world.player.life_changed");
             return life;
         },
         damages: opts.PLAYER.DEFAULT_DAMAGES,
