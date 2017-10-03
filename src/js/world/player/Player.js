@@ -54,6 +54,7 @@ const Player = function (bq, startSquare) {
 
     player.die = function (bq) {
         player.state = player.states.dead;
+        bq.interface.audio.players.actions.play("mortcombat");
 
         bq.events.add("bq.game.stop")
 
@@ -67,8 +68,7 @@ const Player = function (bq, startSquare) {
                 life: en.life,
                 damages: en.damages,
                 proba_hit: en.proba_hit
-            }; // throw ni; check if it doesn't modify all the monsters
-            console.log(player.cur_enemy);
+            };
         }
     }
 
