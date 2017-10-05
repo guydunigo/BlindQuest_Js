@@ -32,6 +32,7 @@ function loadRulesHandlers(bq, events) {
             else {
                 dest[targ] = [rule];
             }
+
             if (opts.DEBUG.EVENTS && opts.DEBUG.EVENTS_REGISTER) {
                 console.log("EVENTS REGISTER " + rule.name + " TO " + targ);
             }
@@ -52,6 +53,7 @@ function loadRulesHandlers(bq, events) {
             tree = events.getParentsTree(ev);
             tree.forEach(function (cat) {
                 rules = rulesList[cat];
+
                 if (rules !== undefined) {
                     if (res !== true) {
                         res = true;

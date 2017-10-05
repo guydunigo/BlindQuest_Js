@@ -99,6 +99,7 @@ const Events = function (bq) {
                     console.log("EVENTS INSTANT " + elmt);
                 }
             }
+            // throw ni; check for an existing rule before adding
             fifo.push(elmt);
             if (opts.DEBUG.EVENTS) {
                 console.log("EVENTS ADDED #" + fifo.length + " " + elmt);

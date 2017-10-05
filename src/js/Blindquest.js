@@ -41,9 +41,11 @@ const Bq = function (filename = undefined) {
 
         console.log(bq);
         bq.events = Events(bq);
-        if (bq.interface.not_loaded === true) {
-            bq.interface = Interface(bq.events);
+        if (!bq.interface.not_loaded) {
+            document.removeEventListener("keydown", bq.interface.input.kb.keydown);
+            bq.interface.audio.stopAll();
         }
+        bq.interface = Interface(bq.events);
 
         // throw ni; temporary :
         StateMsg(bq);
@@ -59,8 +61,7 @@ const Bq = function (filename = undefined) {
                 }
                 return Promise.resolve();
             });
-
-    }
+    };
 
     bq.launch = function () {
         bq.events.add("bq.game.state.launching");
@@ -73,7 +74,7 @@ const Bq = function (filename = undefined) {
             bq.interface.disp.write("BlindQuest is not fully loaded !");
             return bq;
         }
-    }
+    };
 
     // Game loop :
     bq.play = function () {

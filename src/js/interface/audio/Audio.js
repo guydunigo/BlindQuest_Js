@@ -171,7 +171,8 @@ const Heart = function () {
     return {
         // heartbeat,
         play,
-        pause
+        pause,
+        stopAll() { heartbeat.stop(); }
     }
 }
 
@@ -193,12 +194,17 @@ const Audio = function () {
             Howler.mute(val);
             return ismute;
         },
-        toggleMute: undefined
+        toggleMute: undefined,
+        stopAll: undefined,
     }
-    
+
     audio.toggleMute = function () {
         audio.isMute ^= true;
     };
+
+    audio.stopAll = function () {
+        Object.keys(audio.players).forEach((key) => audio.players[key].stopAll());
+    }
 
     return audio;
 };
