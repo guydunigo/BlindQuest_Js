@@ -10,7 +10,7 @@ const ShowProxMap = function (bq) {
         instant: true,
         data: {
             type_length: 2,
-            radius: 2
+            radius: 3
         }
     }
 
@@ -28,6 +28,7 @@ const ShowProxMap = function (bq) {
     const code2Type = bq.world.env.code2Type;
 
     rule.main = function (bq, event) {
+        event;
         const div = document.createElement("div");
         const table = document.createElement("table");
         let line, cell, content, tmp;

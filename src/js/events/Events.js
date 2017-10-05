@@ -38,6 +38,7 @@ const Events = function (bq) {
         getNext: undefined,
         isIdle: undefined,
         getPendings: undefined,
+        getPendingsUniq: undefined,
         isEvendGood: undefined,
         getParentsTree: undefined,
         filterEventsFrom: undefined,
@@ -118,6 +119,24 @@ const Events = function (bq) {
         }
         return res;
     };
+
+    // Get pendings but returns only once each event
+    //  if resend_dups it true, call events.add to the doubles.
+    events.getPendingsUniq = function (readd_dups = false) {
+        const evts = events.getPendings();
+        const res = [];
+
+        evts.forEach(function (evt) {
+            if (!res.includes(evt)) {
+                res.push(evt);
+            }
+            else if (readd_dups) {
+                events.add(evt);
+            }
+        });
+
+        return res;
+    }
 
     // Check is event exists in events.model
     events.isEventGood = function (event) {

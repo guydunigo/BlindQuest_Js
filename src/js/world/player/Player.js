@@ -48,9 +48,8 @@ const Player = function (bq, startSquare) {
 
     // Kills the player and stop the game
     // throw ni; use an event/rule ?
-    player.kill = function (bq) {
+    player.kill = function () {
         player.life = 0;
-        player.die(bq);
     }
 
     player.die = function (bq) {

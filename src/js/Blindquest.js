@@ -44,7 +44,7 @@ const Bq = function (filename = undefined) {
 
     // Game loop :
     bq.play = function () {
-        const events = bq.events.getPendings();
+        const events = bq.events.getPendingsUniq(true);
         const t_start = Date.now();
 
         if (bq.state === bq.states.launched) {

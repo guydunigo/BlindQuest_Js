@@ -22,7 +22,7 @@ export const DEBUG = {
     BQ_PLAY_LOOP: false,
     AUDIO: true,
     AUDIO_STOP: false,
-    AUDIO_PLAY: true,
+    AUDIO_PLAY: false,
     KB: false,
     EVENTS: false,
     EVENTS_REGISTER: false
@@ -55,7 +55,7 @@ export const ENV = {
         plain: "plaine",
         woods: "foret",
         cave: "caverne",
-        water: "eau",
+        water: "eau_short",
         castle: "chateau",
         wood_path: "sentier",
         bridge: "pont",
@@ -76,9 +76,9 @@ export const ENV = {
 };
 
 export const PLAYER = {
-    MAX_LIFE: 15,
+    MAX_LIFE: 20,
     DEFAULT_DAMAGES: 1,
-    PROBA_HIT: 0.75
+    PROBA_HIT: 0.85
 };
 
 // type: life, damages, proba_hit
