@@ -10,18 +10,20 @@ const Base = function (bq) {
         ],
         instant: true,
         data: {
-            start_under: 5,
+            start_under: 10,
         }
     }
+
+    const heart_p = bq.interface.audio.players.heart;
 
     rule.main = function (bq, event) {
         event;
         const p = bq.world.player;
-        if (p.life <= 0) {
-            bq.interface.audio.players.heart.pause();
+        if (p.life <= 0 || p.life > rule.data.start_under) {
+            heart_p.pause();
         }
         else if (p.life <= rule.data.start_under) {
-            bq.interface.audio.players.heart.play(1 / p.life);
+            heart_p.play((rule.data.start_under - p.life) / rule.data.start_under);
         }
     };
 

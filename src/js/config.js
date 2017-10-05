@@ -2,32 +2,6 @@
 
 // Will contain all environment codes, music filenames, their behaviour, player infos, ...
 
-export const BQ = {
-    // miliseconds beetween each game loop
-    FILENAME: "maps/carte_defaut.json",
-    TIMEBASE: 200
-}
-
-export const AUDIO = {
-    VOLUME_ENV: 1,
-    VOLUME_ENV_PLAYER: 0.65,
-    VOLUME_ENV_PROX: 0.5,
-    VOLUME_ACTION: 1,
-    VOLUME_HEART: 1,
-    AUDIO_START_MUTE: false
-};
-
-export const DEBUG = {
-    BQ: true,
-    BQ_PLAY_LOOP: false,
-    AUDIO: true,
-    AUDIO_STOP: false,
-    AUDIO_PLAY: false,
-    KB: false,
-    EVENTS: false,
-    EVENTS_REGISTER: false
-};
-
 export const ENV = {
     CODES: {
         plain: 0,
@@ -73,6 +47,32 @@ export const ENV = {
         start: "depart",
         end: "fin"
     }
+};
+
+export const BQ = {
+    // miliseconds beetween each game loop
+    FILENAME: "maps/carte_defaut.json",
+    TIMEBASE: 200
+}
+
+export const AUDIO = {
+    VOLUME_ENV: 1,
+    VOLUME_ENV_PLAYER: 0.65,
+    VOLUME_ENV_PROX: 0.5,
+    VOLUME_ACTION: 1,
+    VOLUME_HEART: 1,
+    AUDIO_START_MUTE: true
+};
+
+export const DEBUG = {
+    BQ: true,
+    BQ_PLAY_LOOP: false,
+    AUDIO: true,
+    AUDIO_STOP: false,
+    AUDIO_PLAY: false,
+    KB: false,
+    EVENTS: false,
+    EVENTS_REGISTER: false
 };
 
 export const PLAYER = {
