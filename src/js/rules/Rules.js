@@ -9,12 +9,14 @@ import PlayEnvSounds from "./Rules_PlayEnvSounds.js";
 import ChangeState from "./Rules_ChangeState.js";
 import Pause from "./Rules_Pause.js";
 import Stop from "./Rules_Stop.js";
+import Reset from "./Rules_Reset.js";
 import Bonus from "./Rules_Bonus.js";
 import StartFight from "./Rules_StartFight.js";
 import PlayerAttack from "./Rules_PlayerAttack.js";
 import EndFight from "./Rules_EndFight.js";
 import HeartBeat from "./Rules_HeartBeat.js";
 import DispLife from "./Rules_DisplayLife.js";
+import StartMute from "./Rules_StartMute.js";
 
 const Rules = function (bq) {
     // throw ni; order them in a tree ?
@@ -27,12 +29,14 @@ const Rules = function (bq) {
         change_state: ChangeState(bq),
         pause: Pause(bq),
         stop: Stop(bq),
+        reset: Reset(bq),
         bonus: Bonus(bq),
         start_fight: StartFight(bq),
         player_attack: PlayerAttack(bq),
         end_fight: EndFight(bq),
         heartbeat: HeartBeat(bq),
-        disp_life: DispLife(bq)
+        disp_life: DispLife(bq),
+        start_mute: StartMute(bq),
     };
 
     return rules;

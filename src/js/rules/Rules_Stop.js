@@ -5,7 +5,7 @@ const Base = function (bq) {
         name: "bq.game.stop",
         main(bq, event) {
             event;
-            bq.events.add("bq.game.stopped");
+            bq.events.add("bq.game.state.stopped");
         },
         events: [
             "bq.game.stop"

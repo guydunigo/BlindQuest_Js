@@ -22,19 +22,19 @@ const formatDebug = function (event, length_total, length_limits) {
 
 const Base = function (bq) {
     const rule = {
-        name: "bq.",
+        name: "bq.game.state",
         main: undefined,
         events: [
-            "bq.game"
+            "bq.game.state"
         ],
         instant: true,
         data: {
-            "bq.game.loading": "Game loading world...",
-            "bq.game.loaded": "Game loaded.",
-            "bq.game.launching": "Launching game...",
-            "bq.game.launched": "Game launched, have fun!",
-            "bq.game.stopped": "Game stopped (you either died or quit).",
-            "bq.game.paused": "Game paused (press p to resume).",
+            "bq.game.state.loading": "Game loading world...",
+            "bq.game.state.loaded": "Game loaded.",
+            "bq.game.state.launching": "Launching game...",
+            "bq.game.state.launched": "Game launched, have fun!",
+            "bq.game.state.stopped": "Game stopped (you either died or quit).",
+            "bq.game.state.paused": "Game paused (press p to resume).",
             length_total: 30,
             length_limits: 9
         }

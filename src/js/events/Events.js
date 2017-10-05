@@ -75,13 +75,16 @@ const Events = function (bq) {
             },
             game: { // 2001 -> 3001
                 stop: 2001,
-                launching: 2002,
-                launched: 2003,
-                loading: 2004,
-                loaded: 2005,
                 pause: 2006,
-                paused: 2007,
-                stopped: 2008,
+                reset: 2009,
+                state: {
+                    launching: 2002,
+                    launched: 2003,
+                    loading: 2004,
+                    loaded: 2005,
+                    paused: 2007,
+                    stopped: 2008,
+                }
             }
         }
     };

@@ -6,10 +6,10 @@ const Base = function (bq) {
         main(bq, event) {
             event;
             if (bq.state === bq.states.launched) {
-                bq.events.add("bq.game.paused");
+                bq.events.add("bq.game.state.paused");
             }
             else if (bq.state === bq.states.paused) {
-                bq.events.add("bq.game.launched");
+                bq.events.add("bq.game.state.launched");
             }
         },
         events: [

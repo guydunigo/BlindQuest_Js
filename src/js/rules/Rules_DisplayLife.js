@@ -6,7 +6,7 @@ const Base = function (bq) {
         main: undefined,
         events: [
             "bq.world.player.life_changed",
-            "bq.game.loaded"
+            "bq.game.state.loaded"
         ],
         instant: true
     }

@@ -36,6 +36,8 @@ function loadRulesHandlers(bq, events) {
                 console.log("EVENTS REGISTER " + rule.name + " TO " + targ);
             }
         })
+
+        return rule;
     };
 
     // Call the more generic rule first
@@ -64,6 +66,7 @@ function loadRulesHandlers(bq, events) {
             })
         });
 
+        // console.log(res);
         return res
     }
 

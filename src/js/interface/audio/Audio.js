@@ -195,9 +195,7 @@ const Audio = function () {
         },
         toggleMute: undefined
     }
-
-    audio.isMute = opts.AUDIO.AUDIO_START_MUTE;
-
+    
     audio.toggleMute = function () {
         audio.isMute ^= true;
     };

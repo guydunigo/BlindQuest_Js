@@ -22,11 +22,15 @@ const Keyboard = function (events) {
                 fullscreen: "f",
                 mute: "m",
                 pause: "p"
-            }
-        }
+            },
+            game: {
+                reset: "r",
+            },
+        },
+        keydown: undefined
     }
 
-    document.addEventListener("keydown", function (event) {
+    kb.keydown = function (event) {
         let msg = "";
         switch (event.key) {
             case kb.conf.world.player.move.up:
@@ -53,13 +57,18 @@ const Keyboard = function (events) {
             case kb.conf.world.player.attack:
                 events.add("bq.world.player.attack");
                 break;
+            case kb.conf.game.reset:
+                events.add("bq.game.reset");
+                break;
             default:
                 msg = "NOEVENT ";
         };
         if (opts.DEBUG.KB) {
             console.log("\tINPUT KB " + msg + event.key);
         }
-    });
+    }
+
+    document.addEventListener("keydown", kb.keydown);
 
     return kb;
 }

@@ -2,8 +2,7 @@
 import Bq from "./Blindquest.js"
 
 const main = function () {
-    const b = Bq();
-    console.log(b);
+    Bq();
 }
 
 document.addEventListener("DOMContentLoaded", main);

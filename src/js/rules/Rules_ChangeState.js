@@ -2,17 +2,17 @@ export default Base;
 
 const Base = function (bq) {
     const rule = {
-        name: "bq.game.changeState",
+        name: "bq.game.state changeState",
         main: undefined,
         events: [
-            "bq.game"
+            "bq.game.state"
         ],
         instant: true,
         data: {
-            "bq.game.loaded": bq.states.loaded,
-            "bq.game.launched": bq.states.launched,
-            "bq.game.paused": bq.states.paused,
-            "bq.game.stopped": bq.states.stopped,
+            "bq.game.state.loaded": bq.states.loaded,
+            "bq.game.state.launched": bq.states.launched,
+            "bq.game.state.paused": bq.states.paused,
+            "bq.game.state.stopped": bq.states.stopped,
         }
     }
 
