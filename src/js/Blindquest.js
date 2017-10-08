@@ -18,9 +18,11 @@ const Bq = function (filename = undefined) {
         rules: { not_loaded: true },
         events: { not_loaded: true },
         reset: undefined, // set and reset are on a boat...
+        load: undefined,
         launch: undefined,
         play: undefined,
         states: {
+            init: 0,
             loaded: 1,
             launched: 2,
             paused: 3,
@@ -28,15 +30,7 @@ const Bq = function (filename = undefined) {
         }
     };
 
-    // Couldn't find a proper name : "(re)load", "(re)set" ?
-    // throw ni; recursive reset ?
-    bq.reset = function (bq) {
-        if (!bq.events.not_loaded) {
-            bq.events.add("bq.game.state.stop");
-        }
-
-        bq.rules.dd = false;
-
+    bq.load = function (bq) {
         const t_start = Date.now();
 
         console.log(bq);
@@ -61,6 +55,12 @@ const Bq = function (filename = undefined) {
                 }
                 return Promise.resolve();
             });
+    }
+
+    // Couldn't find a proper name : "(re)load", "(re)set" ?
+    // throw ni; recursive reset ?
+    bq.reset = function (bq) {
+        bq.events.add("bq.game.state.init");
     };
 
     bq.launch = function () {
@@ -89,7 +89,10 @@ const Bq = function (filename = undefined) {
         if (bq.state === bq.states.launched || bq.state === bq.states.paused) {
             // I find this way of doing the loop quite funny ^^
             // It can't provide a reliable time tracking though
-            setTimeout(() => bq.play(), opts.TIMEBASE);
+            setTimeout(() => bq.play(), opts.BQ.TIMEBASE);
+        }
+        else if (bq.state === bq.states.init) {
+            bq.load(bq);
         }
 
         if (opts.DEBUG.BQ && opts.DEBUG.BQ_PLAY_LOOP) {
@@ -99,7 +102,7 @@ const Bq = function (filename = undefined) {
         return bq;
     }
 
-    bq.reset(bq);
+    bq.load(bq);
 
     return bq;
 };

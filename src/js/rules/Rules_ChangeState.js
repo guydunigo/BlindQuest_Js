@@ -9,6 +9,7 @@ const Base = function (bq) {
         ],
         instant: true,
         data: {
+            "bq.game.state.init": bq.states.init,
             "bq.game.state.loaded": bq.states.loaded,
             "bq.game.state.launched": bq.states.launched,
             "bq.game.state.paused": bq.states.paused,

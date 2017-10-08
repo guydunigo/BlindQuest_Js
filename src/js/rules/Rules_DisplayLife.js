@@ -13,7 +13,7 @@ const Base = function (bq) {
 
     const tmp = document.getElementById("life");
     if (tmp !== null) {
-        document.removeChild(tmp);
+        document.body.removeChild(tmp);
     }
     const txt = document.createElement("h1");
     txt.style = "position:fixed;top:10px;left:10px;margin:0;";

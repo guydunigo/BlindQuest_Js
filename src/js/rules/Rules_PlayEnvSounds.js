@@ -54,8 +54,6 @@ const PlayEnvSounds = function (bq) {
                         rel_pos.y
                     );
 
-                    // console.log(rel_pos.x,rel_pos.y,distance);
-
                     inv_dist = 1 / (distance);
                     inv_dist = Number.parseFloat(inv_dist.toFixed(6));
 
@@ -64,7 +62,7 @@ const PlayEnvSounds = function (bq) {
             });
         });
 
-        bq.interface.audio.players.env.debug_printAll();
+        env_player.debug_printAll();
     }
 
     bq.events.register(rule);
