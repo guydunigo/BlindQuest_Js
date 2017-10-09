@@ -98,7 +98,7 @@ const Bq = function (filename = undefined) {
             bq.load(bq);
         }
 
-        if (opts.DEBUG.BQ && opts.DEBUG.BQ_PLAY_LOOP) {
+        if (opts.DEBUG.BQ && opts.DEBUG.BQ_PLAY_LOOP && events.length !== 0) {
             console.log("BQ LOOP DONE IN " + (Date.now() - t_start) + "ms");
         }
 

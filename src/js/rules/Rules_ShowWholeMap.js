@@ -4,7 +4,7 @@ import opts from "../config.js";
 import dispMap from "../dev_tools/Display_Map.js";
 
 const ShowProxMap = function (bq) {
-    if (opts.DEV_TOOLS.SHOW_PROX_MAP) {
+    if (opts.DEV_TOOLS.SHOW_WHOLE_MAP) {
         const rule = {
             name: "bq.world.player.moved showProxMap",
             main: undefined,
@@ -14,7 +14,6 @@ const ShowProxMap = function (bq) {
             instant: true,
             data: {
                 type_length: 2,
-                radius: 3,
                 square_size: "10px",
             }
         }
@@ -22,30 +21,26 @@ const ShowProxMap = function (bq) {
         rule.main = function (bq, event) {
             event;
 
-            const pos = bq.world.player.square;
-            const prox_map = bq.world.getSubMap(pos.x - rule.data.radius,
-                pos.y - rule.data.radius,
-                pos.x + rule.data.radius,
-                pos.y + rule.data.radius);
-
             const table = dispMap(
-                prox_map,
+                bq.world.data,
                 rule.data.type_length,
                 rule.data.square_size,
                 bq,
-                [rule.data.radius, rule.data.radius]);
+                [bq.world.player.square.x, bq.world.player.square.y]
+            );
 
             if (table !== undefined) {
-                table.id = "proxMap";
+                table.id = "map";
 
                 table.style.position = "fixed";
-                table.style.top = "45vh";
-                table.style.left = "0";
-                // table.style.fontSize = "0.5em";
+                table.style.top = "0";
+                table.style.right = "0";
                 table.style.zIndex = 100;
                 table.style.textAlign = "center";
+                table.style.color = "white";
+                table.style.fontSize = "0.5em";
 
-                const tmp = document.getElementById("proxMap");
+                const tmp = document.getElementById("map");
                 if (tmp != undefined)
                     tmp.parentNode.removeChild(tmp);
 

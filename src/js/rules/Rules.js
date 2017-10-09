@@ -5,6 +5,7 @@ import Move from "./Rules_Move.js";
 import ToggleFullscreen from "./Rules_ToggleFullscreen.js";
 import ToggleMute from "./Rules_ToggleMute.js";
 import ShowProxMap from "./Rules_ShowProxMap.js";
+import ShowWholeMap from "./Rules_ShowWholeMap.js";
 import PlayEnvSounds from "./Rules_PlayEnvSounds.js";
 import ChangeState from "./Rules_ChangeState.js";
 import Pause from "./Rules_Pause.js";
@@ -24,7 +25,8 @@ const Rules = function (bq) {
         move: Move(bq),
         toggle_fullscreen: ToggleFullscreen(bq),
         toggle_mute: ToggleMute(bq),
-        show_map: ShowProxMap(bq),
+        show_prox_map: ShowProxMap(bq),
+        show_whole_map: ShowWholeMap(bq),
         play_env_sounds: PlayEnvSounds(bq),
         change_state: ChangeState(bq),
         pause: Pause(bq),

@@ -46,7 +46,34 @@ export const ENV = {
         border: "border",
         start: "depart",
         end: "fin"
-    }
+    },
+    COLORS: {
+        plain: "rgb(150,175,10)",
+        woods: "rgb(0,100,0)",
+        cave: "rgb(100,50,0)",
+        water: "rgb(0,0,255)",
+        castle: "rgb(150,150,150)",
+        wood_path: "rgb(10,200,0)",
+        bridge: "rgb(100,50,0)",
+        sand: "rgb(255,255,0)",
+        mountains: "rgb(50,10,0)",
+        monster: "rgb(200,200,0)",
+        boss: "rgb(100,100,0)",
+        boss_final: "rgb(255,0,0)",
+        bonus: "rgb(00,0,200)",
+        sea: "rgb(20,20,100)",
+        castle_gate: "rgb(50,50,50)",
+        magic: "rgb()",
+        funny: "rgb()",
+        border: "rgb(0,0,0)",
+        start: "rgb(255,255,255)",
+        end: "rgb(10,10,10)"
+    },
+    ROUND: new Set([
+        "monster",
+        "boss",
+        "boss_final"
+    ])
 };
 
 export const BQ = {
@@ -66,8 +93,8 @@ export const AUDIO = {
 
 export const DEBUG = {
     BQ: true,
-    BQ_PLAY_LOOP: false,
-    AUDIO: true,
+    BQ_PLAY_LOOP: true,
+    AUDIO: false,
     AUDIO_STOP: false,
     AUDIO_PLAY: false,
     EVENTS: false,
@@ -75,6 +102,15 @@ export const DEBUG = {
     FIGHTS: true,
     KB: false,
 };
+
+export const DEV_TOOLS = {
+    SHOW_LIFE: true,
+    SHOW_PROX_MAP: true,
+    SHOW_WHOLE_MAP: false,
+    // "txt" or "square" :
+    SHOW_MAP_TYPE: "square",
+    SHOW_MAP_COLORS: true,
+}
 
 export const PLAYER = {
     MAX_LIFE: 20,
@@ -105,6 +141,7 @@ export default {
     BAD_SQUARES_CODES,
     BQ,
     DEBUG,
+    DEV_TOOLS,
     ENV,
     EVENTS,
     MONSTERS,
