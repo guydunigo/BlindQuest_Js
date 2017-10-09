@@ -74,7 +74,9 @@ const Player = function (bq, startSquare) {
                     }
                 },
                 damages: en.damages,
-                proba_hit: en.proba_hit,
+                get proba_hit() {
+                    return (player.cur_enemy.life > 0) ? en.proba_hit : en.proba_death;
+                },
                 die: function () {
                     bq.events.add("bq.world.player.end_fight");
                 }

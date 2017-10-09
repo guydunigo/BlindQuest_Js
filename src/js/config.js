@@ -84,9 +84,9 @@ export const PLAYER = {
 
 // type: life, damages, proba_hit
 export const MONSTERS = {};
-MONSTERS[ENV.CODES.monster] = { life: 1, damages: 1, proba_hit: 0.5 };
-MONSTERS[ENV.CODES.boss] = { life: 2, damages: 2, proba_hit: 0.5 };
-MONSTERS[ENV.CODES.boss_final] = { life: 3, damages: 3, proba_hit: 0.6 };
+MONSTERS[ENV.CODES.monster] = { life: 1, damages: 1, proba_hit: 0.5, proba_death: 0.2 };
+MONSTERS[ENV.CODES.boss] = { life: 2, damages: 2, proba_hit: 0.5, proba_death: 0.2 };
+MONSTERS[ENV.CODES.boss_final] = { life: 3, damages: 3, proba_hit: 0.6, proba_death: 0.8 };
 
 export const BAD_SQUARES_CODES = new Set([
     ENV.CODES.bonus, // Prevent loops
