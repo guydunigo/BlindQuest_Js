@@ -7,7 +7,7 @@ const Base = function (bq) {
         events: [
             "bq.world.player.start_fight"
         ],
-        instant: false,
+        instant: true,
         data: {
         }
     }

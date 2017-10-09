@@ -135,7 +135,7 @@ const Events = function (bq) {
             if (!res.includes(evt)) {
                 res.push(evt);
             }
-            else if (readd_dups) {
+            else if (readd_dups && opts.EVENTS.REPORT_DUPLICATES) {
                 events.add(evt);
             }
         });

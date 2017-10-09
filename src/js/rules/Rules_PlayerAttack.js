@@ -1,5 +1,7 @@
 export default Base;
 
+import opts from "../config.js";
+
 const Base = function (bq) {
     const rule = {
         name: "bq.world.player.attack",
@@ -13,21 +15,30 @@ const Base = function (bq) {
     }
 
     const fight = function (attacker, receiver, sound_hit, sound_missed, receiver_hurt, callback) {
-        if (attacker.life >= 0) {
-            if (Math.random() < attacker.proba_hit) {
-                // hit
-                bq.interface.audio.players.actions.play(sound_hit, 1,
-                    () => bq.interface.audio.players.actions.play(receiver_hurt, 1,
-                        () => { if (callback) callback(); receiver.life -= attacker.damages; }));
+        let damages = 0;
+        if (Math.random() < attacker.proba_hit) {
+            // hit
+            bq.interface.audio.players.actions.play(sound_hit, 1,
+                () => bq.interface.audio.players.actions.play(receiver_hurt, 1,
+                    () => {
+                    }));
 
-                // console.log("FIGHT HIT a : " + attacker.life + " r : " + receiver.life);
+            if (opts.DEBUG.FIGHTS) {
+                console.log("FIGHT HIT A : " + attacker.life + " R : " + (receiver.life - attacker.damages));
             }
-            else {
-                // missed
-                bq.interface.audio.players.actions.play(sound_missed, 1, callback);
-                // console.log("FIGHT MISSED");
-            }
+
+            if (callback) callback();
+            receiver.life -= attacker.damages;
         }
+        else {
+            // missed
+            if (opts.DEBUG.FIGHTS) {
+                console.log("FIGHT MISSED");
+            }
+
+            bq.interface.audio.players.actions.play(sound_missed, 1, callback);
+        }
+        return damages;
     }
 
     rule.main = function (bq, event) {
@@ -36,12 +47,12 @@ const Base = function (bq) {
         // throw ni; random damages
         if (p.state == p.states.fighting) {
             fight(p, p.cur_enemy, "epeehit", "epeemissed", "monstreblesse",
-                () => fight(p.cur_enemy, p, "marteauhit_short", "epeemissed", "joueurblesse",
+                () => fight(p.cur_enemy, p, "marteauhit_short", "epeemissed", "joueurblesse"/*,
                     () => {
                         if (p.cur_enemy.life <= 0) {
                             bq.events.add("bq.world.player.end_fight");
                         }
-                    }
+                    }*/
                 ));
         }
     };

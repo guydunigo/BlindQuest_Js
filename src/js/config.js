@@ -70,9 +70,10 @@ export const DEBUG = {
     AUDIO: true,
     AUDIO_STOP: false,
     AUDIO_PLAY: false,
-    KB: false,
     EVENTS: false,
-    EVENTS_REGISTER: false
+    EVENTS_REGISTER: false,
+    FIGHTS: true,
+    KB: false,
 };
 
 export const PLAYER = {
@@ -95,12 +96,17 @@ export const BAD_SQUARES_CODES = new Set([
     ENV.CODES.sea
 ]);
 
+export const EVENTS = {
+    REPORT_DUPLICATES: false,
+};
+
 export default {
     AUDIO,
     BAD_SQUARES_CODES,
     BQ,
     DEBUG,
     ENV,
+    EVENTS,
     MONSTERS,
     PLAYER,
 };

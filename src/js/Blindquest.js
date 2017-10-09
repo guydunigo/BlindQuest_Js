@@ -60,6 +60,9 @@ const Bq = function (filename = undefined) {
     // Couldn't find a proper name : "(re)load", "(re)set" ?
     // throw ni; recursive reset ?
     bq.reset = function (bq) {
+        if (bq.state == bq.states.stopped) {
+            bq.load(bq);
+        }
         bq.events.add("bq.game.state.init");
     };
 

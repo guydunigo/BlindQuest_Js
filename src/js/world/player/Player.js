@@ -63,11 +63,21 @@ const Player = function (bq, startSquare) {
 
     player.createEnemy = function (square) {
         const en = opts.MONSTERS[square.code];
+        let life = en.life;
         if (en !== undefined) {
             player.cur_enemy = {
-                life: en.life,
+                get life() { return life; },
+                set life(new_life) {
+                    life = new_life;
+                    if (life <= 0) {
+                        player.cur_enemy.die();
+                    }
+                },
                 damages: en.damages,
-                proba_hit: en.proba_hit
+                proba_hit: en.proba_hit,
+                die: function () {
+                    bq.events.add("bq.world.player.end_fight");
+                }
             };
         }
     }

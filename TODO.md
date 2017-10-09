@@ -10,6 +10,7 @@ Misc
 * External repo for the sound/music
 * File for *tool* functions (getDistance, ...);
 * Debug messages order, format, ...
+* Documentation
 * Reference every extern sound and content with license
 * Deal with licenses (GPLv3 ?) and sublicenses compatibility
     * https://www.gnu.org/licenses/gpl-faq.fr.html
