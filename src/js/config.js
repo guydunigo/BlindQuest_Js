@@ -102,7 +102,8 @@ export const DEBUG = {
     TIME: {
         LIMIT: 10,
         LOAD: false,
-        LOOP: false,
+        LOOP: true,
+        BET_LOOPS: true,
         RULE: false,
     }
 };
@@ -140,6 +141,10 @@ export const EVENTS = {
     REPORT_DUPLICATES: false,
 };
 
+export const RULES = {
+    MOVE: false,
+};
+
 export default {
     AUDIO,
     BAD_SQUARES_CODES,
@@ -150,4 +155,5 @@ export default {
     EVENTS,
     MONSTERS,
     PLAYER,
+    RULES,
 };

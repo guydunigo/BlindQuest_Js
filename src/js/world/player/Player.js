@@ -43,7 +43,9 @@ const Player = function (bq, startSquare) {
     player.move = function (mvt_obj) {
         player.square = mvt_obj.dest;
 
-        console.log(`PLAYER MOVED TO (${player.square.x},${player.square.y}) ON ${player.square.type}`);
+        if (opts.RULES.MOVE) {
+            console.log(`PLAYER MOVED TO (${player.square.x},${player.square.y}) ON ${player.square.type}`);
+        }
     }
 
     // Kills the player and stop the game

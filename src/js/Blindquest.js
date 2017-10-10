@@ -21,6 +21,7 @@ const Bq = function (filename = undefined) {
         load: undefined,
         launch: undefined,
         play: undefined,
+        prev_time: Date.now(),
         states: {
             init: 0,
             loaded: 1,
@@ -81,6 +82,11 @@ const Bq = function (filename = undefined) {
 
     // Game loop :
     bq.play = function () {
+        if (opts.DEBUG.TIME.BET_LOOPS && (-opts.BQ.TIMEBASE + Date.now() - bq.prev_time) > opts.DEBUG.TIME.LIMIT / 100 * opts.BQ.TIMEBASE) {
+            console.log("BQ LOOP AFTER " + (Date.now() - bq.prev_time) + "ms");
+        }
+        bq.prev_time = Date.now();
+
         const events = bq.events.getPendingsUniq(true);
         const t_start = Date.now();
 
@@ -92,7 +98,7 @@ const Bq = function (filename = undefined) {
         if (bq.state === bq.states.launched || bq.state === bq.states.paused) {
             // I find this way of doing the loop quite funny ^^
             // It can't provide a reliable time tracking though
-            setTimeout(() => bq.play(), opts.BQ.TIMEBASE);
+            setTimeout(() => bq.play(), opts.BQ.TIMEBASE - (Date.now() - t_start));
         }
         else if (bq.state === bq.states.init) {
             bq.load(bq);

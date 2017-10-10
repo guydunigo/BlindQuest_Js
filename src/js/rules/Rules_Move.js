@@ -1,5 +1,6 @@
 export default Move;
 
+import opts from "../config.js";
 import Mvt from "./Movement.js";
 
 const Move = function (bq) {
@@ -84,7 +85,9 @@ const Move = function (bq) {
             // throw ni; for bigger moves, check path...
             let nogo = move.pre.nogo;
             if (nogo.data && nogo.data.has(mvt_obj.dest.code)) {
-                console.log("RULES MOVE NOGO " + mvt_obj.dest.type);
+                if (opts.RULES.MOVE) {
+                    console.log("RULES MOVE NOGO " + mvt_obj.dest.type);
+                }
                 // throw ni; pick random sound ?
                 // throw ni; change sound
                 bq.interface.audio.players.actions.play("marteauhit");
@@ -123,7 +126,10 @@ const Move = function (bq) {
             if (letalTypes.includes(mvt_obj.dest.code)) {
                 const index = letalTypes.indexOf(mvt_obj.dest.code);
                 const letalSounds = move.post.letalSquares.data.map((x) => x[1]);
-                console.log("RULES MOVE LETHAL " + mvt_obj.dest.type);
+
+                if (opts.RULES.MOVE) {
+                    console.log("RULES MOVE LETHAL " + mvt_obj.dest.type);
+                }
 
                 bq.interface.audio.players.actions.play(letalSounds[index]);
                 bq.world.player.kill(bq);

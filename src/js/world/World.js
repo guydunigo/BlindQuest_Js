@@ -134,6 +134,10 @@ const World = function (bq, filename) {
 
             return res;
         },
+        getProxMap(x1,y1,x2_or_radius,y2) {
+            const submap = world.getSubMap(x1,y1,x2_or_radius,y2);
+            // throw ni; prevent display behind a border
+        },
         getNewCode: undefined,
         isSquareCodeGood(code) {
             return !(opts.BAD_SQUARES_CODES.has(code))
