@@ -92,8 +92,6 @@ export const AUDIO = {
 };
 
 export const DEBUG = {
-    BQ: true,
-    BQ_PLAY_LOOP: true,
     AUDIO: false,
     AUDIO_STOP: false,
     AUDIO_PLAY: false,
@@ -101,6 +99,12 @@ export const DEBUG = {
     EVENTS_REGISTER: false,
     FIGHTS: true,
     KB: false,
+    TIME: {
+        LIMIT: 10,
+        LOAD: false,
+        LOOP: false,
+        RULE: false,
+    }
 };
 
 export const DEV_TOOLS = {

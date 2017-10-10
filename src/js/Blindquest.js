@@ -50,7 +50,7 @@ const Bq = function (filename = undefined) {
             .then(function () { bq.events.add("bq.game.state.loaded"); return Promise.resolve(); })
             .then(function () { bq.launch(); return Promise.resolve(); })
             .then(function () {
-                if (opts.DEBUG.BQ) {
+                if (opts.DEBUG.TIME.LOAD) {
                     console.log("BQ LOADED IN " + (Date.now() - t_start) + "ms");
                 }
                 return Promise.resolve();
@@ -98,7 +98,7 @@ const Bq = function (filename = undefined) {
             bq.load(bq);
         }
 
-        if (opts.DEBUG.BQ && opts.DEBUG.BQ_PLAY_LOOP && events.length !== 0) {
+        if (opts.DEBUG.TIME.LOOP && events.length > opts.DEBUG.TIME.LIMIT) {
             console.log("BQ LOOP DONE IN " + (Date.now() - t_start) + "ms");
         }
 

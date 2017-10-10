@@ -48,7 +48,7 @@ function loadRulesHandlers(bq, events) {
     //     >> track the uncalled rules and call the idle method ?
     // returns true if a rule was called, false if nothing was done
     events.handle = function (evts, rulesList = events.rules) {
-        let tree, rules, res = false;
+        let tree, rules, res = false, t_start = Date.now();
         evts.forEach(function (ev) {
             tree = events.getParentsTree(ev);
             tree.forEach(function (cat) {
@@ -63,6 +63,9 @@ function loadRulesHandlers(bq, events) {
                             console.log("EVENTS EXEC " + rule.name);
                         }
                         rule.main(bq, ev);
+                        if (opts.DEBUG.TIME.RULE && (Date.now() - t_start) > opts.DEBUG.TIME.LIMIT) {
+                            console.log("EVENTS " + (Date.now() - t_start) + "ms FOR " + rule.name);
+                        }
                     });
                 }
             })

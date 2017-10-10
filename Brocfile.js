@@ -97,10 +97,10 @@ const maps = funnel(mapsFold, {
 /* --------------------------- end --------------------------- */
 let tree = merge([html,/*css,*/js, imgs, audio, maps]);
 
-if (env === "development") {
-    tree = new LiveReload(tree, {
-        target: "index.html"
-    });
-}
+// if (env === "development") {
+//     tree = new LiveReload(tree, {
+//         target: "index.html"
+//     });
+// }
 
 module.exports = tree;
