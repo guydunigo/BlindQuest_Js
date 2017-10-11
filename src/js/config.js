@@ -73,8 +73,13 @@ export const ENV = {
         "monster",
         "boss",
         "boss_final"
-    ])
+    ]),
+    // Coefs of sounds behind the squares (0 means block sounds (change the square to border)) :
+    // throw ni; use the coef ^^ + store the coef in the square code (10.3) of lowered squares.
+    SOUND_BLOCKERS: {}
 };
+ENV.SOUND_BLOCKERS[ENV.CODES.border] = 0;
+// ENV.SOUND_BLOCKERS[ENV.CODES.mountains] = 0.5;
 
 export const BQ = {
     // miliseconds beetween each game loop
@@ -102,9 +107,10 @@ export const DEBUG = {
     TIME: {
         LIMIT: 10,
         LOAD: false,
-        LOOP: true,
+        LOOP: false,
         BET_LOOPS: true,
         RULE: false,
+        GETPROXMAP: true,
     }
 };
 

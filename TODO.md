@@ -12,8 +12,8 @@ Misc
 * Debug messages order, format, ...
 * Documentation
 * Reference every extern sound and content with license
-* Shorten time between loops depending on loop length
-    * Shorten time
+* ~~Shorten time between loops depending on loop length~~
+* Pause when changing tabs
 * Deal with licenses (GPLv3 ?) and sublicenses compatibility
     * https://www.gnu.org/licenses/gpl-faq.fr.html
 

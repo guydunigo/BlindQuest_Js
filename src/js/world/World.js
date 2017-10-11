@@ -7,6 +7,34 @@ import Env from "./env/Env.js";
 import Player from "./player/Player.js";
 import Square from "./Square.js";
 
+const clearBehind = function (submap, c_x, c_y, radius) {
+    const center_xy = radius;
+    let vu = [0, 0]/* unit vector */, hyp = 0;
+    let safety_counter = 0;
+    let tmp_x = 0, tmp_y = 0;
+
+    vu = [c_x - center_xy, c_y - center_xy];
+    hyp = Math.sqrt(vu[0] * vu[0] + vu[1] * vu[1]);
+    vu[0] = vu[0] / hyp;
+    vu[1] = vu[1] / hyp;
+
+    tmp_x = c_x + vu[0];
+    tmp_y = c_y + vu[1];
+    // console.log("" + c_x + "," + c_y + " + " + c_rad);
+    while (safety_counter < 100000
+        && 0 <= tmp_x && tmp_x <= 2 * radius
+        && 0 <= tmp_y && tmp_y <= 2 * radius) {
+        // console.log(tmp_x, tmp_y, vu);
+        submap[Math.round(tmp_y)][Math.round(tmp_x)] = opts.ENV.CODES.border;
+
+        tmp_x += vu[0];
+        tmp_y += vu[1];
+        safety_counter++;
+    }
+
+    return submap;
+}
+
 /* Try to open the given filename and extract the world */
 // returns : {name:String,data:Array(Array(Number))}
 const loadWorldFile = function (world, fileContent) {
@@ -134,9 +162,61 @@ const World = function (bq, filename) {
 
             return res;
         },
-        getProxMap(x1,y1,x2_or_radius,y2) {
-            const submap = world.getSubMap(x1,y1,x2_or_radius,y2);
-            // throw ni; prevent display behind a border
+        // Submap but with *hidden* squares behind walls, etc...
+        // walking from the center and circling
+        // thow ni : non squary submaps
+        getProxMap(x, y, radius) {
+            const t_start = Date.now();
+            let submap = world.getSubMap(x, y, radius);
+            if (radius > 1) {
+                const center_xy = radius;
+                let c_rad = 1, c_x = center_xy, c_y = center_xy - 1, c_code = 0, prev_blocker = false, move = [1, 0];
+                while (c_rad < radius) {
+                    c_code = submap[c_y][c_x];
+                    // if it is defined as a sound blockers, squares behind => border
+                    if (Object.keys(opts.ENV.SOUND_BLOCKERS).includes(String(c_code))) {
+
+                        submap = clearBehind(submap, c_x, c_y, radius);
+
+                        // If the previous square was good too, do this with a virtual square between both :
+                        /*if (prev_blocker === true) {
+                            submap = clearBehind(submap, c_x - move[0] / 2, c_y - move[1] / 2);
+                        }*/
+
+                        prev_blocker = true;
+                    }
+                    else {
+                        prev_blocker = false;
+                    }
+
+                    // move :
+                    // if we are at top left of the row, change row :
+                    if (c_x === center_xy - c_rad && c_y === center_xy - c_rad) {
+                        c_rad++;
+                        move = [0, -1];
+                    }
+                    else if (c_y === center_xy - c_rad && c_x === center_xy - c_rad + 1) {
+                        move = [1, 0];
+                    }
+                    else if (c_y === center_xy - c_rad && c_x === center_xy + c_rad) {
+                        move = [0, 1];
+                    }
+                    else if (c_y === center_xy + c_rad && c_x === center_xy + c_rad) {
+                        move = [-1, 0];
+                    }
+                    else if (c_y === center_xy + c_rad && c_x === center_xy - c_rad) {
+                        move = [0, -1];
+                    }
+
+                    c_x += move[0]; c_y += move[1];
+                }
+            }
+
+            if (opts.DEBUG.TIME.GETPROXMAP) {
+                console.log("WORLD GETPROXMAP " + (Date.now() - t_start) + "ms");
+            }
+
+            return submap;
         },
         getNewCode: undefined,
         isSquareCodeGood(code) {

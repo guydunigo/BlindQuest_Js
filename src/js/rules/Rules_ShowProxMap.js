@@ -14,8 +14,8 @@ const ShowProxMap = function (bq) {
             instant: true,
             data: {
                 type_length: 2,
-                radius: 5,
-                square_size: "10px",
+                radius: 20,
+                square_size: "5px",
             }
         }
 
@@ -23,10 +23,7 @@ const ShowProxMap = function (bq) {
             event;
 
             const pos = bq.world.player.square;
-            const prox_map = bq.world.getSubMap(pos.x - rule.data.radius,
-                pos.y - rule.data.radius,
-                pos.x + rule.data.radius,
-                pos.y + rule.data.radius);
+            const prox_map = bq.world.getProxMap(pos.x, pos.y, rule.data.radius);
 
             const table = dispMap(
                 prox_map,
