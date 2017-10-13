@@ -28,7 +28,7 @@ const PlayEnvSounds = function (bq) {
         const env_player = bq.interface.audio.players.env;
         const pos = bq.world.player.square;
         let rel_pos;
-        const submap = bq.world.getSubMap(pos.x, pos.y, rule.data.radius);
+        const submap = bq.world.getProxMap(pos.x, pos.y, rule.data.radius);
         let distance, inv_dist;
 
         env_player.stopProx();
