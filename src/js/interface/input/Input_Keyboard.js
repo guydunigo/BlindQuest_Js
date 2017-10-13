@@ -62,8 +62,9 @@ const Keyboard = function (events, consoleInterface) {
                 events.add("bq.game.reset");
                 break;
             case kb.conf.game.help:
-            default:
                 events.add("bq.game.help");
+                break;
+            default:
                 msg = "NOEVENT ";
         };
         if (opts.DEBUG.KB) {

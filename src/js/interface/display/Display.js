@@ -2,11 +2,13 @@
 export default Display;
 
 import Msg from "./Display_Msg.js";
+import PopUp from "./Display_PopUp.js";
 import ConsoleLog from "./Display_Console.js";
 
 const Display = function () {
     const disp = {
         msg: Msg(),
+        popup: PopUp(),
         console: ConsoleLog(),
         write: undefined,
         writeState: undefined,

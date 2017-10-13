@@ -19,6 +19,7 @@ import HeartBeat from "./Rules_HeartBeat.js";
 import DispLife from "./Rules_DisplayLife.js";
 import StartMute from "./Rules_StartMute.js";
 import Victory from "./Rules_Victory.js";
+import ShowHelp from "./Rules_ShowHelp.js";
 
 const Rules = function (bq) {
     // throw ni; order them in a tree ?
@@ -40,7 +41,8 @@ const Rules = function (bq) {
         heartbeat: HeartBeat(bq),
         disp_life: DispLife(bq),
         start_mute: StartMute(bq),
-        victory: Victory(bq)
+        victory: Victory(bq),
+        show_help: ShowHelp(bq),
     };
 
     return rules;

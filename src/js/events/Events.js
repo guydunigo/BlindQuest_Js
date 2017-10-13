@@ -87,6 +87,7 @@ const Events = function (bq) {
                 stop: 2008,
                 pause: 2009,
                 reset: 2010,
+                help: 2011,
             }
         }
     };
