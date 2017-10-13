@@ -108,9 +108,9 @@ export const DEBUG = {
         LIMIT: 10,
         LOAD: false,
         LOOP: false,
-        BET_LOOPS: true,
+        BET_LOOPS: false,
         RULE: false,
-        GETPROXMAP: true,
+        GETPROXMAP: false,
     }
 };
 

@@ -20,11 +20,10 @@ const clearBehind = function (submap, c_x, c_y, radius) {
 
     tmp_x = c_x + vu[0];
     tmp_y = c_y + vu[1];
-    // console.log("" + c_x + "," + c_y + " + " + c_rad);
+
     while (safety_counter < 100000
         && 0 <= tmp_x && tmp_x <= 2 * radius
         && 0 <= tmp_y && tmp_y <= 2 * radius) {
-        // console.log(tmp_x, tmp_y, vu);
         submap[Math.round(tmp_y)][Math.round(tmp_x)] = opts.ENV.CODES.border;
 
         tmp_x += vu[0];
@@ -179,9 +178,9 @@ const World = function (bq, filename) {
                         submap = clearBehind(submap, c_x, c_y, radius);
 
                         // If the previous square was good too, do this with a virtual square between both :
-                        /*if (prev_blocker === true) {
-                            submap = clearBehind(submap, c_x - move[0] / 2, c_y - move[1] / 2);
-                        }*/
+                        if (prev_blocker === true) {
+                            submap = clearBehind(submap, c_x - move[0] / 2, c_y - move[1] / 2, radius);
+                        }
 
                         prev_blocker = true;
                     }
@@ -193,6 +192,9 @@ const World = function (bq, filename) {
                     // if we are at top left of the row, change row :
                     if (c_x === center_xy - c_rad && c_y === center_xy - c_rad) {
                         c_rad++;
+                        if (Object.keys(opts.ENV.SOUND_BLOCKERS).includes(String(submap[c_y][c_x + 1]))) {
+                            submap = clearBehind(submap, c_x + 1 / 2, c_y, radius);
+                        }
                         move = [0, -1];
                     }
                     else if (c_y === center_xy - c_rad && c_x === center_xy - c_rad + 1) {

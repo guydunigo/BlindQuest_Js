@@ -12,6 +12,7 @@ Misc
 * Debug messages order, format, ...
 * Documentation
 * Reference every extern sound and content with license
+* Optimize getproxmap (stop writing if the map is already *black*)
 * ~~Shorten time between loops depending on loop length~~
 * Pause when changing tabs
 * Deal with licenses (GPLv3 ?) and sublicenses compatibility
