@@ -27,7 +27,8 @@ const Bq = function (filename = undefined) {
             loaded: 1,
             launched: 2,
             paused: 3,
-            stopped: 4
+            stopped: 4,
+            won: 5
         }
     };
 
@@ -61,7 +62,7 @@ const Bq = function (filename = undefined) {
     // Couldn't find a proper name : "(re)load", "(re)set" ?
     // throw ni; recursive reset ?
     bq.reset = function (bq) {
-        if (bq.state == bq.states.stopped) {
+        if (bq.state === bq.states.stopped || bq.state === bq.states.won) {
             bq.load(bq);
         }
         bq.events.add("bq.game.state.init");

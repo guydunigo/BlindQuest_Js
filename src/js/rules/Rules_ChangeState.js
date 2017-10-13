@@ -14,6 +14,7 @@ const Base = function (bq) {
             "bq.game.state.launched": bq.states.launched,
             "bq.game.state.paused": bq.states.paused,
             "bq.game.state.stopped": bq.states.stopped,
+            "bq.game.state.won": bq.states.won,
         }
     }
 

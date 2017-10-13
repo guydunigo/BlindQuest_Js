@@ -68,6 +68,7 @@ const Player = function (bq, startSquare) {
         let life = en.life;
         if (en !== undefined) {
             player.cur_enemy = {
+                id: en.id,
                 get life() { return life; },
                 set life(new_life) {
                     life = new_life;

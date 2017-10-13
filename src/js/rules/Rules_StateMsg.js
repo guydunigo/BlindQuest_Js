@@ -33,8 +33,9 @@ const Base = function (bq) {
             "bq.game.state.loaded": "Game loaded.",
             "bq.game.state.launching": "Launching game...",
             "bq.game.state.launched": "Game launched, have fun!",
-            "bq.game.state.stopped": "Game stopped (you either died or quit).",
+            "bq.game.state.stopped": "Game stopped (you either died or quit) (press r to restart).",
             "bq.game.state.paused": "Game paused (press p to resume).",
+            "bq.game.state.won": "Game finished, you won ! (press r to restart).",
             length_total: 30,
             length_limits: 9
         }

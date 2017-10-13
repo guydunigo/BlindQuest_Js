@@ -82,6 +82,7 @@ const Events = function (bq) {
                     loaded: 2005,
                     paused: 2006,
                     stopped: 2007,
+                    won: 2008,
                 },
                 stop: 2008,
                 pause: 2009,
