@@ -7,10 +7,13 @@ import Display from "./display/Display.js";
 
 const Interface = function (events) {
     const inter = {
-        input: Input(events),
-        audio: Audio(),
+        input: undefined,
+        audio: undefined,
         disp: Display(),
     };
+
+    inter.audio = Audio(inter.disp.console);
+    inter.input = Input(events, inter.disp.console);
 
     return inter;
 };

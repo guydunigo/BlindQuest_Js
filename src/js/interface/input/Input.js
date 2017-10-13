@@ -20,12 +20,12 @@ const conf = {
 }; conf;
 
 // throw ni; param : kind of input
-const Input = function (events) {
+const Input = function (events, consoleInterface) {
     const input = {
         kb: undefined
     }
 
-    input.kb = Keyboard(events);
+    input.kb = Keyboard(events, consoleInterface);
 
     return input;
 };

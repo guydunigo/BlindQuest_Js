@@ -34,7 +34,7 @@ function loadRulesHandlers(bq, events) {
             }
 
             if (opts.DEBUG.EVENTS && opts.DEBUG.EVENTS_REGISTER) {
-                console.log("EVENTS REGISTER " + rule.name + " TO " + targ);
+                bq.interface.disp.console.write("EVENTS REGISTER " + rule.name + " TO " + targ);
             }
         })
 
@@ -60,18 +60,17 @@ function loadRulesHandlers(bq, events) {
                     }
                     rules.forEach(function (rule) {
                         if (opts.DEBUG.EVENTS) {
-                            console.log("EVENTS EXEC " + rule.name);
+                            bq.interface.disp.console.write("EVENTS EXEC " + rule.name);
                         }
                         rule.main(bq, ev);
                         if (opts.DEBUG.TIME.RULE && (Date.now() - t_start) > opts.DEBUG.TIME.LIMIT) {
-                            console.log("EVENTS " + (Date.now() - t_start) + "ms FOR " + rule.name);
+                            bq.interface.disp.console.write("EVENTS " + (Date.now() - t_start) + "ms FOR " + rule.name);
                         }
                     });
                 }
             })
         });
 
-        // console.log(res);
         return res
     }
 

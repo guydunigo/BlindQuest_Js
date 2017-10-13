@@ -23,7 +23,7 @@ const Base = function (bq) {
                     }));
 
             if (opts.DEBUG.FIGHTS) {
-                console.log("FIGHT HIT A : " + attacker.life + " R : " + (receiver.life - attacker.damages) + " PROBA : " + attacker.proba_hit);
+                bq.interface.disp.console.write("FIGHT HIT A : " + attacker.life + " R : " + (receiver.life - attacker.damages) + " PROBA : " + attacker.proba_hit);
             }
 
             receiver.life -= attacker.damages;
@@ -31,7 +31,7 @@ const Base = function (bq) {
         else {
             // missed
             if (opts.DEBUG.FIGHTS) {
-                console.log("FIGHT MISSED");
+                bq.interface.disp.console.write("FIGHT MISSED");
             }
 
             bq.interface.audio.players.actions.play(sound_missed, 1);
@@ -46,7 +46,7 @@ const Base = function (bq) {
         // throw ni; random damages
         if (p.state == p.states.fighting) {
             fight(p, p.cur_enemy, "epeehit", "epeemissed", "monstreblesse",
-                () => fight(p.cur_enemy, p, "marteauhit_short", "epeemissed", "joueurblesse"/*,
+                () => fight(p.cur_enemy, p, "marteauhit", "epeemissed", "joueurblesse"/*,
                     () => {
                         if (p.cur_enemy.life <= 0) {
                             bq.events.add("bq.world.player.end_fight");

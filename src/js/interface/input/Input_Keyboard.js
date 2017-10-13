@@ -2,7 +2,7 @@ export default Keyboard;
 
 import opts from "../../config.js";
 
-const Keyboard = function (events) {
+const Keyboard = function (events, consoleInterface) {
     // The conf can be edited anytime during the game
     // through : bq.interface.input.kb.conf.xxx = "z"
     const kb = {
@@ -25,6 +25,7 @@ const Keyboard = function (events) {
             },
             game: {
                 reset: "r",
+                help: "h",
             },
         },
         keydown: undefined
@@ -60,11 +61,13 @@ const Keyboard = function (events) {
             case kb.conf.game.reset:
                 events.add("bq.game.reset");
                 break;
+            case kb.conf.game.help:
             default:
+                events.add("bq.game.help");
                 msg = "NOEVENT ";
         };
         if (opts.DEBUG.KB) {
-            console.log("\tINPUT KB " + msg + event.key);
+            consoleInterface.write("\tINPUT KB " + msg + event.key);
         }
     }
 

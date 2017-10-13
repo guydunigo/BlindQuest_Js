@@ -36,7 +36,7 @@ export const ENV = {
         sand: "sable",
         mountains: "montagne",
         monster: "monstre",
-        boss: "boss",
+        boss: "monstre",
         boss_final: "boss_final",
         bonus: "bonus",
         sea: "mer",
@@ -45,7 +45,7 @@ export const ENV = {
         funny: "funny",
         border: "border",
         start: "depart",
-        end: "fin"
+        end: "depart"
     },
     COLORS: {
         plain: "rgb(150,175,10)",
@@ -97,9 +97,11 @@ export const AUDIO = {
 };
 
 export const DEBUG = {
+    DISABLE: false,
     AUDIO: false,
     AUDIO_STOP: false,
     AUDIO_PLAY: false,
+    BQ: false,
     EVENTS: false,
     EVENTS_REGISTER: false,
     FIGHTS: true,

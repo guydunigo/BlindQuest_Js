@@ -19,7 +19,7 @@ const Base = function (bq) {
         p.createEnemy(p.square);
         p.state = p.states.fighting;
 
-        console.log("#########    fight    #########");
+        bq.interface.disp.console.writeState("fight");
     };
 
     bq.events.register(rule);

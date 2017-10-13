@@ -35,7 +35,10 @@ const Bq = function (filename = undefined) {
     bq.load = function (bq) {
         const t_start = Date.now();
 
-        console.log(bq);
+        if ((!opts.DEBUG.DISABLE) && opts.DEBUG.BQ) {
+            console.log(bq);
+        }
+
         bq.events = Events(bq);
         if (!bq.interface.not_loaded) {
             document.removeEventListener("keydown", bq.interface.input.kb.keydown);
@@ -53,7 +56,7 @@ const Bq = function (filename = undefined) {
             .then(function () { bq.launch(); return Promise.resolve(); })
             .then(function () {
                 if (opts.DEBUG.TIME.LOAD) {
-                    console.log("BQ LOADED IN " + (Date.now() - t_start) + "ms");
+                    bq.interface.disp.console.write("BQ LOADED IN " + (Date.now() - t_start) + "ms");
                 }
                 return Promise.resolve();
             });
@@ -84,7 +87,7 @@ const Bq = function (filename = undefined) {
     // Game loop :
     bq.play = function () {
         if (opts.DEBUG.TIME.BET_LOOPS && (-opts.BQ.TIMEBASE + Date.now() - bq.prev_time) > opts.DEBUG.TIME.LIMIT / 100 * opts.BQ.TIMEBASE) {
-            console.log("BQ LOOP AFTER " + (Date.now() - bq.prev_time) + "ms");
+            bq.interface.disp.console.write("BQ LOOP AFTER " + (Date.now() - bq.prev_time) + "ms");
         }
         bq.prev_time = Date.now();
 
@@ -106,7 +109,7 @@ const Bq = function (filename = undefined) {
         }
 
         if (opts.DEBUG.TIME.LOOP && events.length > opts.DEBUG.TIME.LIMIT) {
-            console.log("BQ LOOP DONE IN " + (Date.now() - t_start) + "ms");
+            bq.interface.disp.console.write("BQ LOOP DONE IN " + (Date.now() - t_start) + "ms");
         }
 
         return bq;

@@ -2,24 +2,18 @@ Misc
 ====
 * ~~FIRST~~ Later : **Order TODO !**
 * Optimize website and display for screen readers
-* conf for debug messages
+* ~~conf for debug messages~~
 * Webapps
-* Trim martreauhit sound
-* Bq visual theme
 * Env files to js script ? security ? sandbox ?
-* External repo for the sound/music
 * File for *tool* functions (getDistance, ...);
-* Debug messages order, format, ...
-* Documentation
-* Reference every extern sound and content with license
-* Optimize getproxmap (stop writing if the map is already *black*)
-* ~~Shorten time between loops depending on loop length~~
-* Pause when changing tabs
-* Deal with licenses (GPLv3 ?) and sublicenses compatibility
-    * https://www.gnu.org/licenses/gpl-faq.fr.html
 
 Features to add
 ===============
+* Debug
+    * Debug messages order, format, ...
+* Game
+    * ~~Shorten time between loops depending on loop length~~
+    * Pause when changing tabs
 * Files
     * Maps
         * ~~**maps to JSON directly**~~
@@ -33,6 +27,7 @@ Features to add
     * Config
         * Square types, sounds, voices...
 * Interface
+    * Bq visual theme
     * Input
         * Voice commanded ? (chat with player...)
     * Easily translatable
@@ -55,6 +50,7 @@ Features to add
 * Environment
     * Player to more generic class *character* for monsters
     * ~~Load map~~
+    * Optimize getproxmap (stop writing if the map is already *black*)
     * Map editor
         * Display map with color
         * Export json file
@@ -102,8 +98,9 @@ Features to add
 * Sounds
     * ~~Create basic audio interface logging before linking to any lib~~
     * ~~Play sound~~
-    * Test playing 1 sound file twice at the same time
-    * Rename audio file
+    * ~~Trim martreauhit sound~~
+    * ~~Test playing 1 sound file twice at the same time~~ It appears to work
+    * Rename audio files
     * Sound equalizers in conf file
         * to json
         * in menu
@@ -117,8 +114,10 @@ Features to add
     * Theme/Style or instrument rather than whole music ?
 * Fights
     * Life
-        * Heartbeat louder as life dims
-    * Turn based or not
+        * ~~Heartbeat louder as life dims~~
+            * *"Mouais... A revoir..."*
+    * ~~~Turn based...~~~
+        * ...or not
     * Gears of war
         * Differents weapons
         * Magic
@@ -149,3 +148,9 @@ Features to add
     * in Bag
     * static
     * Fade off sound ?
+* Misc / Extern :
+    * Documentation
+    * Reference every extern sound and content with license
+    * Deal with licenses (GPLv3 ?) and sublicenses compatibility
+        * https://www.gnu.org/licenses/gpl-faq.fr.html
+    * External repo for the sound/music

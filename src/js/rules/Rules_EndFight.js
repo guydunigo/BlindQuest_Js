@@ -21,7 +21,7 @@ const Base = function (bq) {
 
             p.square.code = bq.world.getNewCode(p.square);
 
-            console.log("#########  fight end   #########");
+            bq.interface.disp.console.writeState("fight end");
 
             bq.events.add("bq.world.player.moved");
         }

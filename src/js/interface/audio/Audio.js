@@ -26,7 +26,7 @@ const keepPlayingTracks = function (list) {
     return res;
 };
 
-const Env = function () {
+const Env = function (consoleInterface) {
     let prox_sounds = [];
     let player_sound = undefined;
 
@@ -41,7 +41,7 @@ const Env = function () {
 
         if (prox_sounds.length > 0 && opts.DEBUG.AUDIO && opts.DEBUG.AUDIO_STOP) {
             const names = stringifyList(prox_sounds);
-            console.log(`AUDIO ENV STOP ${names}`);
+            consoleInterface.write(`AUDIO ENV STOP ${names}`);
         }
 
         prox_sounds.length = 0;
@@ -57,13 +57,13 @@ const Env = function () {
             loop: true,
             volume: volume * opts.AUDIO.VOLUME_ENV,
             onloaderror: function (id, msg) {
-                console.log("AUDIO ERROR " + soundName + " : " + msg);
+                consoleInterface.write("AUDIO ERROR " + soundName + " : " + msg);
             }
         });
 
         sound.play();
         if (opts.DEBUG.AUDIO && opts.DEBUG.AUDIO_PLAY) {
-            console.log(`AUDIO ENV PLAY ${soundName} VOL ${volume}`);
+            consoleInterface.write(`AUDIO ENV PLAY ${soundName} VOL ${volume}`);
         }
 
         return sound;
@@ -86,13 +86,13 @@ const Env = function () {
         stopAll,
         debug_printAll() {
             if (opts.DEBUG.AUDIO) {
-                console.log("AUDIO ENV PLAY " + stringifyList([player_sound, ...prox_sounds]));
+                consoleInterface.write("AUDIO ENV PLAY " + stringifyList([player_sound, ...prox_sounds]));
             }
         }
     }
 }
 
-const Actions = function () {
+const Actions = function (consoleInterface) {
     let act_sounds = [];
 
     const stopAll = function () {
@@ -100,7 +100,7 @@ const Actions = function () {
 
         if (act_sounds.length > 0 && opts.DEBUG.AUDIO && opts.DEBUG.AUDIO_STOP) {
             const names = stringifyList(act_sounds);
-            console.log(`AUDIO ACTION STOP ${names}`);
+            consoleInterface.write(`AUDIO ACTION STOP ${names}`);
         }
 
         act_sounds.length = 0;
@@ -112,7 +112,7 @@ const Actions = function () {
             src: [audioFold + "webm/" + soundName + ".webm",
             audioFold + "mp3/" + soundName + ".mp3"],
             onloaderror: function (id, msg) {
-                console.log("AUDIO ERROR " + soundName + " : " + msg);
+                consoleInterface.write("AUDIO ERROR " + soundName + " : " + msg);
             },
             volume: volume * opts.AUDIO.VOLUME_ACTION,
         });
@@ -120,7 +120,7 @@ const Actions = function () {
 
         sound.play();
         if (opts.DEBUG.AUDIO && opts.DEBUG.AUDIO_PLAY) {
-            console.log(`AUDIO ACTION PLAY ${soundName}`);
+            consoleInterface.write(`AUDIO ACTION PLAY ${soundName}`);
         }
 
         if (callback !== undefined) {
@@ -134,21 +134,21 @@ const Actions = function () {
         stopAll,
         debug_printAll() {
             if (opts.DEBUG.AUDIO) {
-                console.log("AUDIO ENV PLAY " + stringifyList(act_sounds));
+                consoleInterface.write("AUDIO ENV PLAY " + stringifyList(act_sounds));
             }
         }
     }
 }
 
-const Heart = function () {
-    const soundName = "heartbeat_2";
+const Heart = function (consoleInterface) {
+    const soundName = "heartbeat";
     let heartbeat = new Howl({
         src: [audioFold + "webm/" + soundName + ".webm",
         audioFold + "mp3/" + soundName + ".mp3"],
         autoplay: false,
         loop: true,
         onloaderror: function (id, msg) {
-            console.log("AUDIO ERROR " + soundName + " : " + msg);
+            consoleInterface.write("AUDIO ERROR " + soundName + " : " + msg);
         },
         volume: opts.AUDIO.VOLUME_HEART,
     });
@@ -164,7 +164,7 @@ const Heart = function () {
             heartbeat.play();
 
         if (opts.DEBUG.AUDIO && opts.DEBUG.AUDIO_PLAY) {
-            console.log("AUDIO HEART PLAY " + heartbeat.volume());
+            consoleInterface.write("AUDIO HEART PLAY " + heartbeat.volume());
         }
     }
 
@@ -176,20 +176,20 @@ const Heart = function () {
     }
 }
 
-const Audio = function () {
+const Audio = function (consoleInterface) {
     let ismute = false;
 
     const audio = {
         players: {
-            env: Env(),
-            actions: Actions(),
-            heart: Heart(),
+            env: Env(consoleInterface),
+            actions: Actions(consoleInterface),
+            heart: Heart(consoleInterface),
         },
         get isMute() { return ismute; },
         set isMute(val) {
             ismute = val;
             if (opts.DEBUG.AUDIO) {
-                console.log("AUDIO " + (audio.isMute ? "MUTE" : "DE-MUTE"));
+                consoleInterface.write("AUDIO " + (audio.isMute ? "MUTE" : "DE-MUTE"));
             }
             Howler.mute(val);
             return ismute;

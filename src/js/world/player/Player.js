@@ -36,7 +36,7 @@ const Player = function (bq, startSquare) {
     player.placeOn = function (square) {
         player.square = square;
         if (square !== undefined) {
-            console.log(`PLAYER PLACED AT (${square.x},${square.y}) ON ${square.type}`);
+            bq.interface.disp.console.write(`PLAYER PLACED AT (${square.x},${square.y}) ON ${square.type}`);
         }
     }
 
@@ -44,7 +44,7 @@ const Player = function (bq, startSquare) {
         player.square = mvt_obj.dest;
 
         if (opts.RULES.MOVE) {
-            console.log(`PLAYER MOVED TO (${player.square.x},${player.square.y}) ON ${player.square.type}`);
+            bq.interface.disp.console.write(`PLAYER MOVED TO (${player.square.x},${player.square.y}) ON ${player.square.type}`);
         }
     }
 
@@ -60,7 +60,7 @@ const Player = function (bq, startSquare) {
 
         bq.events.add("bq.game.stop")
 
-        console.log("PLAYER KILLED");
+        bq.interface.disp.console.write("PLAYER KILLED");
     }
 
     player.createEnemy = function (square) {

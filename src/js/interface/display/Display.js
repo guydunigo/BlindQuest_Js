@@ -1,17 +1,29 @@
 // Interfaces different kind of input : keyboard, touch, voice, ...
 export default Display;
 
-import Msg from "./Display_Msg.js"
+import Msg from "./Display_Msg.js";
+import ConsoleLog from "./Display_Console.js";
 
 const Display = function () {
     const disp = {
         msg: Msg(),
-        write: undefined
+        console: ConsoleLog(),
+        write: undefined,
+        writeState: undefined,
     };
 
     disp.write = function (msg, debugMsg = undefined) {
         disp.msg.write(msg);
-        console.log(debugMsg === undefined ? msg : debugMsg);
+        disp.console.write(debugMsg === undefined ? msg : debugMsg);
+    }
+    disp.writeState = function (
+        msg,
+        debugMsg = undefined,
+        length_total,
+        length_limits
+    ) {
+        disp.msg.write(msg);
+        disp.console.writeState(debugMsg === undefined ? msg : debugMsg, length_total, length_limits);
     }
 
     return disp;

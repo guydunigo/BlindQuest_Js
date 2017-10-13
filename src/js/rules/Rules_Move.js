@@ -86,7 +86,7 @@ const Move = function (bq) {
             let nogo = move.pre.nogo;
             if (nogo.data && nogo.data.has(mvt_obj.dest.code)) {
                 if (opts.RULES.MOVE) {
-                    console.log("RULES MOVE NOGO " + mvt_obj.dest.type);
+                    bq.interface.disp.console.write("RULES MOVE NOGO " + mvt_obj.dest.type);
                 }
                 // throw ni; pick random sound ?
                 // throw ni; change sound
@@ -128,7 +128,7 @@ const Move = function (bq) {
                 const letalSounds = move.post.letalSquares.data.map((x) => x[1]);
 
                 if (opts.RULES.MOVE) {
-                    console.log("RULES MOVE LETHAL " + mvt_obj.dest.type);
+                    bq.interface.disp.console.write("RULES MOVE LETHAL " + mvt_obj.dest.type);
                 }
 
                 bq.interface.audio.players.actions.play(letalSounds[index]);

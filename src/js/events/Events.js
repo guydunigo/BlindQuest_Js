@@ -98,13 +98,13 @@ const Events = function (bq) {
         if (events.isEventGood(elmt)) {
             if (events.handle([elmt], events.instants)) {
                 if (opts.DEBUG.EVENTS) {
-                    console.log("EVENTS INSTANT " + elmt);
+                    bq.interface.disp.console.write("EVENTS INSTANT " + elmt);
                 }
             }
             // throw ni; check for an existing rule before adding
             fifo.push(elmt);
             if (opts.DEBUG.EVENTS) {
-                console.log("EVENTS ADDED #" + fifo.length + " " + elmt);
+                bq.interface.disp.console.write("EVENTS ADDED #" + fifo.length + " " + elmt);
             }
             return elmt;
         }
@@ -112,7 +112,7 @@ const Events = function (bq) {
 
     events.getNext = function () {
         const res = fifo.shift();
-        // console.log("EVENT #" + (fifo.length + 1) + " REMOVED " + res);
+        // bq.interface.disp.console.write("EVENT #" + (fifo.length + 1) + " REMOVED " + res);
         return res;
     }
 
@@ -154,7 +154,7 @@ const Events = function (bq) {
 
         if (tmp === undefined) {
             if (opts.DEBUG.EVENTS) {
-                console.log("EVENTS DIRTY " + event);
+                bq.interface.disp.console.write("EVENTS DIRTY " + event);
             }
         }
 

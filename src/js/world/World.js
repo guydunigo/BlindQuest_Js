@@ -215,7 +215,7 @@ const World = function (bq, filename) {
             }
 
             if (opts.DEBUG.TIME.GETPROXMAP) {
-                console.log("WORLD GETPROXMAP " + (Date.now() - t_start) + "ms");
+                bq.interface.disp.console.write("WORLD GETPROXMAP " + (Date.now() - t_start) + "ms");
             }
 
             return submap;
