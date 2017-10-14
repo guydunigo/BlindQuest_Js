@@ -88,6 +88,7 @@ const Events = function (bq) {
                 pause: 2009,
                 reset: 2010,
                 help: 2011,
+                save: 2012
             }
         }
     };

@@ -30,14 +30,17 @@ Features to add
     * Bq visual theme
     * Input
         * Voice commanded ? (chat with player...)
+        * Change automatically commands in help message
+        * Visual buttons
     * Easily translatable
-    * Non disturbing visual interface 
+    * Non disturbing visual interface
         * keep Bq visual theme *but*
             don't hurt eyes displaying smtg (you must be able to play with closed eyes)
     * Help
         * Ingame :
             * Voice ?
             * displayable
+        * Adapted to input mean
         * Wiki (github)
     * Simple onomatopoeia appearing on the blank page
     * ~~Fullscreen~~

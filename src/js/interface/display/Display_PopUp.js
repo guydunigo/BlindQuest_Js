@@ -24,7 +24,10 @@ const Display_PopUp = function () {
 
             popup.id = "popUp";
             popup.style.position = "fixed";
-            popup.style.background = "#333E";
+            // Default to non transparant
+            popup.style.background = "#333";
+            // On Firefox Nightly only apparently : a tad transparant. (useful ?)
+            popup.style.backgroundColor = "#333A";
             popup.style.top = "10vh";
             popup.style.left = "10vw";
             popup.style.zIndex = "1000";

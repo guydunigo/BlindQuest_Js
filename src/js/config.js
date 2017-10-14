@@ -89,11 +89,11 @@ export const BQ = {
 
 export const AUDIO = {
     VOLUME_ENV: 1,
-    VOLUME_ENV_PLAYER: 0.65,
+    VOLUME_ENV_PLAYER: 0.55,
     VOLUME_ENV_PROX: 0.5,
     VOLUME_ACTION: 1,
     VOLUME_HEART: 1,
-    AUDIO_START_MUTE: true
+    START_MUTE: true
 };
 
 export const DEBUG = {
