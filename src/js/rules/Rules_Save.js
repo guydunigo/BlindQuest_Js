@@ -1,5 +1,24 @@
 export default Base;
 
+// Function to download data to a file
+const download = function (data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
 const Base = function (bq) {
     const rule = {
         name: "bq.game.save",
@@ -18,9 +37,9 @@ const Base = function (bq) {
         const player = bq.world.player;
         const save_obj = {
             world: {
-                isReady: bq.world.isReady,
                 name: bq.world.name,
-                steps: bq.world.steps,
+                isReady: bq.world.isReady,
+                // steps: bq.world.steps,
                 data: bq.world.data,
                 player: {
                     pos: [player.square.x, player.square.y],
@@ -32,8 +51,8 @@ const Base = function (bq) {
             }
         };
 
-        const str = JSON.stringify(save_obj);
-        const test = new Blob([str], { type: "application/json" });
+        const txt = JSON.stringify(save_obj);
+        download(txt, "save_" + Date.now() + ".json", "application/json");
     };
 
     bq.events.register(rule);

@@ -97,7 +97,8 @@ const findStartSquare = function (world) {
 }
 
 const step = function (world) {
-    world.steps++;
+    world;
+    // world.steps++;
 }
 
 const World = function (bq, filename) {
@@ -107,7 +108,7 @@ const World = function (bq, filename) {
         data: [[]],
         env: {},
         player: {},
-        steps: 0,
+        // steps: 0,
 
         get height() { return world.data.length },
         get width() { return world.data[0].length },

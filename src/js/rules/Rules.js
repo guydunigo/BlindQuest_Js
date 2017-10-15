@@ -44,7 +44,7 @@ const Rules = function (bq) {
         start_mute: StartMute(bq),
         victory: Victory(bq),
         show_help: ShowHelp(bq),
-        save: Save(bq);
+        save: Save(bq),
     };
 
     return rules;
