@@ -21,7 +21,6 @@ const Base = function (bq) {
         event;
         const p = bq.world.player;
         if (rule.data.has(p.square.code)) {
-
             p.createEnemy(p.square);
             p.state = p.states.fighting;
 

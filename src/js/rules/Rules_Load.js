@@ -26,6 +26,7 @@ const Base = function (bq) {
                 popup.remove();
             };
             popup.write("Click here to load a savefile or a world :", input);
+            input.click();
         }
     };
 
