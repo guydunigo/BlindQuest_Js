@@ -62,7 +62,7 @@ const Events = function (bq) {
                     },
                     moved: 5,
                     bonus: 6,
-                    start_fight: 7,
+                    fight_started: 7,
                     attack: 8,
                     damaged: 9,
                     end_fight: 10,
@@ -99,13 +99,13 @@ const Events = function (bq) {
     events.add = function (elmt) {
         if (events.isEventGood(elmt)) {
             if (events.handle([elmt], events.instants)) {
-                if (opts.DEBUG.EVENTS) {
+                if (opts.DEBUG.EVENTS && opts.DEBUG.EVENTS_EXEC) {
                     bq.interface.disp.console.write("EVENTS INSTANT " + elmt);
                 }
             }
             // throw ni; check for an existing rule before adding
             fifo.push(elmt);
-            if (opts.DEBUG.EVENTS) {
+            if (opts.DEBUG.EVENTS && opts.DEBUG.EVENTS_ADD) {
                 bq.interface.disp.console.write("EVENTS ADDED #" + fifo.length + " " + elmt);
             }
             return elmt;
@@ -155,7 +155,7 @@ const Events = function (bq) {
         }
 
         if (tmp === undefined) {
-            if (opts.DEBUG.EVENTS) {
+            if (opts.DEBUG.EVENTS && opts.DEBUG.EVENTS_DIRTY) {
                 bq.interface.disp.console.write("EVENTS DIRTY " + event);
             }
         }

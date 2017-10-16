@@ -151,19 +151,6 @@ const Move = function (bq) {
         }
     }
 
-    move.post.fight = {
-        main(bq, mvt_obj) {
-            if (move.post.fight.data.has(mvt_obj.dest.code)) {
-                bq.events.add("bq.world.player.start_fight");
-            }
-        },
-        data: new Set([
-            codes.monster,
-            codes.boss,
-            codes.boss_final,
-        ])
-    }
-
     // Don't forget to register your rule to the events defined in move.events
     bq.events.register(move);
 

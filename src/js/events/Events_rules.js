@@ -59,7 +59,7 @@ function loadRulesHandlers(bq, events) {
                         res = true;
                     }
                     rules.forEach(function (rule) {
-                        if (opts.DEBUG.EVENTS) {
+                        if (opts.DEBUG.EVENTS && opts.DEBUG.EVENTS_EXEC) {
                             bq.interface.disp.console.write("EVENTS EXEC " + rule.name);
                         }
                         rule.main(bq, ev);

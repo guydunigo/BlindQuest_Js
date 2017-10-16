@@ -5,8 +5,7 @@ const Base = function (bq) {
     return bq.events.register({
         name: "bq.game.help",
         events: [
-            "bq.game.help",
-            "bq.game.hide_help"
+            "bq.game.help"
         ],
         main(bq, event) {
             event;

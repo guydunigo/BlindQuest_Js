@@ -102,8 +102,11 @@ export const DEBUG = {
     AUDIO_STOP: false,
     AUDIO_PLAY: false,
     BQ: false,
-    EVENTS: false,
+    EVENTS: true,
     EVENTS_REGISTER: false,
+    EVENTS_DIRTY: true,
+    EVENTS_EXEC: false,
+    EVENTS_ADD: false,
     FIGHTS: true,
     KB: false,
     TIME: {

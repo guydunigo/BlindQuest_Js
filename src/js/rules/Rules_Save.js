@@ -38,21 +38,23 @@ const Base = function (bq) {
         const save_obj = {
             world: {
                 name: bq.world.name,
-                isReady: bq.world.isReady,
+                // isReady: bq.world.isReady,
                 // steps: bq.world.steps,
                 data: bq.world.data,
                 player: {
                     pos: [player.square.x, player.square.y],
                     life: player.life,
                     damages: player.damages,
-                    state: player.state,
-                    cur_enemy: player.cur_enemy,
+                    // state: player.state,
+                    // cur_enemy: player.cur_enemy,
+                    // rules: infos related to rules
+                    // other settings ? (kb conf, ...)
                 }
             }
         };
 
         const txt = JSON.stringify(save_obj);
-        download(txt, "save_" + Date.now() + ".json", "application/json");
+        download(txt, "save_" + save_obj.world.name + "_" + Date.now() + ".json", "application/json");
     };
 
     bq.events.register(rule);

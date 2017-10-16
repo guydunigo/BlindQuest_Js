@@ -37,23 +37,32 @@ const clearBehind = function (submap, c_x, c_y, radius) {
 /* Try to open the given filename and extract the world */
 // returns : {name:String,data:Array(Array(Number))}
 const loadWorldFile = function (world, fileContent) {
-    checkWorld(fileContent);
+    checkWorld(fileContent.world);
 
-    // safe ?
-    Object.keys(fileContent).forEach(function (key) {
-        world[key] = fileContent[key];
-    })
+    world.name = fileContent.world.name;
+    world.data = fileContent.world.data;
 
-    endWorldLoading(world);
+    // move that to player constructor ?
+    if (fileContent.world.player !== undefined) {
+        const p = fileContent.world.player;
+        if (p.pos !== undefined) {
+            world.player.placeOn(Square(world, ...p.pos));
+        }
+        if (p.life !== undefined) {
+            world.player.life = p.life;
+        }
+        if (p.damages !== undefined) {
+            world.player.damages = p.damages;
+        }
+    }
+    else {
+        world.player.placeOn(findStartSquare(world));
+    }
 
     world.isReady = true;
 
     return world;
 };
-
-const endWorldLoading = function (world) {
-    world.player.placeOn(findStartSquare(world));
-}
 
 /* Open world (download json, from fs, local drag,...) */
 // returns : json file
