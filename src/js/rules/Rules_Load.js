@@ -7,7 +7,7 @@ const Base = function (bq) {
             "bq.game.load"
         ],
         main: undefined,
-        instant: false
+        instant: true
     }
 
     const popup = bq.interface.disp.popup;

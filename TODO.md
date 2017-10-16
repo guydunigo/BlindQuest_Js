@@ -19,10 +19,14 @@ Features to add
         * ~~**maps to JSON directly**~~
         * Open file (map) with nodeJs
         * ~~download file (map) in js~~
-        * import local ? (drag and drop ?)
-    * Save/Load
-        * local
-            * load (drag and drop ?)
+        * ~~import local~~
+            * cf "Save/Load > local" below.
+    * ~~Save/Load~~
+        * ~~local~~
+            * ~~load~~
+                * ~~dialog~~
+                * drag and drop ?
+            * import env (codes, sounds, ...) ?
         * Online ?
     * Config
         * Square types, sounds, voices...
@@ -46,7 +50,8 @@ Features to add
     * ~~Fullscreen~~
     * ~~Mute button~~
         * Visual
-    * Pause (and mute ?)
+    * ~~Pause (and mute ?)~~
+        * Pause on load, save, ... ?
     * Character describing what's happening ?
         ex : "Damn it ! The effects of *potion* are nearly off."
         * Or sidekick
