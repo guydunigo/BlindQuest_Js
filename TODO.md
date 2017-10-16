@@ -1,16 +1,17 @@
 Misc
 ====
 * ~~FIRST~~ Later : **Order TODO !**
-* Optimize website and display for screen readers
-* ~~conf for debug messages~~
-* Webapps
-* Env files to js script ? security ? sandbox ?
 * File for *tool* functions (getDistance, ...);
+* deafquest ? (only visual)
 
 Features to add
 ===============
 * Debug
+    * ~~conf for messages~~
     * Debug messages order, format, ...
+    * Easily disable all (one param)
+    * Find a way to exclude all the debug tools from final program
+    * {En,Dis}able ingame
 * Game
     * ~~Shorten time between loops depending on loop length~~
     * Pause when changing tabs
@@ -26,15 +27,23 @@ Features to add
             * ~~load~~
                 * ~~dialog~~
                 * drag and drop ?
-            * import env (codes, sounds, ...) ?
+                * import env (codes, sounds, ...) ?
+            * ~~save~~
+                * saving during fights ?
+                * change extension
+        * Keep last saves in memory
+            * autosaves
+            * quick save
+            * quick load
         * Online ?
-    * Config
+    * ~~Config~~
         * Square types, sounds, voices...
 * Interface
+    * Optimize website and display for screen readers
     * Bq visual theme
     * Input
         * Voice commanded ? (chat with player...)
-        * Change automatically commands in help message
+        * Change automatically keys in help message
         * Visual buttons
     * Easily translatable
     * Non disturbing visual interface
@@ -46,7 +55,10 @@ Features to add
             * displayable
         * Adapted to input mean
         * Wiki (github)
+        * Website
     * Simple onomatopoeia appearing on the blank page
+        * "Comic style"
+    * Display square types once ?
     * ~~Fullscreen~~
     * ~~Mute button~~
         * Visual
@@ -56,13 +68,14 @@ Features to add
         ex : "Damn it ! The effects of *potion* are nearly off."
         * Or sidekick
 * Environment
+    * Random
     * Player to more generic class *character* for monsters
-    * ~~Load map~~
     * Optimize getproxmap (stop writing if the map is already *black*)
     * Map editor
         * Display map with color
         * Export json file
-    * Day/Night ? (+ sounds)
+    * Time
+        * Day/Night ? (+ sounds (houhouuuuhou ! houhouuuuhou !))
     * Weather (wind, rain, storm, ... + different strength)
         * Covering the other sounds
         * Acting on the player : harder to walk/random moves, weariness, damages...
@@ -93,15 +106,16 @@ Features to add
     * 3d ? (df style)
         * command to get position (=> number of *bip*s)
     * Change orientation
+        * **Or listen NSWE (play only sounds from this direction)**
         * *Ding* when facing North (or West)
     * Only one move per gameloop ? Prevent moving left and right at the same time)
     * Map
         * Draw it on the screen as the player discovers new squares ? (would break the audio-exclusive rule :/)
-            * Or snake-like line showing only the n last cases used
+            * **Or** snake-like line showing only the n last cases used
                 * Can be done with a voice telling *left left right ...*
         * ~~Letal squares~~
         * ~~Nogo squares~~
-            * *Bumping* sound when trying to go
+            * ~~*Bumping* sound when trying to go~~
         * ~~Looping map : (west is east, north is south, violets are blue, roses are red...)~~
 * Sounds
     * ~~Create basic audio interface logging before linking to any lib~~
@@ -109,8 +123,7 @@ Features to add
     * ~~Trim martreauhit sound~~
     * ~~Test playing 1 sound file twice at the same time~~ It appears to work
     * Rename audio files
-    * Sound equalizers in conf file
-        * to json
+    * ~~Sound equalizers in conf file~~
         * in menu
     * Equalize sounds
     * Sound format (with support ? webm/mp3/ogg/flac ?)
@@ -119,7 +132,7 @@ Features to add
     * ~~Hear close squares sounds~~
         * ~~Hear second close squares sounds but softened~~
             * Check the attenuation formula ?
-    * Theme/Style or instrument rather than whole music ?
+    * Theme/Style or music instrument rather than whole music ?
 * Fights
     * Life
         * ~~Heartbeat louder as life dims~~
@@ -157,6 +170,7 @@ Features to add
     * static
     * Fade off sound ?
 * Misc / Extern :
+    * Webapps / NodeJs
     * Documentation
     * Reference every extern sound and content with license
     * Deal with licenses (GPLv3 ?) and sublicenses compatibility

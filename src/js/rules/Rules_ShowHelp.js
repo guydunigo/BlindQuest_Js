@@ -15,7 +15,7 @@ const Base = function (bq) {
                 ↑ pour aller au nord, ↓ pour le sud, ← pour l'ouest, et ⇥ pour l'est\n\
                 P met le jeu en pause et reprend la partie.\nF active et désactive le plein écran.\n\
                 M permet de couper le son.\n\
-                La barre ESPACE permet d'attaquer lors d'un combat.\nR permet de redémarrer le jeu à tout moment.");
+                La barre ESPACE permet d'attaquer lors d'un combat.\nR permet de redémarrer le jeu à tout moment.\nS pour sauvegarder et C pour charger un monde ou une sauvegarde.");
             }
             else {
                 popup.remove();
