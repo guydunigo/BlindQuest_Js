@@ -20,7 +20,6 @@ const Move = function (bq) {
         instant: false,
         // Any data for the rule
         //   here, you have the mvt vectors applyed :
-        // throw ni; use functions to calculate the vector
         //      ie : depending on stamina, ...
         data: {
             "bq.world.player.move.up": [0, -1],
@@ -28,8 +27,6 @@ const Move = function (bq) {
             "bq.world.player.move.left": [-1, 0],
             "bq.world.player.move.right": [1, 0]
         },
-
-        // throw ni; use these in the main or in Events.js ?
 
         // played before the main
         // determine wether you can move or not or what happens when you try to leave, ...
@@ -53,8 +50,6 @@ const Move = function (bq) {
             Object.values(move.pre).forEach(function (func) {
                 mvt = func.main(bq, mvt);
             });
-            //throw ni; find a way to calculate new mvt with priority (use an array ?)
-
 
             // actual move
             if (!mvt.doesNothing()) {
@@ -70,9 +65,6 @@ const Move = function (bq) {
         }
     };
 
-    // throw ni; think about priority and what is returned (possibility to be thrown away, events,...)
-    // >> update mvt_obj ?
-
     /* --- move.pre --- */
     // args : bq and mvt obj
     // returns : true if move accepted and false if not
@@ -82,14 +74,11 @@ const Move = function (bq) {
     // ie : player gaining ability to go through doors...
     move.pre.nogo = {
         main: function (bq, mvt_obj) {
-            // throw ni; for bigger moves, check path...
             let nogo = move.pre.nogo;
             if (nogo.data && nogo.data.has(mvt_obj.dest.code)) {
                 if (opts.RULES.MOVE) {
                     bq.interface.disp.console.write("RULES MOVE NOGO " + mvt_obj.dest.type);
                 }
-                // throw ni; pick random sound ?
-                // throw ni; change sound
                 bq.interface.audio.players.actions.play("marteauhit");
                 return Mvt(bq.world, mvt_obj.src);
             }
@@ -103,7 +92,6 @@ const Move = function (bq) {
         sounds: ["bump_wall"],
     }
 
-    // throw ni; Add proba to escape ? + with damages ?
     move.pre.static_fights = {
         main: function (bq, mvt_obj) {
             const p = bq.world.player;
@@ -132,7 +120,7 @@ const Move = function (bq) {
                 }
 
                 bq.interface.audio.players.actions.play(letalSounds[index]);
-                bq.world.player.kill(bq);
+                bq.events.add("bq.world.player.kill");
             }
         },
         data: [

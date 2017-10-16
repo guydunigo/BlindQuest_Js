@@ -22,9 +22,9 @@ import Victory from "./Rules_Victory.js";
 import ShowHelp from "./Rules_ShowHelp.js";
 import Save from "./Rules_Save.js";
 import Load from "./Rules_Load.js";
+import Kill from "./Rules_Kill.js";
 
 const Rules = function (bq) {
-    // throw ni; order them in a tree ?
     const rules = {
         move: Move(bq),
         toggle_fullscreen: ToggleFullscreen(bq),
@@ -46,7 +46,8 @@ const Rules = function (bq) {
         victory: Victory(bq),
         show_help: ShowHelp(bq),
         save: Save(bq),
-        load: Load(bq)
+        load: Load(bq),
+        kill: Kill(bq),
     };
 
     return rules;

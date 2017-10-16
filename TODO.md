@@ -12,14 +12,31 @@ Features to add
     * Easily disable all (one param)
     * Find a way to exclude all the debug tools from final program
     * {En,Dis}able ingame
+* Rules
+    * Priority
+        * + in rule_move with pre and post
+    * Uniq
+        * Or send all the events at the same time
+    * Order in tree
+    * What is returned ?
+    * Most generic before specific or the other way round ?
+        * ie : "bq" rules before "bq.world.player.move.left"
+    * Check vefore adding
+    * Possible memory loss ? rule duplicating ?
+    * Test modifying the one in events and see if it changes in env too.
+    * Params in rule or in other place
+        * when saving ?
 * Game
     * ~~Shorten time between loops depending on loop length~~
     * Pause when changing tabs
+    * Recursive reset rather than all from Bq
+    * Loading from Bq ? Recursive ?
 * Files
     * Maps
         * ~~**maps to JSON directly**~~
         * Open file (map) with nodeJs
         * ~~download file (map) in js~~
+            * Handle download error
         * ~~import local~~
             * cf "Save/Load > local" below.
     * ~~Save/Load~~
@@ -36,6 +53,8 @@ Features to add
             * quick save
             * quick load
         * Online ?
+        * Check file
+            * Try repair
     * ~~Config~~
         * Square types, sounds, voices...
 * Interface
@@ -102,7 +121,9 @@ Features to add
                     * Mana ? Stamina ? bonus ?
 * Move around
     * Touch (mobile) support
-    * ability to go through walls, doors, ... (temporarily remove elmnts from nogo.data)
+    * Move more than one square at a time (jump, ...)
+    * Funciton in rule to calculate the move vect (depending on strength or whatever)
+    * Ability to go through walls, doors, ... (temporarily remove elmnts from nogo.data)
     * 3d ? (df style)
         * command to get position (=> number of *bip*s)
     * Change orientation
@@ -116,6 +137,8 @@ Features to add
         * ~~Letal squares~~
         * ~~Nogo squares~~
             * ~~*Bumping* sound when trying to go~~
+                * sound depending on texture
+                * change sound (the current one isn't good)
         * ~~Looping map : (west is east, north is south, violets are blue, roses are red...)~~
 * Sounds
     * ~~Create basic audio interface logging before linking to any lib~~
@@ -139,6 +162,7 @@ Features to add
             * *"Mouais... A revoir..."*
     * ~~~Turn based...~~~
         * ...or not
+    * Random damages
     * Gears of war
         * Differents weapons
         * Magic
@@ -163,6 +187,7 @@ Features to add
         * Bonuses
         * Keys
 * Boni (/bonuses) : (potions, enchantments)
+    * Lara's "haaaaaa" sound
     * ~~Instant~~
         * other types
             * random type

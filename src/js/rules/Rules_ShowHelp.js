@@ -10,12 +10,14 @@ const Base = function (bq) {
         main(bq, event) {
             event;
             if (!popup.isUp) {
-                // throw ni; translate
-                popup.write("La touche H vous permet d'afficher de nouveau cette aide.\n\
-                ↑ pour aller au nord, ↓ pour le sud, ← pour l'ouest, et ⇥ pour l'est\n\
-                P met le jeu en pause et reprend la partie.\nF active et désactive le plein écran.\n\
-                M permet de couper le son.\n\
-                La barre ESPACE permet d'attaquer lors d'un combat.\nR permet de redémarrer le jeu à tout moment.\nS pour sauvegarder et C pour charger un monde ou une sauvegarde.");
+                popup.write(" H : Display and hide this message.\n\
+                ↑ : go north, ↓ : south, ← : west, et ⇥ : east\n\
+                P : Pause/resume the game.\n\
+                F : Enable/disable fullscreen mode.\n\
+                M : mute.\n\
+                SPACE BAR : Attack during fights.\n\
+                R : Reset the game anytime.\nS : Save\n\
+                C : Load a world or a savefile.");
             }
             else {
                 popup.remove();

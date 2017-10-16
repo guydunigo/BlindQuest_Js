@@ -13,7 +13,6 @@ const Base = function (bq) {
         }
     }
 
-    // throw ni; different effects + Lara's "haaaa" sound ;)
     rule.main = function (bq, event) {
         event;
         bq.world.player.life += rule.data.effect;

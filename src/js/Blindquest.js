@@ -70,7 +70,6 @@ const Bq = function () {
     }
 
     // Couldn't find a proper name : "(re)load", "(re)set" ?
-    // throw ni; recursive reset ?
     bq.reset = function (bq) {
         if (bq.state === bq.states.stopped || bq.state === bq.states.won) {
             bq.load(bq);

@@ -7,28 +7,6 @@ import opts from "../config.js";
 
 import loadRulesHandlers from "./Events_rules.js";
 
-/* throw ni;
-const getParents = function (tree, event) {
-    const res = [];
-    let tmp = [];
-    for (const key of Object.keys(tree)) {
-        // If it is a direct child :
-        if (tree[key] === event) {
-            res.push(key);
-            break;
-        }
-        // Or look in the sub trees
-        else if (Object.values(tree[key]).length !== 0) {
-            tmp = getParents(tree[key], event);
-            if (tmp.length > 0) {
-                res.push(key, ...tmp);
-                break;
-            }
-        }
-    }
-    return res;
-}*/
-
 const Events = function (bq) {
     const events = {
         model: {},
@@ -67,6 +45,7 @@ const Events = function (bq) {
                     damaged: 9,
                     end_fight: 10,
                     life_changed: 11,
+                    kill: 12,
                 }
             },
             interface: { // 1001 to 2000
@@ -104,7 +83,6 @@ const Events = function (bq) {
                     bq.interface.disp.console.write("EVENTS INSTANT " + elmt);
                 }
             }
-            // throw ni; check for an existing rule before adding
             fifo.push(elmt);
             if (opts.DEBUG.EVENTS && opts.DEBUG.EVENTS_ADD) {
                 bq.interface.disp.console.write("EVENTS ADDED #" + fifo.length + " " + elmt);

@@ -19,7 +19,6 @@ const conf = {
     }
 }; conf;
 
-// throw ni; param : kind of input
 const Input = function (events, consoleInterface) {
     const input = {
         kb: undefined

@@ -77,7 +77,6 @@ const fetchWorldFile = function (bq) {
         })
     }
     else {
-        // throw ni; handle 404
         json_promise = fetch(new Request(bq.src)).then((response) => response.json());
     }
 
@@ -87,8 +86,6 @@ const fetchWorldFile = function (bq) {
 };
 
 const checkWorld = function (world) {
-    // throw ni + ?tryRepair?
-
     // Non-empty world name
     if (world.name.length == 0)
         throw new Error("Empty world name.");

@@ -40,9 +40,6 @@ const Sample = function (bq) {
         // Calling post
     };
 
-    // throw ni; think about priority and what is returned (possibility to be thrown away, events,...)
-    // >> update mvt_obj ?
-
     /* --- move.pre --- */
     // args : bq and whatever the rule.main need
     // // But every pre and post should use the same args

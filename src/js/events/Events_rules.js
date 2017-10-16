@@ -3,9 +3,6 @@ export default loadRulesHandlers;
 import opts from "../config.js";
 
 function loadRulesHandlers(bq, events) {
-    // Possible memory loss ? rule duplicating ?
-    //   throw ni; test modifying the one in events and see if it changes in env too.
-    // throw ni; check rule ?
     events.register = function (rule) {
         const goodTargets = [];
         // Keep only good events
@@ -43,8 +40,6 @@ function loadRulesHandlers(bq, events) {
 
     // Call the more generic rule first
     //   ("world" before "world.player.move.up")
-    // throw ni; Good idea ?
-    // throw ni; send all events for this rule of one at a time ?
     //     >> track the uncalled rules and call the idle method ?
     // returns true if a rule was called, false if nothing was done
     events.handle = function (evts, rulesList = events.rules) {

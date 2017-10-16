@@ -43,16 +43,9 @@ const Base = function (bq) {
     rule.main = function (bq, event) {
         event;
         const p = bq.world.player;
-        // throw ni; random damages
         if (p.state == p.states.fighting) {
             fight(p, p.cur_enemy, "epeehit", "epeemissed", "monstreblesse",
-                () => fight(p.cur_enemy, p, "marteauhit", "epeemissed", "joueurblesse"/*,
-                    () => {
-                        if (p.cur_enemy.life <= 0) {
-                            bq.events.add("bq.world.player.end_fight");
-                        }
-                    }*/
-                ));
+                () => fight(p.cur_enemy, p, "marteauhit", "epeemissed", "joueurblesse"));
         }
     };
 

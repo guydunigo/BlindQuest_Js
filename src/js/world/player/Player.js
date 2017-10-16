@@ -20,7 +20,6 @@ const Player = function (bq, startSquare) {
         proba_hit: opts.PLAYER.PROBA_HIT,
         move: undefined,
         placeOn: undefined,
-        kill: undefined,
         die: undefined,
         createEnemy: undefined,
         state: 0,
@@ -46,12 +45,6 @@ const Player = function (bq, startSquare) {
         if (opts.RULES.MOVE) {
             bq.interface.disp.console.write(`PLAYER MOVED TO (${player.square.x},${player.square.y}) ON ${player.square.type}`);
         }
-    }
-
-    // Kills the player and stop the game
-    // throw ni; use an event/rule ?
-    player.kill = function () {
-        player.life = 0;
     }
 
     player.die = function (bq) {
