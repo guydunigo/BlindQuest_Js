@@ -64,11 +64,26 @@ const loadWorldFile = function (world, fileContent) {
     return world;
 };
 
-/* Open world (download json, from fs, local drag,...) */
+/* Open world (download json, from fs, local drag,...) based on bq.src */
 // returns : json file
-const fetchWorldFile = function (name) {
-    // throw ni; handle 404
-    return fetch(new Request(name)).then((response) => response.json());
+const fetchWorldFile = function (bq) {
+    let json_promise;
+
+    if (bq.src instanceof File) {
+        const reader = new FileReader();
+        reader.readAsText(bq.src);
+        json_promise = new Promise(function (resolve) {
+            reader.onloadend = () => resolve(JSON.parse(reader.result));
+        })
+    }
+    else {
+        // throw ni; handle 404
+        json_promise = fetch(new Request(bq.src)).then((response) => response.json());
+    }
+
+    bq.src = undefined
+
+    return json_promise;
 };
 
 const checkWorld = function (world) {
@@ -110,7 +125,7 @@ const step = function (world) {
     // world.steps++;
 }
 
-const World = function (bq, filename) {
+const World = function (bq) {
     const world = {
         isReady: false,
         name: "",
@@ -263,5 +278,6 @@ const World = function (bq, filename) {
     world.env = Env();
     world.player = Player(bq);
 
-    return fetchWorldFile(filename).then((response) => Promise.resolve(loadWorldFile(world, response)));
+    return fetchWorldFile(bq)
+        .then((response) => Promise.resolve(loadWorldFile(world, response)));
 };

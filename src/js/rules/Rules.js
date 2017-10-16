@@ -21,6 +21,7 @@ import StartMute from "./Rules_StartMute.js";
 import Victory from "./Rules_Victory.js";
 import ShowHelp from "./Rules_ShowHelp.js";
 import Save from "./Rules_Save.js";
+import Load from "./Rules_Load.js";
 
 const Rules = function (bq) {
     // throw ni; order them in a tree ?
@@ -45,6 +46,7 @@ const Rules = function (bq) {
         victory: Victory(bq),
         show_help: ShowHelp(bq),
         save: Save(bq),
+        load: Load(bq)
     };
 
     return rules;

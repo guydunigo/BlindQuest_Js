@@ -10,9 +10,12 @@ import World from "./world/World.js";
 
 import StateMsg from "./rules/Rules_StateMsg.js";
 
-const Bq = function (filename = undefined) {
+const Bq = function () {
     const bq = {
         state: 0,
+        // src might be set temporarily before bq.load is called to override default value (eg. load world or save).
+        // After bq.load, it is set back to undefined.
+        src: undefined,
         world: { not_loaded: true },
         interface: { not_loaded: true },
         rules: { not_loaded: true },
@@ -50,7 +53,11 @@ const Bq = function (filename = undefined) {
         StateMsg(bq);
         bq.events.add("bq.game.state.loading");
 
-        World(bq, filename === undefined ? opts.BQ.FILENAME : filename).then(function (world) { bq.world = world; return Promise.resolve(); })
+        if (bq.src === undefined) {
+            bq.src = opts.BQ.FILENAME;
+        }
+
+        World(bq).then(function (world) { bq.world = world; return Promise.resolve(); })
             .then(function () { bq.rules = Rules(bq); return Promise.resolve(); })
             .then(function () { bq.events.add("bq.game.state.loaded"); return Promise.resolve(); })
             .then(function () { bq.launch(); return Promise.resolve(); })

@@ -27,6 +27,7 @@ const Keyboard = function (events, consoleInterface) {
                 reset: "r",
                 help: "h",
                 save: "s",
+                load: "c"
             },
         },
         keydown: undefined
@@ -67,6 +68,9 @@ const Keyboard = function (events, consoleInterface) {
                 break;
             case kb.conf.game.save:
                 events.add("bq.game.save");
+                break;
+            case kb.conf.game.load:
+                events.add("bq.game.load");
                 break;
             default:
                 msg = "NOEVENT ";

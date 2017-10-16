@@ -6,7 +6,7 @@ const Display_PopUp = function () {
         get isUp() {
             return (document.getElementById("popUp") !== null);
         },
-        write(msg) {
+        write(msg, dom_elmt = undefined) {
             const txt = document.createElement("p");
 
             const tmp_list = msg.split("\n");
@@ -15,12 +15,29 @@ const Display_PopUp = function () {
                 txt.appendChild(document.createElement("br"));
             })
 
-            p.popUp(txt);
+            p.popUp(txt, dom_elmt);
         },
-        popUp(dom_elmt) {
+        popUp(...dom_elmts) {
             const popup = document.createElement("div");
 
-            popup.appendChild(dom_elmt);
+            const closeBtn = document.createElement("button");
+            closeBtn.textContent = "Close [x]";
+            closeBtn.style.position = "absolute";
+            closeBtn.style.top = "0";
+            closeBtn.style.right = "0";
+            closeBtn.style.borderRadius = "0";
+            closeBtn.style.border = "none";
+            closeBtn.style.background = "none";
+            closeBtn.style.color = "#fff";
+            closeBtn.onclick = p.remove;
+
+            popup.appendChild(closeBtn);
+
+            dom_elmts.forEach(function (elmt) {
+                if (elmt != undefined) {
+                    popup.appendChild(elmt);
+                }
+            })
 
             popup.id = "popUp";
             popup.style.position = "fixed";
