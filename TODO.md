@@ -160,6 +160,7 @@ Features to add
     * Life
         * ~~Heartbeat louder as life dims~~
             * *"Mouais... A revoir..."*
+            * heartbeat freq
     * ~~~Turn based...~~~
         * ...or not
     * Random damages

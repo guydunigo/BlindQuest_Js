@@ -85,7 +85,7 @@ const imgs = funnel(imgsFold, {
 
 /* --------------------------- audio --------------------------- */
 const audio = funnel(audioFold, {
-    exclude: ["wav"],
+    exclude: ["wav", "tmp"],
     destDir: "audio"
 });
 
