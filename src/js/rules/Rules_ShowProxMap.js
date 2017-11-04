@@ -14,7 +14,7 @@ const ShowProxMap = function (bq) {
             instant: true,
             data: {
                 type_length: 2,
-                radius: 10,
+                radius: 5,
                 square_size: "5px",
             }
         }

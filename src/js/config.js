@@ -107,6 +107,7 @@ export const DEBUG = {
     EVENTS_DIRTY: true,
     EVENTS_EXEC: false,
     EVENTS_ADD: false,
+    EVENTS_REMOVE: false,
     FIGHTS: true,
     KB: false,
     TIME: {

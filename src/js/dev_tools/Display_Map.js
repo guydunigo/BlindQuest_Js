@@ -2,6 +2,10 @@ export default dispMap;
 
 import opts from "../config.js";
 
+// Args :
+//     type(string) : square type
+//     type_length(int) : the size of the return string
+// Returns : the type string cut or expanded to the size type_length
 const formatType = function (type, type_length) {
     let res;
     if (type.length < type_length) {
@@ -14,6 +18,12 @@ const formatType = function (type, type_length) {
     return res;
 }
 
+// Returns : a table DOM element showing map with square textual types
+// Args :
+//     map(Number[][]) : the whole map
+//     type_length(int) : the length of each square typenames
+//     bq : the bq object
+//     player_pos(Number[2]) : the square at these coordinates will be displayed in red.
 export const dispMapTxt = function (map, type_length, bq, player_pos = undefined) {
     const table = document.createElement("table");
     let line, cell, content, tmp;
@@ -26,7 +36,7 @@ export const dispMapTxt = function (map, type_length, bq, player_pos = undefined
                 cell.style.color = opts.ENV.COLORS[bq.world.env.code2Type(c)];
             }
             content = document.createTextNode(formatType(bq.world.env.code2Type(c), type_length));
-            if (player_pos !== undefined && ci == player_pos.x && li == player_pos.y) {
+            if (player_pos !== undefined && ci == player_pos[0] && li == player_pos[1]) {
                 tmp = document.createElement("strong");
                 tmp.style.color = "red";
                 tmp.appendChild(content);
@@ -41,6 +51,12 @@ export const dispMapTxt = function (map, type_length, bq, player_pos = undefined
     return table;
 };
 
+// Returns : a table DOM element showing map with colored squares
+// Args :
+//     map(Number[][]) : the whole map
+//     type_length(int) : the length of each square typenames
+//     bq : the bq object
+//     player_pos(Number[2]) : the square at these coordinates will be displayed in red.
 export const dispMapColor = function (map, square_size, bq, player_pos = undefined) {
     const table = document.createElement("table");
     let line, cell;
@@ -68,6 +84,12 @@ export const dispMapColor = function (map, square_size, bq, player_pos = undefin
     return table;
 };
 
+// Returns : a table DOM element showing map with the form defined in opts.DEV_TOOLS.SHOW_MAP_TYPE
+// Args :
+//     map(Number[][]) : the whole map
+//     type_length(int) : the length of each square typenames
+//     bq : the bq object
+//     player_pos(Number[2]) : the square at these coordinates will be displayed in red.
 const dispMap = function (map, type_length, square_size, bq, player_pos = undefined) {
     let table;
 

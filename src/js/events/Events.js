@@ -1,4 +1,5 @@
 // Dealing with events coming from interface.input and others
+// Fires events and call the rules attached to them
 // it uses a FIFO Array ([].push(x),[].shift())
 
 export default Events;
@@ -7,6 +8,10 @@ import opts from "../config.js";
 
 import loadRulesHandlers from "./Events_rules.js";
 
+// Events constructor
+// Args :
+//     bq : the bq object
+// Returns : the events object
 const Events = function (bq) {
     const events = {
         model: {},
@@ -23,6 +28,9 @@ const Events = function (bq) {
         eventIsA/*belle a les yeux bleus*/: undefined,
         register: undefined,
         handle: undefined,
+        // Cleans the events related stuff (in case of a whole reset for instance)
+        // Args : none
+        // Returns : nothing
         clean() { /* throw ni; */ }
     };
 
@@ -77,6 +85,10 @@ const Events = function (bq) {
     // Private
     const fifo = [];
 
+    // Checks the given event, executes the instants rules and adds it to the pending events list
+    // Args :
+    //     elmt(string) : event string, eg. "bq.world.player.move.up"
+    // Returns : elmt if succeded
     events.add = function (elmt) {
         if (events.isEventGood(elmt)) {
             if (events.handle([elmt], events.instants)) {
@@ -92,14 +104,22 @@ const Events = function (bq) {
         }
     }
 
+    // Returns : the next event to be handled in the fifo
+    // Args : none
     events.getNext = function () {
         const res = fifo.shift();
-        // bq.interface.disp.console.write("EVENT #" + (fifo.length + 1) + " REMOVED " + res);
+        if (opts.DEBUG.EVENTS && opts.DEBUG.EVENTS_REMOVE) {
+            bq.interface.disp.console.write("EVENT #" + (fifo.length + 1) + " REMOVED " + res);
+        }
         return res;
     }
 
+    // Returns : bool : true is the fifo is empty
+    // Args : none
     events.isIdle = () => fifo.length === 0;
 
+    // Returns : string[] : the whole events list in the fifo
+    // Args : none
     events.getPendings = function () {
         const res = [];
         while (!events.isIdle()) {
@@ -108,8 +128,9 @@ const Events = function (bq) {
         return res;
     };
 
-    // Get pendings but returns only once each event
-    //  if resend_dups it true, call events.add to the doubles.
+    // Returns : string[] : the whole events list in the fifo but only once each event
+    // Args :
+    //     resend_dups(bool) : if true : adds the duplicates back to the fifo
     events.getPendingsUniq = function (readd_dups = false) {
         const evts = events.getPendings();
         const res = [];

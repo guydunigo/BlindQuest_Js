@@ -10,6 +10,10 @@ import World from "./world/World.js";
 
 import StateMsg from "./rules/Rules_StateMsg.js";
 
+// bq object contructor : 
+// Args :
+//     src(string) : path to the map json file
+// Returns : the fully loaded and launched bq object
 const Bq = function (src) {
     const bq = {
         state: 0,
@@ -35,7 +39,10 @@ const Bq = function (src) {
         }
     };
 
-    bq.load = function (bq) {
+    // Loads all the game's componants and launch it
+    // Args : none
+    // Returns : a promise to the fully loaded and launched bq object
+    bq.load = function () {
         const t_start = Date.now();
 
         if ((!opts.DEBUG.DISABLE) && opts.DEBUG.BQ) {
@@ -62,12 +69,12 @@ const Bq = function (src) {
         // --------- Events ---------
         bq.events = Events(bq);
 
+        // --------- Interfaces ---------
+        bq.interface = Interface(bq.events);
+
         // throw ni; temporary :
         StateMsg(bq);
         bq.events.add("bq.game.state.loading");
-
-        // --------- Interfaces ---------
-        bq.interface = Interface(bq.events);
 
         // --------- World ---------
         World(bq).then(function (world) { bq.world = world; return Promise.resolve(); })
@@ -86,13 +93,20 @@ const Bq = function (src) {
     }
 
     // Couldn't find a proper name : "(re)load", "(re)set" ?
-    bq.reset = function (bq) {
+    //     Triggers the game's whole reset
+    // Args : none
+    // Returns : nothing
+    bq.reset = function () {
         if (bq.state === bq.states.stopped || bq.state === bq.states.won) {
             bq.load(bq);
         }
         bq.events.add("bq.game.state.init");
     };
 
+    // Tries to launch the game :
+    //     Launches it only if it is fulled loaded.
+    // Args : none
+    // Returns : the bq object
     bq.launch = function () {
         bq.events.add("bq.game.state.launching");
         if (bq.state === bq.states.loaded) {
@@ -107,6 +121,8 @@ const Bq = function (src) {
     };
 
     // Game loop :
+    //     Loops unless the gmae is in stopped or won state
+    // Returns : bq object
     bq.play = function () {
         if (opts.DEBUG.TIME.BET_LOOPS && (-opts.BQ.TIMEBASE + Date.now() - bq.prev_time) > opts.DEBUG.TIME.LIMIT / 100 * opts.BQ.TIMEBASE) {
             bq.interface.disp.console.write("BQ LOOP AFTER " + (Date.now() - bq.prev_time) + "ms");
@@ -136,7 +152,7 @@ const Bq = function (src) {
         return bq;
     }
 
-    bq.load(bq);
+    bq.load();
 
     return bq;
 };
