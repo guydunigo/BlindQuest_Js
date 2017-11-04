@@ -1,6 +1,6 @@
 // To json
 
-// Will contain all environment codes, music filenames, their behaviour, player infos, ...
+// Contains all constants, environment codes, music filenames, their behaviour, player infos, ...
 
 export const ENV = {
     CODES: {
@@ -82,10 +82,10 @@ ENV.SOUND_BLOCKERS[ENV.CODES.border] = 0;
 // ENV.SOUND_BLOCKERS[ENV.CODES.mountains] = 0.5;
 
 export const BQ = {
-    // miliseconds beetween each game loop
     FILENAME: "maps/carte_defaut.json",
+    // Miliseconds beetween each game loop (at least theoretically)
     TIMEBASE: 200
-}
+};
 
 export const AUDIO = {
     VOLUME_ENV: 1,
@@ -126,7 +126,7 @@ export const DEV_TOOLS = {
     // "txt" or "square" :
     SHOW_MAP_TYPE: "square",
     SHOW_MAP_COLORS: true,
-}
+};
 
 export const PLAYER = {
     MAX_LIFE: 20,
@@ -134,7 +134,7 @@ export const PLAYER = {
     PROBA_HIT: 0.85
 };
 
-// type: life, damages, proba_hit
+// type: life, damages, proba_hit, proba_death (how likely it is to strike when it dies)
 export const MONSTERS = {};
 MONSTERS[ENV.CODES.monster] = { id: ENV.CODES.monster, life: 1, damages: 1, proba_hit: 0.5, proba_death: 0.2 };
 MONSTERS[ENV.CODES.boss] = { id: ENV.CODES.boss, life: 2, damages: 2, proba_hit: 0.5, proba_death: 0.2 };

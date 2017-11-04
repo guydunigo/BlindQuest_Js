@@ -10,10 +10,16 @@ const Interface = function (events) {
         input: undefined,
         audio: undefined,
         disp: Display(),
+        clean: undefined,
     };
 
     inter.audio = Audio(inter.disp.console);
     inter.input = Input(events, inter.disp.console);
+
+    inter.clean = function () {
+        document.removeEventListener("keydown", inter.input.kb.keydown);
+        inter.audio.stopAll();
+    }
 
     return inter;
 };

@@ -117,11 +117,6 @@ const findStartSquare = function (world) {
     return Square(world, ...pos);
 }
 
-const step = function (world) {
-    world;
-    // world.steps++;
-}
-
 const World = function (bq) {
     const world = {
         isReady: false,
@@ -250,7 +245,7 @@ const World = function (bq) {
         launch() {
             bq.events.add("bq.world.player.moved");
         },
-        step
+        clean() { /* throw ni; */ }
     }
     // Return a new code based on the "good" close squares 
     world.getNewCode = function (square) {

@@ -1,4 +1,4 @@
-// Main game loop
+// Root object, deals with the gameloop and such, launches the game when created.
 export default Bq;
 
 import opts from "./config.js";
@@ -10,12 +10,12 @@ import World from "./world/World.js";
 
 import StateMsg from "./rules/Rules_StateMsg.js";
 
-const Bq = function () {
+const Bq = function (src) {
     const bq = {
         state: 0,
         // src might be set temporarily before bq.load is called to override default value (eg. load world or save).
         // After bq.load, it is set back to undefined.
-        src: undefined,
+        src,
         world: { not_loaded: true },
         interface: { not_loaded: true },
         rules: { not_loaded: true },
@@ -42,24 +42,40 @@ const Bq = function () {
             console.log(bq);
         }
 
-        bq.events = Events(bq);
-        if (!bq.interface.not_loaded) {
-            document.removeEventListener("keydown", bq.interface.input.kb.keydown);
-            bq.interface.audio.stopAll();
+        if (!bq.events.not_loaded) {
+            bq.events.clean();
         }
-        bq.interface = Interface(bq.events);
-
-        // throw ni; temporary :
-        StateMsg(bq);
-        bq.events.add("bq.game.state.loading");
+        if (!bq.interface.not_loaded) {
+            bq.interface.clean();
+        }
+        if (!bq.world.not_loaded) {
+            bq.world.clean();
+        }
+        if (!bq.rules.not_loaded) {
+            bq.rules.clean();
+        }
 
         if (bq.src === undefined) {
             bq.src = opts.BQ.FILENAME;
         }
 
+        // --------- Events ---------
+        bq.events = Events(bq);
+
+        // throw ni; temporary :
+        StateMsg(bq);
+        bq.events.add("bq.game.state.loading");
+
+        // --------- Interfaces ---------
+        bq.interface = Interface(bq.events);
+
+        // --------- World ---------
         World(bq).then(function (world) { bq.world = world; return Promise.resolve(); })
+            // --------- Rules ---------
             .then(function () { bq.rules = Rules(bq); return Promise.resolve(); })
+
             .then(function () { bq.events.add("bq.game.state.loaded"); return Promise.resolve(); })
+            // --------- Finally launching the game ---------
             .then(function () { bq.launch(); return Promise.resolve(); })
             .then(function () {
                 if (opts.DEBUG.TIME.LOAD) {
@@ -85,7 +101,7 @@ const Bq = function () {
             return bq.play();
         }
         else {
-            bq.interface.disp.write("BlindQuest is not fully loaded !");
+            bq.interface.disp.error("BlindQuest is not fully loaded !");
             return bq;
         }
     };
@@ -101,7 +117,6 @@ const Bq = function () {
         const t_start = Date.now();
 
         if (bq.state === bq.states.launched) {
-            bq.world.step(bq.world);
             bq.events.handle(events);
         }
 

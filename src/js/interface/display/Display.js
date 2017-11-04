@@ -12,6 +12,7 @@ const Display = function () {
         console: ConsoleLog(),
         write: undefined,
         writeState: undefined,
+        error: undefined,
     };
 
     disp.write = function (msg, debugMsg = undefined) {
@@ -26,6 +27,10 @@ const Display = function () {
     ) {
         disp.msg.write(msg);
         disp.console.writeState(debugMsg === undefined ? msg : debugMsg, length_total, length_limits);
+    }
+    disp.error = function (msg, debugMsg = undefined) {
+        disp.write(msg, debugMsg);
+        // throw ni;
     }
 
     return disp;

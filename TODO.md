@@ -3,6 +3,8 @@ Misc
 * ~~FIRST~~ Later : **Order TODO !**
 * File for *tool* functions (getDistance, ...);
 * deafquest ? (only visual)
+* download config as Json ?
+* Calculate the average of time between loops
 
 Features to add
 ===============

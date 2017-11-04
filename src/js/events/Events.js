@@ -22,7 +22,8 @@ const Events = function (bq) {
         filterEventsFrom: undefined,
         eventIsA/*belle a les yeux bleus*/: undefined,
         register: undefined,
-        handle: undefined
+        handle: undefined,
+        clean() { /* throw ni; */ }
     };
 
     // hierarchy of events, use it between quotes with js notation

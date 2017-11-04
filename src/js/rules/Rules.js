@@ -26,6 +26,7 @@ import Kill from "./Rules_Kill.js";
 
 const Rules = function (bq) {
     const rules = {
+        clean() { /* throw ni; */ },
         move: Move(bq),
         toggle_fullscreen: ToggleFullscreen(bq),
         toggle_mute: ToggleMute(bq),

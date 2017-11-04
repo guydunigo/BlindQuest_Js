@@ -1,4 +1,4 @@
-// We launch the game here and prepare things
+// Quite simple here, but it can be incorporated into another js code.
 import Bq from "./Blindquest.js"
 
 const main = function () {
