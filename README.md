@@ -12,13 +12,19 @@ About the project plan
 
 ### First goal (and *compulsory*) : Rewrite
 
+#### Done, game available at https://blindquest.ovh/game
+
 Rewrite the [original project in python](https://github.com/guydunigo/BlindQuest) to javascript. Actually, I will not convert it directly, rather will I provide the same features at least.
+
+Upload this first version on the [website](https://blindquest.ovh).
 
 ### Second goal : Package
 
+First, make a touch-compatible interface !
+
 I plan to ship it as a multi-platform desktop and mobile app. Surely using a technology like Github's Electron, Ionic, Cordova, phonegap, etc. as it is based on NodeJs and should require no big modifications of the codebase. I have however no experience in these technologies yet.
 
-It will also be time to upload this first version on the [website](https://blindquest.ovh).
+I will also have to make proper sounds and maps repos.
 
 ### Third goal : Planning
 
@@ -28,7 +34,7 @@ During that time, I will think about licensing my work, which also means going t
 
 Why not finding someone who can provide the required musics and sounds rather than picking them on the internet.
 
-### Fourth goal : The forth goal
+### Fourth goal : The fourth goal
 
 Coding ! Adding new ideas, and mostly having fun !
 

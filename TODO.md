@@ -4,7 +4,8 @@ Misc
 * File for *tool* functions (getDistance, ...);
 * deafquest ? (only visual)
 * download config as Json ?
-* Calculate the average of time between loops
+* Calculate the average time between loops
+* Map repo (graphical website ?) + sound packages repos
 
 Features to add
 ===============
@@ -22,8 +23,8 @@ Features to add
     * Order in tree
     * What is returned ?
     * Most generic before specific or the other way round ?
-        * ie : "bq" rules before "bq.world.player.move.left"
-    * Check vefore adding
+        * ie : "bq" rules before "bq.world.player.move.left" ?
+    * Check before adding
     * Possible memory loss ? rule duplicating ?
     * Test modifying the one in events and see if it changes in env too.
     * Params in rule or in other place
@@ -31,7 +32,7 @@ Features to add
 * Game
     * ~~Shorten time between loops depending on loop length~~
     * Pause when changing tabs
-    * Recursive reset rather than all from Bq
+    * Recursive reset rather than all from Bq ?
     * Loading from Bq ? Recursive ?
 * Files
     * Maps
@@ -64,7 +65,7 @@ Features to add
     * Bq visual theme
     * Input
         * Voice commanded ? (chat with player...)
-        * Change automatically keys in help message
+        * Change automatically keys in help messages
         * Visual buttons
     * Easily translatable
     * Non disturbing visual interface
@@ -97,6 +98,7 @@ Features to add
         * Export json file
     * Time
         * Day/Night ? (+ sounds (houhouuuuhou ! houhouuuuhou !))
+        * Time travel
     * Weather (wind, rain, storm, ... + different strength)
         * Covering the other sounds
         * Acting on the player : harder to walk/random moves, weariness, damages...
@@ -115,9 +117,12 @@ Features to add
         * Towns
             * NPCs
                 * Voices
+                * Charisma
                 * Interactions (selection mode ?)
                     * Exange/Sell/Buy
                         * Money ?
+                * Ask for infos, directions, ...
+                    * Possible false answer ?
             * Inns
                 * Sleep
                     * Mana ? Stamina ? bonus ?
@@ -136,7 +141,7 @@ Features to add
         * Draw it on the screen as the player discovers new squares ? (would break the audio-exclusive rule :/)
             * **Or** snake-like line showing only the n last cases used
                 * Can be done with a voice telling *left left right ...*
-        * ~~Letal squares~~
+        * ~~Lethal squares~~
         * ~~Nogo squares~~
             * ~~*Bumping* sound when trying to go~~
                 * sound depending on texture
@@ -158,6 +163,7 @@ Features to add
         * ~~Hear second close squares sounds but softened~~
             * Check the attenuation formula ?
     * Theme/Style or music instrument rather than whole music ?
+        * Multiple themes => multiple covers by instruments
 * Fights
     * Life
         * ~~Heartbeat louder as life dims~~
