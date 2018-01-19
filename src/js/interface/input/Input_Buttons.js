@@ -48,6 +48,7 @@ const Buttons = function (events, consoleInterface, popUpInterface) {
     const menu = document.createElement("div");
 
     menu.appendChild(createBtn("help", "bq.game.help"));
+    menu.id = "menu";
 
     const padBtn = document.createElement("button");
     padBtn.appendChild(document.createTextNode("Gamepad"))
@@ -94,5 +95,10 @@ const Buttons = function (events, consoleInterface, popUpInterface) {
     menu.appendChild(padBtn);
     document.body.appendChild(menu);
 
-    return undefined;
+    return {
+        clean() {
+            const menu = document.getElementById("menu");
+            menu.parentNode.removeChild(menu);
+        }
+    };
 }
