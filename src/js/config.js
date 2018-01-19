@@ -110,6 +110,7 @@ export const DEBUG = {
     EVENTS_REMOVE: false,
     FIGHTS: true,
     KB: false,
+    BUTTONS: false,
     TIME: {
         LIMIT: 10,
         LOAD: false,
