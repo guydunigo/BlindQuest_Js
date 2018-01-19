@@ -4,7 +4,7 @@ const Sample = function (bq) {
     const sample = {
         // debug purpose only
         // Better to use the event name if possible
-        name: "bq.some.event.base",
+        name: "bq.some.event.base sample",
         // Actual method called by the event handler :
         main: function (bq, event) { },
         // Triggered by event(s) : must be an Array

@@ -61,6 +61,7 @@ Features to add
     * ~~Config~~
         * Square types, sounds, voices...
 * Interface
+    * Menu holder with a way to add a sub-menu
     * Optimize website and display for screen readers
     * Bq visual theme
     * Input
@@ -76,6 +77,7 @@ Features to add
             * Voice ?
             * displayable
         * Adapted to input mean
+        * Right arrow
         * Wiki (github)
         * Website
     * Simple onomatopoeia appearing on the blank page
@@ -128,8 +130,10 @@ Features to add
                     * Mana ? Stamina ? bonus ?
 * Move around
     * Touch (mobile) support
+        * Buttons
+        * Swipes
     * Move more than one square at a time (jump, ...)
-    * Funciton in rule to calculate the move vect (depending on strength or whatever)
+    * Function in rule to calculate the move vect (depending on strength or whatever)
     * Ability to go through walls, doors, ... (temporarily remove elmnts from nogo.data)
     * 3d ? (df style)
         * command to get position (=> number of *bip*s)

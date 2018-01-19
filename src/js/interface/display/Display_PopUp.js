@@ -3,8 +3,15 @@ export default Display_PopUp;
 const Display_PopUp = function () {
     let p;
     p = {
-        get isUp() {
-            return (document.getElementById("popUp") !== null);
+        isUp(popUpId) {
+            const popups = document.getElementsByClassName("popUp");
+
+            let res = popups.length > 0;
+
+            if (res && popUpId !== undefined) {
+                res &= (popups[0].id === popUpId);
+            }
+            return res;
         },
         write(msg, dom_elmt = undefined) {
             const txt = document.createElement("p");
@@ -15,7 +22,7 @@ const Display_PopUp = function () {
                 txt.appendChild(document.createElement("br"));
             })
 
-            p.popUp(txt, dom_elmt);
+            return p.popUp(txt, dom_elmt);
         },
         popUp(...dom_elmts) {
             const popup = document.createElement("div");
@@ -39,7 +46,9 @@ const Display_PopUp = function () {
                 }
             })
 
-            popup.id = "popUp";
+            popup.className = "popUp";
+            // throw ni; check if id hasn't been given ?
+            popup.id = Math.random();
             popup.style.position = "fixed";
             // Default to non transparant
             popup.style.background = "#333";
@@ -58,11 +67,13 @@ const Display_PopUp = function () {
             p.remove()
 
             document.body.appendChild(popup);
+
+            return popup.id;
         },
         remove() {
-            const tmp = document.getElementById("popUp");
-            if (tmp != undefined)
-                tmp.parentNode.removeChild(tmp);
+            for (const popup of document.getElementsByClassName("popUp")) {
+                popup.parentNode.removeChild(popup);
+            };
         }
     };
 

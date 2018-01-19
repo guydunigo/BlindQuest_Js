@@ -2,6 +2,7 @@
 export default Input;
 
 import Keyboard from "./Input_Keyboard.js"
+import Buttons from "./Input_Buttons.js"
 
 const conf = {
     world: {
@@ -11,20 +12,28 @@ const conf = {
                 down: undefined,
                 left: undefined,
                 right: undefined
-            }
-        },
-        interface: {
-            fullscreen: undefined
+            },
+            attack: undefined
         }
-    }
+    },
+    interface: {
+        fullscreen: undefined,
+        mute: undefined,
+        pause: undefined
+    },
+    game: {
+        reset: undefined,
+        help: undefined,
+        save: undefined,
+        load: undefined
+    },
 }; conf;
 
-const Input = function (events, consoleInterface) {
+const Input = function (events, consoleInterface, popupInterface) {
     const input = {
-        kb: undefined
+        kb: Keyboard(events, consoleInterface),
+        btns: Buttons(events, consoleInterface, popupInterface)
     }
-
-    input.kb = Keyboard(events, consoleInterface);
 
     return input;
 };

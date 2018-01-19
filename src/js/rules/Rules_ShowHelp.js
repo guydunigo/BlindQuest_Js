@@ -2,6 +2,8 @@ export default Base;
 
 const Base = function (bq) {
     const popup = bq.interface.disp.popup;
+    let popUpId = 0;
+
     return bq.events.register({
         name: "bq.game.help",
         events: [
@@ -9,8 +11,8 @@ const Base = function (bq) {
         ],
         main(bq, event) {
             event;
-            if (!popup.isUp) {
-                popup.write(" H : Display and hide this message.\n\
+            if (!popup.isUp(popUpId)) {
+                popUpId = popup.write(" H : Display and hide this message.\n\
                 ↑ : go north, ↓ : south, ← : west, et ⇥ : east\n\
                 P : Pause/resume the game.\n\
                 F : Enable/disable fullscreen mode.\n\

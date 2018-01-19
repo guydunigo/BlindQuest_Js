@@ -14,7 +14,7 @@ const Interface = function (events) {
     };
 
     inter.audio = Audio(inter.disp.console);
-    inter.input = Input(events, inter.disp.console);
+    inter.input = Input(events, inter.disp.console, inter.disp.popup);
 
     inter.clean = function () {
         document.removeEventListener("keydown", inter.input.kb.keydown);
