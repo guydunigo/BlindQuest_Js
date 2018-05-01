@@ -72,12 +72,12 @@ const Events = function (bq) {
                     stopped: 2007,
                     won: 2008,
                 },
-                stop: 2008,
-                pause: 2009,
-                reset: 2010,
-                help: 2011,
-                save: 2012,
-                load: 2013,
+                stop: 2009,
+                pause: 2010,
+                reset: 2011,
+                help: 2012,
+                save: 2013,
+                load: 2014,
             }
         }
     };
