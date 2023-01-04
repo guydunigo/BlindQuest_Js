@@ -24,7 +24,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "broccoli": "^1.1.4",
-    "broccoli-babel-transpiler": "^6.4.3",
+    "broccoli-babel-transpiler": "^7.8.1",
     "broccoli-concat": "^3.2.2",
     "broccoli-env": "^0.0.1",
     "broccoli-funnel": "^2.0.1",
